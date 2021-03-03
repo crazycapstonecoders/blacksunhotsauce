@@ -55,7 +55,7 @@ exports.signOut = (req, res) => {
     res.json({ message: 'Signout success!' })
 }
 
-exports.requireSinIn = passport.authenticate('jwt', { session: false })
+exports.requireSignIn = passport.authenticate('jwt', { session: false })
 
 exports.isAuth = (req, res, next) => {
     let user = req.profile.id == req.user
