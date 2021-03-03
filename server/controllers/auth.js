@@ -5,6 +5,7 @@ const jwtStrategy = require('passport-jwt').Strategy
 const extractJwt = require('passport-jwt').ExtractJwt
 const jwt = require('jsonwebtoken')
 require('../auth/passport')(passport, localStrategy, jwtStrategy, extractJwt)
+const axios = require('axios')
 
 exports.signUp = async (req, res) => {
     const { email } = req.body
@@ -54,3 +55,26 @@ exports.signOut = (req, res) => {
     res.json({ message: 'Signout success!' })
 }
 
+exports.requireSignIn = passport.authenticate('jwt', { session: false })
+
+exports.isAuth = (req, res, next) => {
+    let user = req.profile.id == req.user
+    if(!user) {
+        return res.status(400).json({ error: 'Access denied' })
+    }
+    next()
+}
+
+exports.validateRecaptcha = async(req, res, next) => {
+    const { token } = req.body
+    const secret = process.env.CAPTCHA_SECRET
+    if(token === null) {
+        return res.status(400).json({ error: 'Please try again' })
+    }
+    try {
+        const isHuman = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${token}`)
+        return res.json({ success: isHuman.data.success })
+    } catch(error) {
+        throw new Error(`Error with Google veirfy API. ${error}`)
+    }
+}
