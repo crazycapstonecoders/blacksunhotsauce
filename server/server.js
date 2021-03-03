@@ -22,7 +22,7 @@ connection.once('open', () => {
 
 const authRouter = require('./routes/auth')
 
-app.use('/auth', authRouter)
+app.use('/api/auth', authRouter)
 
 const port = 5000 || process.env.PORT
 
