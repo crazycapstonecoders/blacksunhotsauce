@@ -12,7 +12,7 @@ const userSchema = new Schema({
     },
     email: {
         type: String,
-        trim: true, 
+        trim: true,
         required: true,
         unique: true
     },
@@ -28,12 +28,16 @@ const userSchema = new Schema({
     history: {
         type: Array,
         default: []
+    },
+    resetPasswordLink: {
+        data: String,
+        default: ""
     }
 }, { timestamps: true }
 )
 
-userSchema.pre('save', async function(next) {
-    if(this.isModified('password')) {
+userSchema.pre('save', async function (next) {
+    if (this.isModified('password')) {
         const salt = await bcrypt.genSaltSync(10)
         this.salt = salt
         const hashed = await this.encryptPassword(this.password, salt)
@@ -43,7 +47,7 @@ userSchema.pre('save', async function(next) {
 })
 
 userSchema.methods = {
-    encryptPassword: async function(password, salt) {
+    encryptPassword: async function (password, salt) {
         return await bcrypt.hashSync(password, salt)
     },
     authenticate: async function (password) {
@@ -53,7 +57,7 @@ userSchema.methods = {
 
 userSchema.statics.checkExistingField = (field, value) => {
     const checkField = User.findOne({ [`${field}`]: value });
-  
+
     return checkField;
 }
 
