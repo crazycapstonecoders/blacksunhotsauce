@@ -5,37 +5,39 @@ const jwtStrategy = require('passport-jwt').Strategy
 const extractJwt = require('passport-jwt').ExtractJwt
 const jwt = require('jsonwebtoken')
 require('../auth/passport')(passport, localStrategy, jwtStrategy, extractJwt)
+const nodeMailer = require('nodemailer')
+const { uuid } = require('uuidv4')
 const axios = require('axios')
 
 exports.signUp = async (req, res) => {
     const { email } = req.body
     const checkEmail = await User.checkExistingField('email', email)
-    if(checkEmail) {
+    if (checkEmail) {
         return res.status(400).json({ error: 'User already exists, please log in instead.' })
     }
     const user = new User(req.body)
     user.save()
-              .then(user => {
-                  user.salt = undefined
-                  user.password = undefined
-                  res.json(user)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        .then(user => {
+            user.salt = undefined
+            user.password = undefined
+            res.json(user)
+        })
+        .catch(err => {
+            console.log(err)
+        })
 }
 
 exports.signIn = async (req, res, next) => {
     const { username, password } = req.body
     passport.authenticate('local', async (err, user) => {
         user = await User.findOne({ username })
-          try {
+        try {
             req.logIn(user, { session: false }, async (error) => {
-                if(error) {
+                if (error) {
                     return res.status(400).json(error)
                 }
                 const compare = await user.authenticate(password)
-                if(!compare) {
+                if (!compare) {
                     return res.status(400).json({ error: 'Username and password does not match' })
                 }
                 const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
@@ -43,11 +45,11 @@ exports.signIn = async (req, res, next) => {
                 const { _id, username, email, role } = user
                 return res.json({ token, user: { _id, username, email, role } })
             })
-          } catch (error) {
+        } catch (error) {
             return next(error);
-          }
         }
-      )(req, res, next);
+    }
+    )(req, res, next);
 }
 
 exports.signOut = (req, res) => {
@@ -59,22 +61,95 @@ exports.requireSignIn = passport.authenticate('jwt', { session: false })
 
 exports.isAuth = (req, res, next) => {
     let user = req.profile.id == req.user
-    if(!user) {
+    if (!user) {
         return res.status(400).json({ error: 'Access denied' })
     }
     next()
 }
 
-exports.validateRecaptcha = async(req, res, next) => {
+exports.isAdmin = (req, res, next) => {
+    if (req.profile.role === 0) {
+        return res.status(400).json({ error: "Admin resource! Access denied" })
+    }
+    next()
+}
+
+// NOT tested yet, do not uncomment
+// exports.forgotPassword = (req, res) => {
+//     if (!req.body) return res.status(400).json({ message: "No request body" })
+//     if (!req.body.email) return res.status(400).json({ message: "Please include email in request body" })
+//     const { email } = req.body
+//     User.findOne({ email }, (error, user) => {
+//         if (error || !user) {
+//             return res.status(400).json({ error: "User with that email does not exist!" })
+//         }
+//         const resetToken = uuid()
+//         const emailData = {
+//             from: 'no-reply@blacksunsauces.com',
+//             to: email,
+//             subject: 'Password Reset Instructions',
+//             text: `Please click on the link to reset your password: http://localhost:5000/resetpassword/${resetToken}`,
+//             html: `<p>Please click on the link to reset your password:</p> 
+//                 <p>http://localhost:5000/resetpassword/${resetToken}</p>`
+//         }
+
+//         return user.updateOne({ resetPasswordLink: resetToken }, (error, success) => {
+//             if(error) {
+//                 return res.json({ message: error })
+//             } else {
+//                 sendEmail(emailData)
+//                 return res.status(200).json({
+//                     message: 'A password reset email has been sent to you! Please check your email'
+//                 })
+//             }
+//         })
+//     })
+// }
+
+// exports.resetPassword = (req, res) => {
+//     const { resetPasswordLink, newPassword } = req.body
+//     User.findOne({ resetPasswordLink }, (error, user) => {
+//         if (error || !user) return res.status(401).json({ error: 'Invalid link' })
+//         const updatedFields = {
+//             password: newPassword,
+//             resetPasswordLink: ''
+//         }
+//         user = _.extend(user, updatedFields)
+//         user.updated = Date.now()
+//         user.save((error, result) => {
+//             if (error) return res.status(400).json({ error: error })
+//             res.json({ message: 'Success! Please sign in with your new password' })
+//         })
+//     })
+// }
+
+exports.validateRecaptcha = async (req, res, next) => {
     const { token } = req.body
     const secret = process.env.CAPTCHA_SECRET
-    if(token === null) {
+    if (token === null) {
         return res.status(400).json({ error: 'Please try again' })
     }
     try {
         const isHuman = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${token}`)
         return res.json({ success: isHuman.data.success })
-    } catch(error) {
+    } catch (error) {
         throw new Error(`Error with Google veirfy API. ${error}`)
     }
 }
+
+// helper functions
+// const sendEmail = emailData => {
+//     const transporter = nodeMailer.createTransport({
+//         host: "smtp.gmail.com",
+//         port: 465,
+//         secure: false,
+//         requireTLS: true,
+//         auth: {
+//             user: process.env.EMAIL_USERNAME,
+//             auth: process.env.EMAIL_PASSWORD
+//         }
+//     })
+//     return transporter.sendMail(emailData)
+//         .then(info => console.log(`Message send: ${info.response}`))
+//         .catch(error => console.log(`Problem sending email: ${error}`))
+// }
