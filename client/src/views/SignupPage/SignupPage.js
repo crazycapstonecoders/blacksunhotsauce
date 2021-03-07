@@ -1,4 +1,5 @@
-import React from "react";
+import React from "react"
+import { Link } from 'react-router-dom'
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -105,11 +106,16 @@ export default function SigninPage(props) {
                         autoComplete: "off"
                       }}
                     />
+                      <div style={{ textAlign: 'center' }}>
+                        <Button simple color="primary" size="lg">
+                          Sign Up
+                        </Button>
+                      </div>
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg">
-                      Sign Up
-                    </Button>
+                    <Link to="/signin" variant="body2">
+                      {"Already have an account? Sign In"}
+                    </Link>
                   </CardFooter>
                 </form>
               </Card>

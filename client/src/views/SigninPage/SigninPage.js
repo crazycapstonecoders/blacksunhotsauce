@@ -1,4 +1,5 @@
   import React from "react";
+  import { Link } from 'react-router-dom'
   // @material-ui/core components
   import { makeStyles } from "@material-ui/core/styles";
   import InputAdornment from "@material-ui/core/InputAdornment";
@@ -83,7 +84,7 @@
                         </Button>
                       </div>
                     </CardHeader>
-                    <p className={classes.divider}>Or Be Classical</p>
+                    <p className={classes.divider}>Or</p>
                     <CardBody>
                       <CustomInput
                         labelText="First Name..."
@@ -118,11 +119,16 @@
                           autoComplete: "off"
                         }}
                       />
+                      <div style={{ textAlign: 'center' }}>
+                        <Button simple color="primary" size="lg">
+                          Sign In
+                        </Button>
+                      </div>
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
-                      <Button simple color="primary" size="lg">
-                        Sign In
-                      </Button>
+                      <Link to="/signup" variant="body2">
+                        {"Don't have an account? Sign Up"}
+                      </Link>
                     </CardFooter>
                   </form>
                 </Card>
