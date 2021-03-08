@@ -22,8 +22,6 @@ import ProductSection from "./Sections/ProductSection.js";
 import TeamSection from "./Sections/TeamSection.js";
 import WorkSection from "./Sections/WorkSection.js";
 
-const dashboardRoutes = [];
-
 const useStyles = makeStyles(styles);
 
 export default function LandingPage(props) {
@@ -33,7 +31,6 @@ export default function LandingPage(props) {
     <div>
       <Header
         color="transparent"
-        routes={dashboardRoutes}
         brand="Material Kit React"
         rightLinks={<HeaderLinks />}
         fixed

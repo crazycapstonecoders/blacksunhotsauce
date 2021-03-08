@@ -1,9 +1,14 @@
-  import React from "react";
-  import { Link } from 'react-router-dom'
+  import React, { useState } from "react";
+  import { Link, Redirect } from 'react-router-dom'
+  import { signin, authenticate, isAuthenticated, validateRecaptcha } from '../../api/authApi'
+  import ReCAPTCHA from 'react-google-recaptcha'
   // @material-ui/core components
   import { makeStyles } from "@material-ui/core/styles";
   import InputAdornment from "@material-ui/core/InputAdornment";
   import Icon from "@material-ui/core/Icon";
+  import { CircularProgress } from '@material-ui/core'
+  // @material-ui/lab components
+  import { Alert } from '@material-ui/lab'
   // @material-ui/icons
   import People from "@material-ui/icons/People";
   // core components
@@ -25,12 +30,68 @@
   const useStyles = makeStyles(styles);
 
   export default function SigninPage(props) {
-    const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
+    const [cardAnimaton, setCardAnimation] = useState("cardHidden");
     setTimeout(function() {
       setCardAnimation("");
     }, 700);
     const classes = useStyles();
     const { ...rest } = props;
+    const [values, setValues] = useState({
+      username: '',
+      password: '',
+      error: '',
+      loading: false,
+      redirectToReferer: false,
+      recaptcha: false
+    })
+    const { username, password, error, loading, redirectToReferer, recaptcha } = values
+
+    const handleChange = name => e => {
+      setValues({ ...values, error: false, [name]: e.target.value })
+    }
+
+    const handleCaptcha = value => {
+      validateRecaptcha(value).then(res => {
+        setValues({ ...values, recaptcha: res.data.success })
+      }).catch(error => {
+        setValues({ ...values, recaptcha: false, error: error })
+      })
+    }
+  
+    const handleSubmit = e => {
+      e.preventDefault()
+      setValues({ ...values, error: false, loading: true })
+      if(recaptcha) {
+        signin({ username, password }).then(res => {
+          authenticate(res, () => {
+            setValues({ ...values, redirectToReferer: true })
+           })
+        }).catch(error => {
+            setValues({ ...values, error: error.response.data.error, loading: false })
+        })
+      } else {
+        setValues({ ...values, error: 'Please validate recaptcha' })
+      }
+    }
+
+    const showError = () => (
+      <Alert severity="error" style={{ display: error ? '' : 'none' }}>
+          {error}
+      </Alert>
+    )
+
+    const showLoading = () => (
+        <CircularProgress style={{ display: loading ? '' : 'none'}} />
+    )
+
+    const redirectUser = () => {
+        if(redirectToReferer) {
+            if(isAuthenticated()) {
+                return <Redirect to='/admin/dashboard' />
+            }
+        }
+    }
+
     return (
       <div>
         <Header
@@ -51,7 +112,7 @@
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={4}>
                 <Card className={classes[cardAnimaton]}>
-                  <form className={classes.form}>
+                  <form className={classes.form} onSubmit={handleSubmit}>
                     <CardHeader color="primary" className={classes.cardHeader}>
                       <h4>Sign In</h4>
                       <div className={classes.socialLine}>
@@ -84,15 +145,18 @@
                         </Button>
                       </div>
                     </CardHeader>
+                    {showError()}
+                    {showLoading()}
                     <p className={classes.divider}>Or</p>
                     <CardBody>
                       <CustomInput
-                        labelText="First Name..."
-                        id="first"
+                        labelText="Username"
+                        id="username"
                         formControlProps={{
                           fullWidth: true
                         }}
                         inputProps={{
+                          onChange: handleChange('username'),
                           type: "text",
                           endAdornment: (
                             <InputAdornment position="end">
@@ -103,11 +167,12 @@
                       />
                       <CustomInput
                         labelText="Password"
-                        id="pass"
+                        id="password"
                         formControlProps={{
                           fullWidth: true
                         }}
                         inputProps={{
+                          onChange: handleChange('password'),
                           type: "password",
                           endAdornment: (
                             <InputAdornment position="end">
@@ -120,7 +185,7 @@
                         }}
                       />
                       <div style={{ textAlign: 'center' }}>
-                        <Button simple color="primary" size="lg">
+                        <Button simple color="primary" size="lg" onClick={handleSubmit}>
                           Sign In
                         </Button>
                       </div>
@@ -132,9 +197,11 @@
                     </CardFooter>
                   </form>
                 </Card>
+                <ReCAPTCHA sitekey='6Leg7WgaAAAAAMq4FlSvK6xqsr_2L2UHDCKncX21' onChange={handleCaptcha} />
               </GridItem>
             </GridContainer>
           </div>
+          {redirectUser()}
         </div>
       </div>
     );
