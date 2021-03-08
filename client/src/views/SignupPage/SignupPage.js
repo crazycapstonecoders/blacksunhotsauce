@@ -1,9 +1,13 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link } from 'react-router-dom'
+import { signup, validateRecaptcha } from '../../api/authApi'
+import ReCAPTCHA from 'react-google-recaptcha'
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
+// @material-ui/lab components
+import { Alert } from '@material-ui/lab'
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
@@ -32,6 +36,55 @@ export default function SigninPage(props) {
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+  const [values, setValues] = useState({
+    username: '',
+    email: '',
+    password: '',
+    error: '',
+    success: false,
+    recaptcha: false
+  })
+  const { username, email, password, error, success, recaptcha } = values
+
+  // higher order function to target name and event of form
+  const handleChange = name => e => {
+    setValues({ ...values, success: false, [name]: e.target.value })
+  }
+
+  const handleCaptcha = value => {
+    validateRecaptcha(value).then(res => {
+      setValues({ ...values, recaptcha: true })
+    }).catch(error => {
+      setValues({ ...values, recaptcha: false, error: error })
+    })
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    setValues({ ...values, error: false })
+    const user = { username, email, password }
+    if(recaptcha) {
+      signup(user).then(res => {
+        setValues({ ...values, username: '', email: '', password: '', error: '', success: true })
+      }).catch(error => {
+          setValues({ ...values, error: error.response.data.error, success: false })
+      })
+    } else {
+      setValues({ ...values, error: 'Please validate recaptcha' })
+    }
+  }
+
+const showError = () => (
+  <Alert severity="error" style={{ display: error ? '' : 'none' }}>
+      {error}
+  </Alert>
+)
+
+const showSuccess = () => (
+  <Alert severity="success" style={{ display: success ? '' : 'none' }}>
+      Success! User created. Please <Link to="/signin" variant="body2" >Sign In</Link>
+  </Alert>
+)
 
   return (
     <div>
@@ -53,10 +106,12 @@ export default function SigninPage(props) {
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
-                <form className={classes.form}>
+                <form className={classes.form} onSubmit={handleSubmit}>
                   <CardHeader color="primary" className={classes.cardHeader}>
                     <h4>Sign Up</h4>
                   </CardHeader>
+                  {showError()}
+                  {showSuccess()}
                   <CardBody>
                     <CustomInput
                       labelText="Username"
@@ -65,6 +120,7 @@ export default function SigninPage(props) {
                         fullWidth: true
                       }}
                       inputProps={{
+                        onChange: handleChange('username'),
                         type: "text",
                         endAdornment: (
                           <InputAdornment position="end">
@@ -80,6 +136,7 @@ export default function SigninPage(props) {
                         fullWidth: true
                       }}
                       inputProps={{
+                        onChange: handleChange('email'),
                         type: "email",
                         endAdornment: (
                           <InputAdornment position="end">
@@ -95,6 +152,7 @@ export default function SigninPage(props) {
                         fullWidth: true
                       }}
                       inputProps={{
+                        onChange: handleChange('password'),
                         type: "password",
                         endAdornment: (
                           <InputAdornment position="end">
@@ -107,7 +165,7 @@ export default function SigninPage(props) {
                       }}
                     />
                       <div style={{ textAlign: 'center' }}>
-                        <Button simple color="primary" size="lg">
+                        <Button simple color="primary" size="lg" onClick={handleSubmit}>
                           Sign Up
                         </Button>
                       </div>
@@ -119,6 +177,7 @@ export default function SigninPage(props) {
                   </CardFooter>
                 </form>
               </Card>
+              <ReCAPTCHA sitekey='6Leg7WgaAAAAAMq4FlSvK6xqsr_2L2UHDCKncX21' onChange={handleCaptcha} />
             </GridItem>
           </GridContainer>
         </div>
