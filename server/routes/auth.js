@@ -1,12 +1,16 @@
 const router = require('express').Router()
-const { userSignUpValidator } = require('../validator')
-const { signUp, signIn, signOut, validateRecaptcha } = require('../controllers/auth')
+const { userSignUpValidator, passwordResetValidator } = require('../validator')
+const { signUp, signIn, signOut, forgotPassword, resetPassword, validateRecaptcha } = require('../controllers/auth')
 
 router.post('/signup', userSignUpValidator, signUp)
 
 router.post('/signin', signIn)
 
 router.get('/signout', signOut)
+
+router.put('/forgot-password', forgotPassword)
+
+router.put('/reset-password', passwordResetValidator, resetPassword)
 
 router.post('/validateRecaptcha', validateRecaptcha)
 

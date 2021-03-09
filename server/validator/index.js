@@ -18,6 +18,7 @@ exports.userSignUpValidator = (req, res, next) => {
 
 exports.passwordResetValidator = (req, res, next) => {
     const schema = Joi.object({
+        resetPasswordLink: Joi.string().required(),
         newPassword: Joi.string().min(6).pattern(new RegExp(/\d/)).message('Password must contain a number').required()
     })
     const { error } = schema.validate(req.body)

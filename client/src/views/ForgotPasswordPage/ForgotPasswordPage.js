@@ -1,6 +1,5 @@
-import React, { useState } from "react"
-import { Link } from 'react-router-dom'
-import { signup, validateRecaptcha } from '../../api/authApi'
+import React, { useState } from "react";
+import { forgotPassword, validateRecaptcha } from '../../api/authApi'
 import ReCAPTCHA from 'react-google-recaptcha'
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,9 +7,6 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/lab components
 import { Alert } from '@material-ui/lab'
-// @material-ui/icons
-import Email from "@material-ui/icons/Email";
-import People from "@material-ui/icons/People";
 // core components
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
@@ -29,31 +25,28 @@ import image from "assets/img/bg7.jpg";
 
 const useStyles = makeStyles(styles);
 
-export default function SigninPage(props) {
-  const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
-  setTimeout(function() {
+export default function ForgotPasswordPage(props) {
+  const [cardAnimaton, setCardAnimation] = useState("cardHidden");
+  setTimeout(function () {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
   const [values, setValues] = useState({
-    username: '',
     email: '',
-    password: '',
+    message: '',
     error: '',
-    success: false,
     recaptcha: false
   })
-  const { username, email, password, error, success, recaptcha } = values
+  const { email, message, error, recaptcha } = values
 
-  // higher order function to target name and event of form
   const handleChange = name => e => {
-    setValues({ ...values, success: false, [name]: e.target.value })
+    setValues({ ...values, error: false, [name]: e.target.value })
   }
 
   const handleCaptcha = value => {
     validateRecaptcha(value).then(res => {
-      setValues({ ...values, recaptcha: true })
+      setValues({ ...values, recaptcha: res.data.success })
     }).catch(error => {
       setValues({ ...values, recaptcha: false, error: 'Error validating recaptcha' })
     })
@@ -61,30 +54,29 @@ export default function SigninPage(props) {
 
   const handleSubmit = e => {
     e.preventDefault()
-    setValues({ ...values, error: false })
-    const user = { username, email, password }
-    if(recaptcha) {
-      signup(user).then(res => {
-        setValues({ ...values, username: '', email: '', password: '', error: '', success: true })
+    setValues({ ...values, message: '', error: '' })
+    if (recaptcha) {
+      forgotPassword(email).then(res => {
+          setValues({ ...values, message: res.data.message, error: '' })
       }).catch(error => {
-          setValues({ ...values, error: error.response.data.error, success: false })
+          setValues({ ...values, message: '', error: error.response.details.error })
       })
     } else {
       setValues({ ...values, error: 'Please validate recaptcha' })
     }
   }
 
-const showError = () => (
-  <Alert severity="error" style={{ display: error ? '' : 'none' }}>
+  const showError = () => (
+    <Alert severity="error" style={{ display: error ? '' : 'none' }}>
       {error}
-  </Alert>
-)
+    </Alert>
+  )
 
-const showSuccess = () => (
-  <Alert severity="success" style={{ display: success ? '' : 'none' }}>
-      Success! User created. Please <Link to="/signin" variant="body2" >Sign In</Link>
-  </Alert>
-)
+  const showMessage = () => (
+    <Alert severity="success" style={{ display: message ? '' : 'none' }}>
+      {message}
+    </Alert>
+  )
 
   return (
     <div>
@@ -108,27 +100,11 @@ const showSuccess = () => (
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form} onSubmit={handleSubmit}>
                   <CardHeader color="primary" className={classes.cardHeader}>
-                    <h4>Sign Up</h4>
+                    <h4>Forgot Password</h4>
                   </CardHeader>
                   {showError()}
-                  {showSuccess()}
+                  {showMessage()}
                   <CardBody>
-                    <CustomInput
-                      labelText="Username"
-                      id="username"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        onChange: handleChange('username'),
-                        type: "text",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <People className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
-                    />
                     <CustomInput
                       labelText="Email"
                       id="email"
@@ -140,40 +116,19 @@ const showSuccess = () => (
                         type: "email",
                         endAdornment: (
                           <InputAdornment position="end">
-                            <Email className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
-                    />
-                    <CustomInput
-                      labelText="Password"
-                      id="password"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        onChange: handleChange('password'),
-                        type: "password",
-                        endAdornment: (
-                          <InputAdornment position="end">
                             <Icon className={classes.inputIconsColor}>
                               lock_outline
-                            </Icon>
+                              </Icon>
                           </InputAdornment>
                         ),
                         autoComplete: "off"
                       }}
                     />
-                      <div style={{ textAlign: 'center' }}>
-                        <Button simple color="primary" size="lg" onClick={handleSubmit}>
-                          Sign Up
-                        </Button>
-                      </div>
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Link to="/signin" variant="body2">
-                      {"Already have an account? Sign In"}
-                    </Link>
+                    <Button simple color="primary" size="lg" onClick={handleSubmit}>
+                        Submit
+                    </Button>
                   </CardFooter>
                 </form>
               </Card>
