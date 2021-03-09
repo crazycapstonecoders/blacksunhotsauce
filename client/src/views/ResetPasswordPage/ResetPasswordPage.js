@@ -59,9 +59,9 @@ export default function ResetPasswordPage(props) {
     setValues({ ...values, message: '', error: '' })
     if (recaptcha) {
       resetPassword({ newPassword, resetPasswordLink: resetPasswordToken }).then(res => {
-          setValues({ ...values, message: res.data.message, error: '' })
+        setValues({ ...values, message: res.data.message, error: '' })
       }).catch(error => {
-          setValues({ ...values, message: '', error: error.response.details.error })
+        setValues({ ...values, message: '', error: error.response.data.error })
       })
     } else {
       setValues({ ...values, error: 'Please validate recaptcha' })
@@ -129,7 +129,7 @@ export default function ResetPasswordPage(props) {
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
                     <Button simple color="primary" size="lg" onClick={handleSubmit}>
-                        Submit
+                      Submit
                     </Button>
                   </CardFooter>
                 </form>
