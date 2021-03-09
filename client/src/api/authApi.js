@@ -56,6 +56,31 @@ export const isAuthenticated = () => {
     }
 }
 
+export const forgotPassword = email => {
+    return axios({
+        method: 'PUT',
+        url: `${server}/api/auth/forgot-password`,
+        headers: {
+            Accept: "*/*",
+            "Content-Type": "application/json",
+        },
+        data: JSON.stringify({ email })
+    })
+}
+
+export const resetPassword = resetInfo => {
+    console.log('reset info ' + resetInfo)
+    return axios({
+        method: 'PUT',
+        url: `${server}/api/auth/reset-password`,
+        headers: {
+            Accept: "*/*",
+            "Content-Type": "application/json",
+        },
+        data: JSON.stringify(resetInfo)
+    })
+}
+
 export const validateRecaptcha = token => {
     return axios({
         method: 'post',

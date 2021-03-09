@@ -13,6 +13,8 @@ import SigninPage from "views/SigninPage/SigninPage.js";
 import SignupPage from "views/SignupPage/SignupPage.js";
 import ShopPage from "views/ShopPage/ShopPage.js";
 import CartPage from "views/CartPage/CartPage.js";
+import ForgotPasswordPage from "views/ForgotPasswordPage/ForgotPasswordPage.js";
+import ResetPasswordPage from "views/ResetPasswordPage/ResetPasswordPage.js";
 
 var hist = createBrowserHistory();
 
@@ -21,6 +23,8 @@ ReactDOM.render(
     <Switch>
       <Route path="/signup" component={SignupPage} />
       <Route path="/signin" component={SigninPage} />
+      <Route path="/forgot-password" component={ForgotPasswordPage} />
+      <Route path="/reset-password/:resetPasswordToken" component={ResetPasswordPage} />
       <Route path="/shop" component={ShopPage} />
       <Route path="/cart" component={CartPage} />
       <Route path="/admin/dashboard" component={AdminDashboardPage} />

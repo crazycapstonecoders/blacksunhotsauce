@@ -54,7 +54,7 @@ export default function SigninPage(props) {
     validateRecaptcha(value).then(res => {
       setValues({ ...values, recaptcha: res.data.success })
     }).catch(error => {
-      setValues({ ...values, recaptcha: false, error: error })
+      setValues({ ...values, recaptcha: false, error: 'Error validating recaptcha' })
     })
   }
 
@@ -187,7 +187,10 @@ export default function SigninPage(props) {
                     <div style={{ textAlign: 'center' }}>
                       <Button simple color="primary" size="lg" onClick={handleSubmit}>
                         Sign In
-                        </Button>
+                      </Button>
+                      <Button simple color="danger" size="lg" to='/forgot-password' component={Link}>
+                        Forgot Password
+                      </Button>
                     </div>
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
