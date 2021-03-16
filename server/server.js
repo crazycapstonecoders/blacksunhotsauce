@@ -21,8 +21,12 @@ connection.once('open', () => {
 })
 
 const authRouter = require('./routes/auth')
+const userRouter = require('./routes/user')
+const productRouter = require('./routes/product')
 
 app.use('/api/auth', authRouter)
+app.use('/api/user', userRouter)
+app.use('/api/product', productRouter)
 
 const port = 5000 || process.env.PORT
 
