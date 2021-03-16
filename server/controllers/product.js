@@ -20,15 +20,18 @@ exports.create = async (req, res) => {
         if(files.image) {
             let uploadFile = async function() {
                 const bucket = admin.storage().bucket()
-                const name = files.image.path
+                let name = files.image.path
+                const folder = 'products'
     
                 const metadata = {
                     metadata: {
+                        cacheControl: 'public, max-age=31536000',
                         firebaseStorageDownloadTokens: uuidv4()
                     },
                     contentType: files.image.type
                 }
                 await bucket.upload(name, {
+                    destination: `${folder}/${name}`,
                     gzip: true,
                     metadata: metadata
                 })
@@ -36,7 +39,8 @@ exports.create = async (req, res) => {
                 return name
             }
             uploadFile().then(res => {
-                product.images.push(res)
+                let imageName = res.split('\\').pop().split('/').pop()
+                product.images.push(imageName)
             }).catch(error => {
                 console.log(error)
             })
