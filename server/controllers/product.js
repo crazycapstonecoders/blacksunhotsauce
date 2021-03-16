@@ -13,8 +13,12 @@ exports.create = async (req, res) => {
     let form = new formidable.IncomingForm()
     form.keepExtensions = true
     form.parse(req, (error, fields, files) => {
+        const { name, description, quantity, price } = fields
         if(error) {
             res.status(400).json({ error: 'Image could not be uploaded' })
+        }
+        if(!name || !description || !quantity || !price) {
+            res.status(400).json({ error: 'All fields are required' })
         }
         let product = new Product(fields)
         if(files.image) {
