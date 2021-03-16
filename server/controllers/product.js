@@ -21,11 +21,12 @@ exports.create = async (req, res) => {
             let uploadFile = async function() {
                 const bucket = admin.storage().bucket()
                 const name = files.image.path
+                const uuid = uuidv4()
     
                 const metadata = {
                     metadata: {
                         cacheControl: 'public, max-age=31536000',
-                        firebaseStorageDownloadTokens: uuidv4()
+                        firebaseStorageDownloadTokens: uuid
                     },
                     contentType: files.image.type
                 }
@@ -33,14 +34,15 @@ exports.create = async (req, res) => {
                     destination: `images/products/${name}`,
                     gzip: true,
                     metadata: metadata
+                }).then(data => {
+                    let file = data[0]
+                    let imageUrl = "https://firebasestorage.googleapis.com/v0/b/" + bucket.name + "/o/" + encodeURIComponent(file.name) + "?alt=media&token=" + uuid
+                    product.images.push(imageUrl)
+                    return Promise.resolve(imageUrl)
                 })
                 console.log(name + ' successfully uploaded')
-                return name
             }
-            uploadFile().then(res => {
-                let imageName = res.split('\\').pop().split('/').pop()
-                product.images.push(imageName)
-            }).catch(error => {
+            uploadFile().catch(error => {
                 console.log(error)
             })
             setTimeout(() => {
