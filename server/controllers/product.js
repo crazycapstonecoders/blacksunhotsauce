@@ -21,7 +21,6 @@ exports.create = async (req, res) => {
             let uploadFile = async function() {
                 const bucket = admin.storage().bucket()
                 const name = files.image.path
-                const folder = 'products'
     
                 const metadata = {
                     metadata: {
@@ -31,7 +30,7 @@ exports.create = async (req, res) => {
                     contentType: files.image.type
                 }
                 await bucket.upload(name, {
-                    destination: `${folder}/${name}`,
+                    destination: `images/products/${name}`,
                     gzip: true,
                     metadata: metadata
                 })
