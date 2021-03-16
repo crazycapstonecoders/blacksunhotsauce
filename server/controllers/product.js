@@ -18,35 +18,40 @@ exports.create = async (req, res) => {
         }
         let product = new Product(fields)
         if(files.image) {
-            let uploadFile = async function() {
+            let uploadFile = function() {
                 const bucket = admin.storage().bucket()
                 const name = files.image.path
+                const uuid = uuidv4()
     
                 const metadata = {
                     metadata: {
-                        firebaseStorageDownloadTokens: uuidv4()
+                        cacheControl: 'public, max-age=31536000',
+                        firebaseStorageDownloadTokens: uuid
                     },
                     contentType: files.image.type
                 }
-                await bucket.upload(name, {
+                return bucket.upload(name, {
+                    destination: `images/products/${name}`,
                     gzip: true,
                     metadata: metadata
+                }).then(data => {
+                    let file = data[0]
+                    let imageUrl = "https://firebasestorage.googleapis.com/v0/b/" + bucket.name + "/o/" + encodeURIComponent(file.name) + "?alt=media&token=" + uuid
+                    return Promise.resolve(imageUrl)
                 })
-                console.log(name + ' successfully uploaded')
-                return name
             }
-            uploadFile().then(res => {
-                product.images.push(res)
+            uploadFile().then(downloadUrl => {
+                if(downloadUrl) {
+                    product.images.push(downloadUrl)
+                    product.save().then(product => {
+                            res.json(product)
+                        }).catch(error => {
+                            return res.status(400).json({ error: 'Error creating product' })
+                        })
+                }
             }).catch(error => {
                 console.log(error)
             })
-            setTimeout(() => {
-                product.save().then(product => {
-                    res.json(product)
-                }).catch(error => {
-                    return res.status(400).json({ error: 'Error creating product' })
-                })
-            }, 700)
         }
     })
 }
