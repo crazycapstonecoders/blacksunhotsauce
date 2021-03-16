@@ -20,7 +20,7 @@ exports.create = async (req, res) => {
         if(files.image) {
             let uploadFile = async function() {
                 const bucket = admin.storage().bucket()
-                let name = files.image.path
+                const name = files.image.path
                 const folder = 'products'
     
                 const metadata = {
