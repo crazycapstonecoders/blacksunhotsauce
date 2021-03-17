@@ -30,13 +30,13 @@ exports.create = (req, res) => {
         if(!name || !description || !quantity || !price) {
             return res.status(400).json({ error: 'All fields are required' })
         }
-        let product = new Product(fields)
         if(files.image.type === null) {
             return res.status(400).json({ error: 'Image is required' })
         }
         if(!files.image.type.includes('image') === true) {
             return res.status(400).json({ message: 'Please upload a valid image' })
         } 
+        let product = new Product(fields)
         let uploadFile = function() {
             const bucket = admin.storage().bucket()
             const name = files.image.path
@@ -55,16 +55,17 @@ exports.create = (req, res) => {
             }).then(data => {
                 let file = data[0]
                 let imageUrl = "https://firebasestorage.googleapis.com/v0/b/" + bucket.name + "/o/" + encodeURIComponent(file.name) + "?alt=media&token=" + uuid
+                const name = file.name.substring(16)
+                product.images.push({ name: name, url: imageUrl })
                 return Promise.resolve(imageUrl)
             })
         }
         uploadFile().then(downloadUrl => {
             if(downloadUrl) {
-                product.images.push(downloadUrl)
                 product.save().then(product => {
                     res.json(product)
                 }).catch(error => {
-                    return res.status(400).json({ error: 'Error creating product' })
+                    return res.status(400).json({ error: 'Error creating product ' + error })
                 })
             }
         }).catch(error => {
@@ -111,12 +112,13 @@ exports.update = (req, res) => {
                 }).then(data => {
                     let file = data[0]
                     let imageUrl = "https://firebasestorage.googleapis.com/v0/b/" + bucket.name + "/o/" + encodeURIComponent(file.name) + "?alt=media&token=" + uuid
+                    const name = file.name.substring(16)
+                    product.images.push({ name: name, url: imageUrl })
                     return Promise.resolve(imageUrl)
                 })
             }
             uploadFile().then(downloadUrl => {
                 if(downloadUrl) {
-                    product.images.push(downloadUrl)
                     product.save().then(product => {
                         res.json(product)
                     }).catch(error => {
@@ -127,5 +129,26 @@ exports.update = (req, res) => {
                 console.log(error)
             })
         }
+    })
+}
+
+exports.remove = (req, res) => {
+    let product = req.product
+    const deleteFile = function() {
+    const bucket = admin.storage().bucket()
+        const imageRemovePromises = product.images.map(image => {
+            return bucket.file(`images/products/${image.name}`).delete()
+        })
+        return Promise.all(imageRemovePromises)
+    }
+    deleteFile().then(() => {
+        product.remove((error, deleteProduct) => {
+            if(error) {
+                return res.status(400).json({ error: 'Unable to delete product' })
+            }
+            res.json({ message: 'Product successfully deleted' })
+        })
+    }).catch(error => {
+        console.log(error)
     })
 }
