@@ -133,19 +133,28 @@ exports.update = (req, res) => {
 exports.read = (req, res) =>{
     //Initialize the incoming form object
     let form = new formidable.IncomingForm()
-    //??
     form.keepExtensions = true
     //Parse the input
     form.parse(req, (error, fields, files) => {
         //Declare the fields, (temp as a placeholder for if searching is implemented)
         const { temp } = fields
+        //Check for blank input
+        if (!temp){
+            //Commented out as this is unused for the time being
+            //return res.status(400).json({ error: 'A field is required to search' })
+        }
         if(error) {
             return res.status(400).json({ error: 'product.read: Unable to load products' })
         }
         //Query the DB
-        //TODO
-        //Dump to console for the time being
-        //TODO
+        product.find(function (err,products){
+            //Check for no result
+            if (err) return console.error (err);
+            //Write products to console log (testing)
+            console.log(products);
+            //TODO this needs to be tested and debugged
+            //I think i might need to add this to routing
+        })
         //Return the object
         //TODO
 
