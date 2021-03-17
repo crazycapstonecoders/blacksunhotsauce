@@ -60,14 +60,12 @@ exports.create = (req, res) => {
                 return Promise.resolve(imageUrl)
             })
         }
-        uploadFile().then(downloadUrl => {
-            if(downloadUrl) {
-                product.save().then(product => {
-                    res.json(product)
-                }).catch(error => {
-                    return res.status(400).json({ error: 'Error creating product ' + error })
-                })
-            }
+        uploadFile().then(() => {
+            product.save().then(product => {
+                res.json(product)
+            }).catch(error => {
+                return res.status(400).json({ error: 'Error creating product' })
+            })
         }).catch(error => {
             console.log(error)
         })
@@ -117,14 +115,12 @@ exports.update = (req, res) => {
                     return Promise.resolve(imageUrl)
                 })
             }
-            uploadFile().then(downloadUrl => {
-                if(downloadUrl) {
-                    product.save().then(product => {
-                        res.json(product)
-                    }).catch(error => {
-                        return res.status(400).json({ error: 'Error updating product' })
-                    })
-                }
+            uploadFile().then(() => {
+                product.save().then(product => {
+                    res.json(product)
+                }).catch(error => {
+                    return res.status(400).json({ error: 'Error updating product' })
+                })
             }).catch(error => {
                 console.log(error)
             })
