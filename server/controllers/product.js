@@ -131,23 +131,23 @@ exports.update = (req, res) => {
 }
 
 exports.read = (req, res) =>{
-    //JS
-    //I am unsure of the operating structure entirely but I think this is query and
-    //return the result?
-
     //Initialize the incoming form object
     let form = new formidable.IncomingForm()
     //??
     form.keepExtensions = true
     //Parse the input
     form.parse(req, (error, fields, files) => {
-        //Declare the fields
-        const { name, description, quantity, price, images } = fields
+        //Declare the fields, (temp as a placeholder for if searching is implemented)
+        const { temp } = fields
         if(error) {
-            return res.status(400).json({ error: 'Image could not be uploaded' })
+            return res.status(400).json({ error: 'product.read: Unable to load products' })
         }
-        //Return the object?
-        //return fields
+        //Query the DB
+        //TODO
+        //Dump to console for the time being
+        //TODO
+        //Return the object
+        //TODO
 
     })
 }
