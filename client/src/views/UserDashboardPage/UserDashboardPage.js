@@ -1,4 +1,6 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom'
+import { isAuthenticated } from '../../api/authApi'
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -15,6 +17,7 @@ import Parallax from "components/Parallax/Parallax.js";
 export default function UserDashboardPage(props) {
     // const classes = useStyles()
     const { ...rest } = props
+    const { user: { _id, username, email, role } } = isAuthenticated()
 
     return (
         <div>
