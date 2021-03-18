@@ -36,6 +36,7 @@ export default function SigninPage(props) {
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+  // initialize state values
   const [values, setValues] = useState({
     username: '',
     password: '',
@@ -44,8 +45,10 @@ export default function SigninPage(props) {
     redirectToReferer: false,
     recaptcha: false
   })
+  // deconstruct variables from values object
   const { username, password, error, loading, redirectToReferer, recaptcha } = values
 
+  // higher order function to target name and event of form
   const handleChange = name => e => {
     setValues({ ...values, error: false, [name]: e.target.value })
   }
@@ -59,10 +62,13 @@ export default function SigninPage(props) {
   }
 
   const handleSubmit = e => {
+    // prevent default page refresh on frontend
     e.preventDefault()
     setValues({ ...values, error: false, loading: true })
     if (recaptcha) {
+      // sign in with form values
       signin({ username, password }).then(res => {
+        // authenticate user by setting jwt and user object
         authenticate(res, () => {
           setValues({ ...values, redirectToReferer: true })
         })
