@@ -47,6 +47,7 @@ export default function SigninPage(props) {
   })
   // deconstruct variables from values object
   const { username, password, error, loading, redirectToReferer, recaptcha } = values
+  const { user } = isAuthenticated()
 
   // higher order function to target name and event of form
   const handleChange = name => e => {
@@ -92,8 +93,10 @@ export default function SigninPage(props) {
 
   const redirectUser = () => {
     if (redirectToReferer) {
-      if (isAuthenticated()) {
+      if (user && user.role === 1) {
         return <Redirect to='/admin/dashboard' />
+      } else {
+        return <Redirect to='/user/dashboard' />
       }
     }
   }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { isAuthenticated, signout } from '../../api/authApi'
 // react components for routing our app without refresh
 import { Link, withRouter } from "react-router-dom";
@@ -25,57 +25,58 @@ function HeaderLinks({ history }) {
 
   return (
     <div>
-      {/* Ternary operator to display header links based on whether user is quthenticated or not */}
-      {isAuthenticated() ? 
-      <List className={classes.list}>
+      {/* AND operator to display header links based on whether user is authenticated or not and user role is admin or registered user */}
+      <ListItem className={classes.listItem}>
+        <Link className={classes.navLink} style={isActive(history, '/shop')} to="/shop">Shop</Link>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Link className={classes.navLink} style={isActive(history, '/cart')} to="/cart">Cart</Link>
+      </ListItem>
+      {isAuthenticated() && isAuthenticated().user.role === 0 && (
         <ListItem className={classes.listItem}>
           <Link className={classes.navLink} style={isActive(history, '/user/dashboard')} to="/user/dashboard">User Dashboard</Link>
         </ListItem>
+        )}
+      {isAuthenticated() && isAuthenticated().user.role === 1 && (
         <ListItem className={classes.listItem}>
           <Link className={classes.navLink} style={isActive(history, '/admin/dashboard')} to="/admin/dashboard">Admin Dashboard</Link>
         </ListItem>
-        <ListItem className={classes.listItem}>
-          <Link className={classes.navLink} style={isActive(history, '/shop')} to="/shop">Shop</Link>
-        </ListItem>
-        <ListItem className={classes.listItem}>
-          <Link className={classes.navLink} style={isActive(history, '/cart')} to="/cart">Cart</Link>
-        </ListItem>
-        <ListItem className={classes.listItem}>
+      )}
+      {!isAuthenticated() && (
+        <Fragment>
+          <ListItem className={classes.listItem}>
+            <Button
+              to="/signin"
+              color="transparent"
+              className={classes.navLink}
+              component={Link}
+              style={isActive(history, '/signin')}
+            >
+              Sign In
+            </Button>
+          </ListItem>
+          <ListItem className={classes.listItem}>
+            <Button
+              to="/signup"
+              color="transparent"
+              className={classes.navLink}
+              component={Link}
+              style={isActive(history, '/signup')}
+            >
+              Sign Up
+            </Button>
+          </ListItem>
+        </Fragment>
+      )}
+      {isAuthenticated() && (
         <Button
-          color="danger"
-          className={classes.navLink}
-          onClick={() => signout(() => { history.push('/') })}
+        color="danger"
+        className={classes.navLink}
+        onClick={() => signout(() => { history.push('/') })}
         >
           Sign Out
         </Button>
-      </ListItem>
-      </List>
-      :
-      <List className={classes.list}>
-        <ListItem className={classes.listItem}>
-          <Button
-            to="/signin"
-            color="transparent"
-            className={classes.navLink}
-            component={Link}
-            style={isActive(history, '/signin')}
-          >
-            Sign In
-          </Button>
-        </ListItem>
-        <ListItem className={classes.listItem}>
-          <Button
-            to="/signup"
-            color="transparent"
-            className={classes.navLink}
-            component={Link}
-            style={isActive(history, '/signup')}
-          >
-            Sign Up
-          </Button>
-        </ListItem>
-      </List>
-      }
+      )}
     </div>
   );
 }

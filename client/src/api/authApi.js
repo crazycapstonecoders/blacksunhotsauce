@@ -46,8 +46,7 @@ export const signout = next => {
 export const authenticate = (res, next) => {
     // set jwt and user object in localStorage to retrieve easily
     if(typeof window !== 'undefined') {
-        localStorage.setItem('jwt', JSON.stringify(res.data.token))
-        localStorage.setItem('user', JSON.stringify(res.data.user))
+        localStorage.setItem('jwt', JSON.stringify(res.data))
         next()
     }
 }

@@ -15,6 +15,9 @@ import ShopPage from "views/ShopPage/ShopPage.js";
 import CartPage from "views/CartPage/CartPage.js";
 import ForgotPasswordPage from "views/ForgotPasswordPage/ForgotPasswordPage.js";
 import ResetPasswordPage from "views/ResetPasswordPage/ResetPasswordPage.js";
+import PrivateRoute from "auth/PrivateRoute.js"
+import AdminRoute from "auth/AdminRoute.js"
+
 
 var hist = createBrowserHistory();
 
@@ -27,8 +30,8 @@ ReactDOM.render(
       <Route path="/reset-password/:resetPasswordToken" component={ResetPasswordPage} />
       <Route path="/shop" component={ShopPage} />
       <Route path="/cart" component={CartPage} />
-      <Route path="/admin/dashboard" component={AdminDashboardPage} />
-      <Route path="/user/dashboard" component={UserDashboardPage} />
+      <AdminRoute path="/admin/dashboard" component={AdminDashboardPage} />
+      <PrivateRoute path="/user/dashboard" component={UserDashboardPage} />
       <Route path="/" component={LandingPage} />
     </Switch>
   </Router>,
