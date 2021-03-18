@@ -18,12 +18,14 @@ const useStyles = makeStyles(styles);
 function HeaderLinks({ history }) {
   const classes = useStyles();
 
+  // custom styling to highlight color of header link when path is active
   const isActive = (history, path) => {
     if (history.location.pathname === path) return { color: '#00FFFF' }
   }
 
   return (
     <div>
+      {/* Ternary operator to display header links based on whether user is quthenticated or not */}
       {isAuthenticated() ? 
       <List className={classes.list}>
         <ListItem className={classes.listItem}>
