@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, Redirect } from 'react-router-dom'
+import Google from "./Sections/Google"
 import { signin, authenticate, isAuthenticated, validateRecaptcha } from '../../api/authApi'
 import ReCAPTCHA from 'react-google-recaptcha'
 // @material-ui/core components
@@ -38,7 +39,7 @@ export default function SigninPage(props) {
   const { ...rest } = props;
   // initialize state values
   const [values, setValues] = useState({
-    username: '',
+    email: '',
     password: '',
     error: '',
     loading: false,
@@ -46,7 +47,7 @@ export default function SigninPage(props) {
     recaptcha: false
   })
   // deconstruct variables from values object
-  const { username, password, error, loading, redirectToReferer, recaptcha } = values
+  const { email, password, error, loading, redirectToReferer, recaptcha } = values
   const { user } = isAuthenticated()
 
   // higher order function to target name and event of form
@@ -68,7 +69,7 @@ export default function SigninPage(props) {
     setValues({ ...values, error: false, loading: true })
     if (recaptcha) {
       // sign in with form values
-      signin({ username, password }).then(res => {
+      signin({ email, password }).then(res => {
         // authenticate user by setting jwt and user object
         authenticate(res, () => {
           setValues({ ...values, redirectToReferer: true })
@@ -124,49 +125,21 @@ export default function SigninPage(props) {
                 <form className={classes.form} onSubmit={handleSubmit}>
                   <CardHeader color="primary" className={classes.cardHeader}>
                     <h4>Sign In</h4>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-twitter"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-facebook"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-google-plus-g"} />
-                      </Button>
-                    </div>
+                    <Google />
                   </CardHeader>
                   {showError()}
                   {showLoading()}
                   <p className={classes.divider}>Or</p>
                   <CardBody>
                     <CustomInput
-                      labelText="Username"
-                      id="username"
+                      labelText="Email"
+                      id="email"
                       formControlProps={{
                         fullWidth: true
                       }}
                       inputProps={{
-                        onChange: handleChange('username'),
-                        type: "text",
+                        onChange: handleChange('email'),
+                        type: "email",
                         endAdornment: (
                           <InputAdornment position="end">
                             <People className={classes.inputIconsColor} />

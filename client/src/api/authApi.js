@@ -89,12 +89,24 @@ export const resetPassword = resetInfo => {
 
 export const validateRecaptcha = token => {
     return axios({
-        method: 'post',
+        method: 'POST',
         url:`${server}/api/auth/validateRecaptcha`,
         headers: {
             Accept: "*/*",
             "Content-Type": "application/json"
         },
         data: JSON.stringify({ token })
+    })
+}
+
+export const socialLogin = user => {
+    return axios({
+        method: 'POST',
+        url:`${server}/api/auth/social-login`,
+        headers: {
+            Accept: "*/*",
+            "Content-Type": "application/json"
+        },
+        data: JSON.stringify(user)
     })
 }
