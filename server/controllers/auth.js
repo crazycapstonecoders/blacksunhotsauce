@@ -33,9 +33,9 @@ exports.signUp = async (req, res) => {
 
 exports.signIn = async (req, res, next) => {
     // get necessary params from sign in page
-    const { username, password } = req.body
+    const { email, password } = req.body
     passport.authenticate('local', async (err, user) => {
-        user = await User.findOne({ username })
+        user = await User.findOne({ email })
         try {
             // log in the user
             req.logIn(user, { session: false }, async (error) => {
@@ -163,6 +163,37 @@ exports.validateRecaptcha = async (req, res, next) => {
     } catch (error) {
         throw new Error(`Error with Google veirfy API. ${error}`)
     }
+}
+
+exports.socialLogin = (req, res) => {
+    const { email } = req.body
+    /**
+     * Check if user associated with the email exists
+     * If they exists, just log the user in
+     * Else, we create a new user using the social login info
+     */
+    User.findOne({ email }, (error, user) => {
+        if(error || !user) {
+            user = new User(req.body)
+            req.profile = user
+            user.save()
+            // create a signed jwt token to authenticate user
+            const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
+            // persists the token as t with expiration date
+            res.cookie('t', token, { expire: new Date() + 9999 })
+            // define user object and return both user object and token to front end
+            const { _id, username, email, role } = user
+            return res.json({ token, user: { _id, username, email, role } })
+        } else {
+            // create a signed jwt token to authenticate user
+            const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
+            // persists the token as t with expiration date
+            res.cookie('t', token, { expire: new Date() + 9999 })
+            // define user object and return both user object and token to front end
+            const { _id, username, email, role } = user
+            return res.json({ token, user: { _id, username, email, role } })
+        }
+    })
 }
 
 // helper functions
