@@ -6,7 +6,7 @@ const admin = require('firebase-admin')
 const serviceAccount = require('../../../black-sun-sauces-firebase-adminsdk-q0eh3-f4c75592fd.json')
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    storageBucket: process.env.FIREBAE_STORAGEBUCKET
+    storageBucket: process.env.FIREBASE_STORAGEBUCKET
 })
 
 exports.productById = (req, res, next, id) => {
@@ -39,7 +39,7 @@ exports.create = (req, res) => {
         if (files.image.type === null) {
             return res.status(400).json({ error: 'Image is required' })
         }
-        if (!files.image.type.includes('image') === true) {
+        if (files.image.type.includes('image') !== true) {
             return res.status(400).json({ message: 'Please upload a valid image' })
         }
         // create new product document with fields for db
