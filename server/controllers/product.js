@@ -39,7 +39,7 @@ exports.create = (req, res) => {
         if (files.image.type === null) {
             return res.status(400).json({ error: 'Image is required' })
         }
-        if (!files.image.type.includes('image') === true) {
+        if (files.image.type.includes('image') !== true) {
             return res.status(400).json({ message: 'Please upload a valid image' })
         }
         // create new product document with fields for db
