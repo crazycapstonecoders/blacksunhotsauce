@@ -6,7 +6,7 @@ const admin = require('firebase-admin')
 const serviceAccount = require('../../../black-sun-sauces-firebase-adminsdk-q0eh3-f4c75592fd.json')
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    storageBucket: process.env.FIREBAE_STORAGEBUCKET
+    storageBucket: process.env.FIREBASE_STORAGEBUCKET
 })
 
 exports.productById = (req, res, next, id) => {
@@ -39,7 +39,7 @@ exports.create = (req, res) => {
         if (files.image.type === null) {
             return res.status(400).json({ error: 'Image is required' })
         }
-        if (!files.image.type.includes('image') === true) {
+        if (files.image.type.includes('image') !== true) {
             return res.status(400).json({ message: 'Please upload a valid image' })
         }
         // create new product document with fields for db
@@ -104,13 +104,17 @@ exports.update = (req, res) => {
         // use lodash to simplify code 
         product = _.extend(product, fields)
         // image is not required, so just save it even if image is null
-        if (files.image.type === null) {
+        if (files.image == null) {
             product.save().then(product => {
                 res.json(product)
             }).catch(error => {
                 return res.status(400).json({ error: 'Error updating product' })
             })
         } else {
+            // if its not an image
+            if (files.image.type.includes('image') !== true) {
+                return res.status(400).json({ message: 'Please upload a valid image' })
+            }
             // function to upload to firebase storage
             let uploadFile = function () {
                 const bucket = admin.storage().bucket()
