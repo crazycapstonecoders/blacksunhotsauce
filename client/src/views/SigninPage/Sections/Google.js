@@ -10,7 +10,7 @@ export default function Google() {
     const responseGoogle = response => {
         const { googleId, name, email } = response.profileObj
         const user = { 
-            username: name,
+            name: name,
             email: email,
             password: googleId
         }

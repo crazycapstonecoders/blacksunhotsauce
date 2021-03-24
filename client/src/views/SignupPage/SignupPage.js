@@ -38,7 +38,7 @@ export default function SigninPage(props) {
   const { ...rest } = props;
   // initialize state values
   const [values, setValues] = useState({
-    username: '',
+    name: '',
     email: '',
     password: '',
     error: '',
@@ -46,7 +46,7 @@ export default function SigninPage(props) {
     recaptcha: false
   })
   // deconstruct variables from values object
-  const { username, email, password, error, success, recaptcha } = values
+  const { name, email, password, error, success, recaptcha } = values
 
   // higher order function to target name and event of form
   const handleChange = name => e => {
@@ -66,11 +66,11 @@ export default function SigninPage(props) {
     e.preventDefault()
     setValues({ ...values, error: false })
     // define user object with form values
-    const user = { username, email, password }
+    const user = { name, email, password }
     if(recaptcha) {
       // sign up with user
       signup(user).then(res => {
-        setValues({ ...values, username: '', email: '', password: '', error: '', success: true })
+        setValues({ ...values, name: '', email: '', password: '', error: '', success: true })
       }).catch(error => {
           setValues({ ...values, error: error.response.data.error, success: false })
       })
@@ -79,17 +79,25 @@ export default function SigninPage(props) {
     }
   }
 
-const showError = () => (
-  <Alert severity="error" style={{ display: error ? '' : 'none' }}>
-      {error}
-  </Alert>
-)
+  const closeError = () => {
+    setValues({ ...values, error: '' })
+  }
 
-const showSuccess = () => (
-  <Alert severity="success" style={{ display: success ? '' : 'none' }}>
-      Success! User created. Please <Link to="/signin" variant="body2" >Sign In</Link>
-  </Alert>
-)
+  const closeSuccess = () => {
+      setValues({ ...values, success: false })
+  }
+
+  const showError = () => (
+    <Alert onClose={closeError} severity="error" style={{ display: error ? '' : 'none' }}>
+        {error}
+    </Alert>
+  )
+
+  const showSuccess = () => (
+    <Alert onClose={closeSuccess} severity="success" style={{ display: success ? '' : 'none' }}>
+        Success! User created. Please <Link to="/signin" variant="body2" >Sign In</Link>
+    </Alert>
+  )
 
   return (
     <div>
@@ -119,13 +127,13 @@ const showSuccess = () => (
                   {showSuccess()}
                   <CardBody>
                     <CustomInput
-                      labelText="Username"
-                      id="username"
+                      labelText="Name"
+                      id="name"
                       formControlProps={{
                         fullWidth: true
                       }}
                       inputProps={{
-                        onChange: handleChange('username'),
+                        onChange: handleChange('name'),
                         type: "text",
                         endAdornment: (
                           <InputAdornment position="end">

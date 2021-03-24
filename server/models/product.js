@@ -22,6 +22,10 @@ const productSchema = new Schema({
         trim: true,
         required: true
     },
+    sold: {
+        type: Number,
+        default: 0
+    },
     images: [{}],
     shipping: {
         required: false,

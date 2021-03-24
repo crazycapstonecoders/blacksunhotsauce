@@ -95,6 +95,9 @@ const userDashboardPageStyle = {
     border: "0",
     borderRadius: "6px",
     justifyContent: "center !important"
+  },
+  form: {
+    margin: "0"
   }
 }
 

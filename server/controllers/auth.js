@@ -45,15 +45,15 @@ exports.signIn = async (req, res, next) => {
                 // check if password match user
                 const compare = await user.authenticate(password)
                 if (!compare) {
-                    return res.status(400).json({ error: 'Username and password does not match' })
+                    return res.status(400).json({ error: 'Email and password does not match' })
                 }
                 // create a signed jwt token to authenticate user
                 const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
                 // persists the token as t with expiration date
                 res.cookie('t', token, { expire: new Date() + 9999 })
                 // define user object and return both user object and token to front end
-                const { _id, username, email, role } = user
-                return res.json({ token, user: { _id, username, email, role } })
+                const { _id, name, email, role } = user
+                return res.json({ token, user: { _id, name, email, role } })
             })
         } catch (error) {
             return next(error);
@@ -182,22 +182,21 @@ exports.socialLogin = (req, res) => {
             // persists the token as t with expiration date
             res.cookie('t', token, { expire: new Date() + 9999 })
             // define user object and return both user object and token to front end
-            const { _id, username, email, role } = user
-            return res.json({ token, user: { _id, username, email, role } })
+            const { _id, name, email, role } = user
+            return res.json({ token, user: { _id, name, email, role } })
         } else {
             // create a signed jwt token to authenticate user
             const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
             // persists the token as t with expiration date
             res.cookie('t', token, { expire: new Date() + 9999 })
             // define user object and return both user object and token to front end
-            const { _id, username, email, role } = user
-            return res.json({ token, user: { _id, username, email, role } })
+            const { _id, name, email, role } = user
+            return res.json({ token, user: { _id, name, email, role } })
         }
     })
 }
 
 // helper functions
-// helper function to send email
 const sendEmail = emailData => {
     const transporter = nodeMailer.createTransport({
         host: "smtp.gmail.com",
