@@ -34,12 +34,12 @@ function HeaderLinks({ history }) {
       </ListItem>
       {isAuthenticated() && isAuthenticated().user.role === 0 && (
         <ListItem className={classes.listItem}>
-          <Link className={classes.navLink} style={isActive(history, '/user/dashboard')} to="/user/dashboard">User Dashboard</Link>
+          <Link className={classes.navLink} style={isActive(history, '/user/dashboard')} to="/user/dashboard">Dashboard</Link>
         </ListItem>
         )}
       {isAuthenticated() && isAuthenticated().user.role === 1 && (
         <ListItem className={classes.listItem}>
-          <Link className={classes.navLink} style={isActive(history, '/admin/dashboard')} to="/admin/dashboard">Admin Dashboard</Link>
+          <Link className={classes.navLink} style={isActive(history, '/admin/dashboard')} to="/admin/dashboard">Dashboard</Link>
         </ListItem>
       )}
       {!isAuthenticated() && (
