@@ -11,7 +11,7 @@ import { CircularProgress } from '@material-ui/core'
 // @material-ui/lab components
 import { Alert } from '@material-ui/lab'
 // @material-ui/icons
-import People from "@material-ui/icons/People";
+import Email from "@material-ui/icons/Email";
 // core components
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
@@ -82,8 +82,12 @@ export default function SigninPage(props) {
     }
   }
 
+  const closeError = () => {
+    setValues({ ...values, error: '' })
+  }
+
   const showError = () => (
-    <Alert severity="error" style={{ display: error ? '' : 'none' }}>
+    <Alert onClose={closeError} severity="error" style={{ display: error ? '' : 'none' }}>
       {error}
     </Alert>
   )
@@ -142,7 +146,7 @@ export default function SigninPage(props) {
                         type: "email",
                         endAdornment: (
                           <InputAdornment position="end">
-                            <People className={classes.inputIconsColor} />
+                            <Email className={classes.inputIconsColor} />
                           </InputAdornment>
                         )
                       }}

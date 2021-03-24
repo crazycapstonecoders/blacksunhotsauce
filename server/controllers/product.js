@@ -104,7 +104,7 @@ exports.update = (req, res) => {
         // use lodash to simplify code 
         product = _.extend(product, fields)
         // image is not required, so just save it even if image is null
-        if (files.image == null) {
+        if (files.image.type == null) {
             product.save().then(product => {
                 res.json(product)
             }).catch(error => {

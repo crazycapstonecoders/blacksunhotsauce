@@ -1,7 +1,5 @@
 import { containerFluid, container, title } from "assets/jss/material-kit-react.js";
 
-import imagesStyle from "assets/jss/material-kit-react/imagesStyles.js";
-
 const userDashboardPageStyle = {
   container: {
     ...containerFluid,
@@ -97,6 +95,9 @@ const userDashboardPageStyle = {
     border: "0",
     borderRadius: "6px",
     justifyContent: "center !important"
+  },
+  form: {
+    margin: "0"
   }
 }
 

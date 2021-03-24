@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { isAuthenticated } from '../../api/authApi'
-// nodejs library that concatenates classes
-import classNames from "classnames";
+import UserUpdate from "./Sections/UserUpdate" 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -24,7 +23,7 @@ const useStyles = makeStyles(styles);
 export default function UserDashboardPage(props) {
     const classes = useStyles()
     const { ...rest } = props
-    const { user: { _id, username, email, role } } = isAuthenticated()
+    const { user: { _id, name, email, role } } = isAuthenticated()
 
     return (
         <div>
@@ -43,7 +42,7 @@ export default function UserDashboardPage(props) {
                 <div className={classes.headerContainer}>
                     <GridContainer>
                         <GridItem xs={12} sm={12} md={6}>
-                            <h1 className={classes.header}>Hello and welcome {username}</h1>
+                            <h1 className={classes.header}>Hello and welcome {name}</h1>
                         </GridItem>
                     </GridContainer>
                 </div>
@@ -51,12 +50,13 @@ export default function UserDashboardPage(props) {
             <div className={classes.container}>
                 <GridContainer>
                     <GridItem xs={12} sm={12} md={4} className={classes.infoItem}>
-                        <Card>
+                        {UserUpdate()}
+                        {/* <Card>
                             <CardHeader color="info" className={classes.cardHeader}>
                                 <h4>User Information</h4>
-                        </CardHeader>
+                            </CardHeader>
                             <CardBody>
-                                <h4>{username}</h4>
+                                <h4>{name}</h4>
                                 <hr />
                                 <h4>{email}</h4>
                                 <hr />
@@ -72,7 +72,7 @@ export default function UserDashboardPage(props) {
                                     View Cart
                                 </Button>
                             </CardFooter>
-                        </Card>
+                        </Card> */}
                     </GridItem>
                     <GridItem xs={12} sm={12} md={4} className={classes.purchaseItem}>
                         <Card>
