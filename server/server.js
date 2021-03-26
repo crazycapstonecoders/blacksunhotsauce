@@ -28,11 +28,13 @@ const authRouter = require('./routes/auth')
 const userRouter = require('./routes/user')
 const productRouter = require('./routes/product')
 const orderRouter = require('./routes/order')
+const braintreeRouter = require('./routes/braintree')
 
 app.use('/api/auth', authRouter)
 app.use('/api/user', userRouter)
 app.use('/api/product', productRouter)
 app.use('/api/order', orderRouter)
+app.use('/api/braintree', braintreeRouter)
 
 // localhost port
 const port = 5000 || process.env.PORT

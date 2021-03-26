@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-let server = 'http://localhost:5000'
+const server = process.env.REACT_APP_SERVER
 
 /**
 This folder exports different functions that make requests/calls to the API/Backend.
