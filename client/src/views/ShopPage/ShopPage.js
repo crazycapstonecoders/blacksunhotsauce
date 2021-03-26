@@ -39,76 +39,133 @@ export default function ShopPage(props) {
                 }}
                 {...rest}
             />
+            <a name="Top"></a>
             <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
 
             
 
             <div id="divShop" class="flex grid-container">
-                <div class="card-Shop col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                    <img source="" alt="placeholder"></img>
-                    <h1>Product Name</h1>
-                    <p alt="product-Image">Description</p>
-                    <div class="flex grid-container">
-                        <form action="">
-                            <button type="submit" action="" class="col-md-8 col-xs-12">Add to cart</button>
-                            <input type="number" class="col-md-4 col-xs-12"></input>
-                            <input type="text" class="hidden" value="#ProductID"></input>
-                        </form>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card-Shop">
+                        <img src="assets/img/temp.jpg" alt="placeholder"></img>
+                        <h1>Product Name</h1>
+                        <p alt="product-Image">Description</p>
+                        <div class="flex grid-container">
+                            <form action="">
+                                <button type="submit" action="" class="col-md-8 col-xs-12">Add to cart</button>
+                                <input type="number" class="col-md-4 col-xs-12"></input>
+                                <input type="text" class="hidden" value="#ProductID" disabled></input>
+                            </form>
+                        </div>
                     </div>
                 </div>
 
                 <p class="hidden">Below this is duplicates of the above code, when the page is generated it would loop and generate this per item</p>
 
-                <div class="card-Shop col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                    <img source="" alt="placeholder"></img>
-                    <h1>Product Name</h1>
-                    <p alt="product-Image">Description</p>
-                    <div class="flex grid-container">
-                        <form action="">
-                            <button type="submit" action="" class="col-md-8 col-xs-12">Add to cart</button>
-                            <input type="number" class="col-md-4 col-xs-12"></input>
-                            <input type="text" class="hidden" value="#ProductID"></input>
-                        </form>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card-Shop">
+                        <img src="assets/img/temp.png" alt="placeholder"></img>
+                        <h1>Product Name</h1>
+                        <p alt="product-Image">Description</p>
+                        <div class="flex grid-container">
+                            <form action="">
+                                <button type="submit" action="" class="col-md-8 col-xs-12">Add to cart</button>
+                                <input type="number" class="col-md-4 col-xs-12"></input>
+                                <input type="text" class="hidden" value="#ProductID" disabled></input>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <div class="card-Shop col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                    <img source="" alt="placeholder"></img>
-                    <h1>Product Name</h1>
-                    <p alt="product-Image">Description</p>
-                    <div class="flex grid-container">
-                        <form action="">
-                            <button type="submit" action="" class="col-md-8 col-xs-12">Add to cart</button>
-                            <input type="number" class="col-md-4 col-xs-12"></input>
-                            <input type="text" class="hidden" value="#ProductID"></input>
-                        </form>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card-Shop">
+                        <img src="assets/img/temp.png" alt="placeholder"></img>
+                        <h1>Product Name</h1>
+                        <p alt="product-Image">Description</p>
+                        <div class="flex grid-container">
+                            <form action="">
+                                <button type="submit" action="" class="col-md-8 col-xs-12">Add to cart</button>
+                                <input type="number" class="col-md-4 col-xs-12"></input>
+                                <input type="text" class="hidden" value="#ProductID" disabled></input>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <div class="card-Shop col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                    <img source="" alt="placeholder"></img>
-                    <h1>Product Name</h1>
-                    <p alt="product-Image">Description</p>
-                    <div class="flex grid-container">
-                        <form action="">
-                            <button type="submit" action="" class="col-md-8 col-xs-12">Add to cart</button>
-                            <input type="number" class="col-md-4 col-xs-12"></input>
-                            <input type="text" class="hidden" value="#ProductID"></input>
-                        </form>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card-Shop">
+                        <img src="assets/img/temp.png" alt="placeholder"></img>
+                        <h1>Product Name</h1>
+                        <p alt="product-Image">Description</p>
+                        <div class="flex grid-container">
+                            <form action="">
+                                <button type="submit" action="" class="col-md-8 col-xs-12">Add to cart</button>
+                                <input type="number" class="col-md-4 col-xs-12"></input>
+                                <input type="text" class="hidden" value="#ProductID" disabled></input>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <div class="card-Shop col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                    <img source="" alt="placeholder"></img>
-                    <h1>Product Name</h1>
-                    <p alt="product-Image">Description</p>
-                    <div class="flex grid-container">
-                        <form action="">
-                            <button type="submit" action="" class="col-md-8 col-xs-12">Add to cart</button>
-                            <input type="number" class="col-md-4 col-xs-12"></input>
-                            <input type="text" class="hidden" value="#ProductID"></input>
-                        </form>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card-Shop">
+                        <img src="assets/img/temp.png" alt="placeholder"></img>
+                        <h1>Product Name</h1>
+                        <p alt="product-Image">Description</p>
+                        <div class="flex grid-container">
+                            <form action="">
+                                <button type="submit" action="" class="col-md-8 col-xs-12">Add to cart</button>
+                                <input type="number" class="col-md-4 col-xs-12"></input>
+                                <input type="text" class="hidden" value="#ProductID" disabled></input>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card-Shop">
+                        <img src="assets/img/temp.png" alt="placeholder"></img>
+                        <h1>Product Name</h1>
+                        <p alt="product-Image">Description</p>
+                        <div class="flex grid-container">
+                            <form action="">
+                                <button type="submit" action="" class="col-md-8 col-xs-12">Add to cart</button>
+                                <input type="number" class="col-md-4 col-xs-12"></input>
+                                <input type="text" class="hidden" value="#ProductID" disabled></input>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card-Shop">
+                        <img src="assets/img/temp.png" alt="placeholder"></img>
+                        <h1>Product Name</h1>
+                        <p alt="product-Image">Description</p>
+                        <div class="flex grid-container">
+                            <form action="">
+                                <button type="submit" action="" class="col-md-8 col-xs-12">Add to cart</button>
+                                <input type="number" class="col-md-4 col-xs-12"></input>
+                                <input type="text" class="hidden" value="#ProductID" disabled></input>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card-Shop">
+                        <img src="assets/img/temp.png" alt="placeholder"></img>
+                        <h1>Product Name</h1>
+                        <p alt="product-Image">Description</p>
+                        <div class="flex grid-container">
+                            <form action="">
+                                <button type="submit" action="" class="col-md-8 col-xs-12">Add to cart</button>
+                                <input type="number" class="col-md-4 col-xs-12"></input>
+                                <input type="text" class="hidden" value="#ProductID" disabled></input>
+                            </form>
+                        </div>
                     </div>
                 </div>
 
-                
+                <p class="hidden">Below this point is non-generated code</p>
+
+                <a href="#top" class="button">Return to Top of page</a>
+
+
             </div>
         </div>
     )

@@ -1,3 +1,4 @@
+/* This is the container of the grid used in the shop*/
 .divShop{
     width: 90%;
     margin-right: auto;
@@ -6,6 +7,7 @@
 }
 /* This is the container for each card in the shop*/
 .card-Shop{
+    width: 98%;
     background-color: lightgray;
     opacity: 50%;
     border-radius: 10px;
@@ -14,20 +16,22 @@
     padding-right: .2em;
     margin-bottom: .2em;
     margin-top: .2em;
+    margin-right: auto;
+    margin-left: auto;
 }
 
+/* Ensure container contents have full visibility if opacity is used in background*/
 .card-Shop *{
-    /* Ensure container contents have full visibility*/
-    opacity: 100%;
+    opacity: 90%;
 }
 
+/*This modifies the rendering of images on the store page*/
 .cardshop img{
-    /*This modifies the rendering of images on the store page*/
     width: 100%;
-    height: 0;
-    padding-bottom: 100%;
+    height: 100%;
 }
 
+/* This modifies the Text elements natively in the card-shop*/
 .card-Shop h1{
     text-align: center;
 }
@@ -38,42 +42,33 @@
     margin-right: auto;
 }
 
+/* This modifies the div containing the form elements*/
 .card-Shop div {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
 }
 
+/* This resizes the form controls*/
+.card-shop > input{
+    height: .6em;
+}
+.card-shop > button{
+    height: 1.3em;
+}
+
+/* This makes the catds get a higher opacity on hover*/
+.card-shop:hover{
+    transition: 500ms;
+    opacity: 100%;
+}
+
+/*This can be used to hide any elements that should not be visible to the user*/
 .hidden{
     display: none;
 }
 
-.grid-container{
-    opacity: 70%;
-    max-height: 18em;
-}
-
-.grid-container:hover{
-    opacity: 100%;
-    transition: 1s;
-}
-
-.grid-text{
-    overflow-y: auto;
-    max-height: 18em;
-}
-
-.right{
-    text-align: right;
-}
-.fright{
-    float: right;
-}
-
-.fright *{
-    text-align: center; 
-}
-
+/* This class enables the containing element to have its internal elements to automatically resize if configured*/
 .flex{
     margin-top: .1em;
     display: flex;
@@ -81,21 +76,32 @@
     flex-wrap: wrap;
 }
 
-.placeholder{
-    width: 100%;
-    text-align: center;
-    
+/* This class enables a link object to visibly become a button */
+.button{
+    max-width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+    background-color: gray;
+    border-radius: 5px;
+}
+
+.button a{
+    text-decoration: none;
+    color: black;
+}
+
+.button:hover{
+    transition: 500ms;
+    background-color: lightgray;
+}
+
+.button:visited{
+    color: black;
 }
 
 /*Extra small devices */
 @media (max-width: 600px){
-    .placeholder{
-        max-width: 128px;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
-    
-    }
     .col-xs-12{
         width: 100%;
         min-width: 100%;
