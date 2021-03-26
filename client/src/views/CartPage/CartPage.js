@@ -1,4 +1,5 @@
 import React from 'react'
+import Checkout from './Sections/Checkout'
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -31,6 +32,7 @@ export default function CartPage(props) {
             />
             <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
             <h1>This is cart page</h1>
+            <Checkout />
         </div>
     )
 }

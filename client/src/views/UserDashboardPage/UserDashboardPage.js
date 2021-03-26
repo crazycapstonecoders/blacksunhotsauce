@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link, Redirect } from 'react-router-dom'
 import { isAuthenticated } from '../../api/authApi'
 import UserUpdate from "./Sections/UserUpdate" 
 // @material-ui/core components
@@ -8,13 +7,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
-import Button from "components/CustomButtons/Button.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
-import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-kit-react/views/userDashboardPage.js";
 
@@ -23,7 +20,7 @@ const useStyles = makeStyles(styles);
 export default function UserDashboardPage(props) {
     const classes = useStyles()
     const { ...rest } = props
-    const { user: { _id, name, email, role } } = isAuthenticated()
+    const { user: { name } } = isAuthenticated()
 
     return (
         <div>
@@ -51,28 +48,6 @@ export default function UserDashboardPage(props) {
                 <GridContainer>
                     <GridItem xs={12} sm={12} md={4} className={classes.infoItem}>
                         {UserUpdate()}
-                        {/* <Card>
-                            <CardHeader color="info" className={classes.cardHeader}>
-                                <h4>User Information</h4>
-                            </CardHeader>
-                            <CardBody>
-                                <h4>{name}</h4>
-                                <hr />
-                                <h4>{email}</h4>
-                                <hr />
-                                <h4>{role === 1 ? 'Admin' : 'Registered User'}</h4>
-                                <hr />
-                            </CardBody>
-                            <CardFooter className={classes.cardFooter}>
-                                <Button round color="rose" to={`/profile/${_id}`} component={Link}>
-                                    Update Info
-                                </Button>
-                                <hr />
-                                <Button color="info" to='/cart' component={Link}>
-                                    View Cart
-                                </Button>
-                            </CardFooter>
-                        </Card> */}
                     </GridItem>
                     <GridItem xs={12} sm={12} md={4} className={classes.purchaseItem}>
                         <Card>

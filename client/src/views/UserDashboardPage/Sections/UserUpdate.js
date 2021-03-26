@@ -36,7 +36,9 @@ export default function UserUpdate() {
     })
     // deconstruct variables from values object
     const { name, email, password, role, error, success } = values
-    const { token, user } = isAuthenticated()
+    // get authenticated user id and auth token while making sure user is indeed authenticated first
+    const userId = isAuthenticated() && isAuthenticated().user._id
+    const token = isAuthenticated() && isAuthenticated().token
 
     const init = userId => {
         read(userId, token).then(res => {
@@ -47,7 +49,7 @@ export default function UserUpdate() {
     }
 
     useEffect(() => {
-        init(user._id)
+        init(userId)
     }, [])
 
     // higher order function to target name and event of form
@@ -58,7 +60,7 @@ export default function UserUpdate() {
     const handleSubmit = e => {
         // prevent default page refresh on frontend
         e.preventDefault()
-        update(user._id, token, { name, password }).then(res => {
+        update(userId, token, { name, password }).then(res => {
             updatedUser(res.data, () => {
                 setValues({ ...values, name: res.data.name, password: '', success: true })
             })
