@@ -79,6 +79,7 @@ exports.create = (req, res) => {
             product.save().then(product => {
                 res.json(product)
             }).catch(error => {
+                console.log(error)
                 return res.status(400).json({ error: 'Error creating product' })
             })
         }).catch(error => {
@@ -143,6 +144,7 @@ exports.update = (req, res) => {
                 product.save().then(product => {
                     res.json(product)
                 }).catch(error => {
+                    console.log(error)
                     return res.status(400).json({ error: 'Error updating product' })
                 })
             }).catch(error => {
