@@ -14,16 +14,23 @@ const productSchema = new Schema({
     },
     quantity: {
         type: Number,
-        required: true
+        required: true,
+        default: 0
     },
     price: {
         type: Number,
         trim: true,
         required: true
     },
-    images: [{
-        type: String
-    }]
+    sold: {
+        type: Number,
+        default: 0
+    },
+    images: [{}],
+    shipping: {
+        required: false,
+        type: Boolean
+    }
 }, { timestamps: true }
 )
 

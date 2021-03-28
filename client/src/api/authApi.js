@@ -1,6 +1,11 @@
 import axios from 'axios'
 
-let server = 'http://localhost:5000'
+const server = 'http://localhost:5000'
+
+/**
+This file exports different functions that make requests/calls to the API/Backend.
+API calls/requests are made via axios.
+ */
 
 export const signup = user => {
     return axios({
@@ -27,6 +32,7 @@ export const signin = user => {
 }
 
 export const signout = next => {
+    // remove jwt and user object when user signs out
     if(typeof window !== 'undefined') {
         localStorage.removeItem('jwt')
         localStorage.removeItem('user')
@@ -38,13 +44,14 @@ export const signout = next => {
 }
 
 export const authenticate = (res, next) => {
+    // set jwt and user object in localStorage to retrieve easily
     if(typeof window !== 'undefined') {
-        localStorage.setItem('jwt', JSON.stringify(res.data.token))
-        localStorage.setItem('user', JSON.stringify(res.data.user))
+        localStorage.setItem('jwt', JSON.stringify(res.data))
         next()
     }
 }
 
+// check if user is authenticated by parsing jwt from localStorage
 export const isAuthenticated = () => {
     if(typeof window === 'undefined') {
         return false
@@ -69,7 +76,6 @@ export const forgotPassword = email => {
 }
 
 export const resetPassword = resetInfo => {
-    console.log('reset info ' + resetInfo)
     return axios({
         method: 'PUT',
         url: `${server}/api/auth/reset-password`,
@@ -83,12 +89,24 @@ export const resetPassword = resetInfo => {
 
 export const validateRecaptcha = token => {
     return axios({
-        method: 'post',
+        method: 'POST',
         url:`${server}/api/auth/validateRecaptcha`,
         headers: {
             Accept: "*/*",
             "Content-Type": "application/json"
         },
         data: JSON.stringify({ token })
+    })
+}
+
+export const socialLogin = user => {
+    return axios({
+        method: 'POST',
+        url:`${server}/api/auth/social-login`,
+        headers: {
+            Accept: "*/*",
+            "Content-Type": "application/json"
+        },
+        data: JSON.stringify(user)
     })
 }

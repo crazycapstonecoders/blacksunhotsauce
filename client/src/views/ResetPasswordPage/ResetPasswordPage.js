@@ -33,15 +33,19 @@ export default function ResetPasswordPage(props) {
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+  // initialize state values 
   const [values, setValues] = useState({
     newPassword: '',
     message: '',
     error: '',
     recaptcha: false
   })
+  // deconstruct variables from values object
   const { newPassword, message, error, recaptcha } = values
+  // get reset password token from request parameters
   const { resetPasswordToken } = useParams()
 
+  // higher order function to target name and event of form
   const handleChange = name => e => {
     setValues({ ...values, error: false, [name]: e.target.value })
   }
@@ -55,9 +59,11 @@ export default function ResetPasswordPage(props) {
   }
 
   const handleSubmit = e => {
+    // prevent default page refresh on frontend
     e.preventDefault()
     setValues({ ...values, message: '', error: '' })
     if (recaptcha) {
+      // reset password using new password and reset password link
       resetPassword({ newPassword, resetPasswordLink: resetPasswordToken }).then(res => {
         setValues({ ...values, message: res.data.message, error: '' })
       }).catch(error => {

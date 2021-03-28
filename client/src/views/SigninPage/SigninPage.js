@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, Redirect } from 'react-router-dom'
+import Google from "./Sections/Google"
 import { signin, authenticate, isAuthenticated, validateRecaptcha } from '../../api/authApi'
 import ReCAPTCHA from 'react-google-recaptcha'
 // @material-ui/core components
@@ -10,7 +11,7 @@ import { CircularProgress } from '@material-ui/core'
 // @material-ui/lab components
 import { Alert } from '@material-ui/lab'
 // @material-ui/icons
-import People from "@material-ui/icons/People";
+import Email from "@material-ui/icons/Email";
 // core components
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
@@ -36,16 +37,20 @@ export default function SigninPage(props) {
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+  // initialize state values
   const [values, setValues] = useState({
-    username: '',
+    email: '',
     password: '',
     error: '',
     loading: false,
     redirectToReferer: false,
     recaptcha: false
   })
-  const { username, password, error, loading, redirectToReferer, recaptcha } = values
+  // deconstruct variables from values object
+  const { email, password, error, loading, redirectToReferer, recaptcha } = values
+  const { user } = isAuthenticated()
 
+  // higher order function to target name and event of form
   const handleChange = name => e => {
     setValues({ ...values, error: false, [name]: e.target.value })
   }
@@ -59,10 +64,13 @@ export default function SigninPage(props) {
   }
 
   const handleSubmit = e => {
+    // prevent default page refresh on frontend
     e.preventDefault()
     setValues({ ...values, error: false, loading: true })
     if (recaptcha) {
-      signin({ username, password }).then(res => {
+      // sign in with form values
+      signin({ email, password }).then(res => {
+        // authenticate user by setting jwt and user object
         authenticate(res, () => {
           setValues({ ...values, redirectToReferer: true })
         })
@@ -74,8 +82,12 @@ export default function SigninPage(props) {
     }
   }
 
+  const closeError = () => {
+    setValues({ ...values, error: '' })
+  }
+
   const showError = () => (
-    <Alert severity="error" style={{ display: error ? '' : 'none' }}>
+    <Alert onClose={closeError} severity="error" style={{ display: error ? '' : 'none' }}>
       {error}
     </Alert>
   )
@@ -86,8 +98,10 @@ export default function SigninPage(props) {
 
   const redirectUser = () => {
     if (redirectToReferer) {
-      if (isAuthenticated()) {
+      if (user && user.role === 1) {
         return <Redirect to='/admin/dashboard' />
+      } else {
+        return <Redirect to='/user/dashboard' />
       }
     }
   }
@@ -115,52 +129,24 @@ export default function SigninPage(props) {
                 <form className={classes.form} onSubmit={handleSubmit}>
                   <CardHeader color="primary" className={classes.cardHeader}>
                     <h4>Sign In</h4>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-twitter"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-facebook"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-google-plus-g"} />
-                      </Button>
-                    </div>
+                    <Google />
                   </CardHeader>
                   {showError()}
                   {showLoading()}
                   <p className={classes.divider}>Or</p>
                   <CardBody>
                     <CustomInput
-                      labelText="Username"
-                      id="username"
+                      labelText="Email"
+                      id="email"
                       formControlProps={{
                         fullWidth: true
                       }}
                       inputProps={{
-                        onChange: handleChange('username'),
-                        type: "text",
+                        onChange: handleChange('email'),
+                        type: "email",
                         endAdornment: (
                           <InputAdornment position="end">
-                            <People className={classes.inputIconsColor} />
+                            <Email className={classes.inputIconsColor} />
                           </InputAdornment>
                         )
                       }}

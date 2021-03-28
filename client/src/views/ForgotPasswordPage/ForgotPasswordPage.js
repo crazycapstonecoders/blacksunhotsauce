@@ -32,14 +32,17 @@ export default function ForgotPasswordPage(props) {
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+  // initialize state values 
   const [values, setValues] = useState({
     email: '',
     message: '',
     error: '',
     recaptcha: false
   })
+  // deconstruct variables from values object
   const { email, message, error, recaptcha } = values
 
+  // higher order function to target name and event of form
   const handleChange = name => e => {
     setValues({ ...values, error: false, [name]: e.target.value })
   }
@@ -53,9 +56,11 @@ export default function ForgotPasswordPage(props) {
   }
 
   const handleSubmit = e => {
+    // prevent default page refresh on frontend
     e.preventDefault()
     setValues({ ...values, message: '', error: '' })
     if (recaptcha) {
+      // pass email into forgot password function
       forgotPassword(email).then(res => {
         setValues({ ...values, message: res.data.message, error: '' })
       }).catch(error => {

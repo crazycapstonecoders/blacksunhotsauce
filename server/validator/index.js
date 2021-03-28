@@ -2,8 +2,8 @@ const Joi = require('@hapi/joi')
 
 exports.userSignUpValidator = (req, res, next) => {
     const schema = Joi.object({
-        username: Joi.string().required(),
-        email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'next', 'edu'] } }).required().max(30),
+        name: Joi.string().required(),
+        email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'next', 'edu'] } }).required(),
         password: Joi.string().min(6).pattern(new RegExp(/\d/)).message('Password must contain a number').required()
     })
     const { error } = schema.validate(req.body)
