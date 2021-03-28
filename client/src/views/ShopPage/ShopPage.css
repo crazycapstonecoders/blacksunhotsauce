@@ -22,13 +22,17 @@
 
 /* Ensure container contents have full visibility if opacity is used in background*/
 .card-Shop *{
-    opacity: 90%;
+    opacity: 100%;
 }
 
 /*This modifies the rendering of images on the store page*/
-.cardshop img{
-    width: 100%;
-    height: 100%;
+
+.card-shop-image img{
+    width: 80%;
+    min-height: 20%;
+    text-align: center;
+    margin-left: 10%;
+    margin-right: auto;
 }
 
 /* This modifies the Text elements natively in the card-shop*/

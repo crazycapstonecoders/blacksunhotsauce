@@ -6,6 +6,7 @@ import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
 import './ShopPage.css'
+import Placeholder from '../../assets/img/temp.png'
 
 // import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
@@ -47,7 +48,9 @@ export default function ShopPage(props) {
             <div id="divShop" class="flex grid-container">
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="card-Shop">
-                        <img src="assets/img/temp.jpg" alt="placeholder"></img>
+                        <div class="card-shop-image">
+                            <img src={Placeholder} alt="placeholder"></img>
+                        </div>
                         <h1>Product Name</h1>
                         <p alt="product-Image">Description</p>
                         <div class="flex grid-container">
@@ -64,7 +67,9 @@ export default function ShopPage(props) {
 
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="card-Shop">
-                        <img src="assets/img/temp.png" alt="placeholder"></img>
+                        <div class="card-shop-image">
+                            <img src={Placeholder} alt="placeholder"></img>
+                        </div>
                         <h1>Product Name</h1>
                         <p alt="product-Image">Description</p>
                         <div class="flex grid-container">
@@ -78,7 +83,9 @@ export default function ShopPage(props) {
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="card-Shop">
-                        <img src="assets/img/temp.png" alt="placeholder"></img>
+                        <div class="card-shop-image">
+                            <img src={Placeholder} alt="placeholder"></img>
+                        </div>
                         <h1>Product Name</h1>
                         <p alt="product-Image">Description</p>
                         <div class="flex grid-container">
@@ -92,7 +99,9 @@ export default function ShopPage(props) {
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="card-Shop">
-                        <img src="assets/img/temp.png" alt="placeholder"></img>
+                        <div class="card-shop-image">
+                            <img src={Placeholder} alt="placeholder"></img>
+                        </div>
                         <h1>Product Name</h1>
                         <p alt="product-Image">Description</p>
                         <div class="flex grid-container">
@@ -106,7 +115,9 @@ export default function ShopPage(props) {
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="card-Shop">
-                        <img src="assets/img/temp.png" alt="placeholder"></img>
+                        <div class="card-shop-image">
+                            <img src={Placeholder} alt="placeholder"></img>
+                        </div>
                         <h1>Product Name</h1>
                         <p alt="product-Image">Description</p>
                         <div class="flex grid-container">
@@ -120,7 +131,9 @@ export default function ShopPage(props) {
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="card-Shop">
-                        <img src="assets/img/temp.png" alt="placeholder"></img>
+                        <div class="card-shop-image">
+                            <img src={Placeholder} alt="placeholder"></img>
+                        </div>
                         <h1>Product Name</h1>
                         <p alt="product-Image">Description</p>
                         <div class="flex grid-container">
@@ -134,7 +147,9 @@ export default function ShopPage(props) {
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="card-Shop">
-                        <img src="assets/img/temp.png" alt="placeholder"></img>
+                        <div class="card-shop-image">
+                            <img src={Placeholder} alt="placeholder"></img>
+                        </div>
                         <h1>Product Name</h1>
                         <p alt="product-Image">Description</p>
                         <div class="flex grid-container">
@@ -148,7 +163,9 @@ export default function ShopPage(props) {
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="card-Shop">
-                        <img src="assets/img/temp.png" alt="placeholder"></img>
+                        <div class="card-shop-image">
+                            <img src={Placeholder} alt="placeholder"></img>
+                        </div>
                         <h1>Product Name</h1>
                         <p alt="product-Image">Description</p>
                         <div class="flex grid-container">
@@ -160,13 +177,20 @@ export default function ShopPage(props) {
                         </div>
                     </div>
                 </div>
+                
+                
 
                 <p class="hidden">Below this point is non-generated code</p>
 
-                <a href="#top" class="button">Return to Top of page</a>
+                
+                
 
 
             </div>
+
+            <div class="col-xs-12">
+                    <a href="#top" class="button">Return to Top of page</a>
+                </div>
         </div>
     )
 }
