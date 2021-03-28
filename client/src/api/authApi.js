@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-let server = 'http://localhost:5000'
+const server = 'http://localhost:5000'
 
 /**
-This folder exports different functions that make requests/calls to the API/Backend.
+This file exports different functions that make requests/calls to the API/Backend.
 API calls/requests are made via axios.
  */
 

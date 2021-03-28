@@ -82,7 +82,7 @@ exports.create = (req, res) => {
                 return res.status(400).json({ error: 'Error creating product' })
             })
         }).catch(error => {
-            console.log(error)
+            return res.status(400).json({ error: 'Error saving images in storage' })
         })
     })
 }
@@ -146,7 +146,7 @@ exports.update = (req, res) => {
                     return res.status(400).json({ error: 'Error updating product' })
                 })
             }).catch(error => {
-                console.log(error)
+                return res.status(400).json({ error: 'Error updating images in storage' })
             })
         }
     })
@@ -176,6 +176,6 @@ exports.remove = (req, res) => {
             res.json({ message: 'Product successfully deleted' })
         })
     }).catch(error => {
-        console.log(error)
+        return res.status(400).json({ error: 'Error deleting images in storage' })
     })
 }
