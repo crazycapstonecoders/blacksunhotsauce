@@ -152,10 +152,10 @@ exports.update = (req, res) => {
     })
 }
 
-exports.productAll = (req, res) =>{
+exports.productAll = (req, res) => {
     // get all products 
     // eg https://example.com/product/<productId>
-    Product.find({},function (error,products) {
+    Product.find({}, function (error, products) {
         if (error || !products) {
             return res.status(400).json({ error: 'Unable to load products' })
         }
