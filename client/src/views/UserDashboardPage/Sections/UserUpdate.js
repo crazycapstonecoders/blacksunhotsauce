@@ -82,7 +82,7 @@ export default function UserUpdate() {
             {error}
         </Alert>
     )
-      
+
     const showSuccess = () => (
         <Alert onClose={closeSuccess} severity="success" style={{ display: success ? '' : 'none' }}>
             Success! User updated
@@ -92,77 +92,77 @@ export default function UserUpdate() {
     return (
         <Card>
             <form className={classes.form} onSubmit={handleSubmit}>
-            <CardHeader color="info" className={classes.cardHeader}>
-                <h4>User Information</h4>
-            </CardHeader>
-            {showError()}
-            {showSuccess()}
-            <CardBody>
-                <CustomInput
-                      labelText="Name"
-                      id="name"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        onChange: handleChange('name'),
-                        value: name,
-                        type: "text",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <People className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                    }}
-                />
-                <CustomInput
-                  labelText="Email"
-                  id="email"
-                  formControlProps={{
-                    fullWidth: true
-                  }}
-                  inputProps={{
-                    value: email,
-                    disabled: true,
-                    type: "email",
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <Email className={classes.inputIconsColor} />
-                      </InputAdornment>
-                    )
-                  }}
-                />
-                <CustomInput
-                    labelText="Update password here"
-                    id="password"
-                    formControlProps={{
-                        fullWidth: true
-                    }}
-                    inputProps={{
-                        onChange: handleChange('password'),
-                        type: "password",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Icon className={classes.inputIconsColor}>
-                              lock_outline
+                <CardHeader color="info" className={classes.cardHeader}>
+                    <h4>User Information</h4>
+                </CardHeader>
+                {showError()}
+                {showSuccess()}
+                <CardBody>
+                    <CustomInput
+                        labelText="Name"
+                        id="name"
+                        formControlProps={{
+                            fullWidth: true
+                        }}
+                        inputProps={{
+                            onChange: handleChange('name'),
+                            value: name,
+                            type: "text",
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <People className={classes.inputIconsColor} />
+                                </InputAdornment>
+                            )
+                        }}
+                    />
+                    <CustomInput
+                        labelText="Email"
+                        id="email"
+                        formControlProps={{
+                            fullWidth: true
+                        }}
+                        inputProps={{
+                            value: email,
+                            disabled: true,
+                            type: "email",
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <Email className={classes.inputIconsColor} />
+                                </InputAdornment>
+                            )
+                        }}
+                    />
+                    <CustomInput
+                        labelText="Update password here"
+                        id="password"
+                        formControlProps={{
+                            fullWidth: true
+                        }}
+                        inputProps={{
+                            onChange: handleChange('password'),
+                            type: "password",
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <Icon className={classes.inputIconsColor}>
+                                        lock_outline
                             </Icon>
-                          </InputAdornment>
-                        ),
-                        autoComplete: "off"
-                    }}
-                />
-                <h5>{role === 1 ? 'Admin' : 'Registered User'}</h5>
-                <hr />
-            </CardBody>
-            <CardFooter className={classes.cardFooter}>
-                <Button round color="rose" onClick={handleSubmit}>
-                    Update Info
+                                </InputAdornment>
+                            ),
+                            autoComplete: "off"
+                        }}
+                    />
+                    <h5>{role === 1 ? 'Admin' : 'Registered User'}</h5>
+                    <hr />
+                </CardBody>
+                <CardFooter className={classes.cardFooter}>
+                    <Button round color="rose" onClick={handleSubmit}>
+                        Update Info
                 </Button>
-                <hr />
-                <Button color="info" to='/cart' component={Link}>
-                    View Cart
+                    <hr />
+                    <Button color="info" to='/cart' component={Link}>
+                        View Cart
                 </Button>
-            </CardFooter>
+                </CardFooter>
             </form>
         </Card>
     )
