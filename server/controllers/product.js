@@ -162,7 +162,6 @@ exports.productAll = (req, res) => {
         // Return the Result as json 
         return res.json(products)
     })
-
 }
 
 exports.remove = (req, res) => {
