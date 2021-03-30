@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { productById, create, update, remove } = require('../controllers/product')
+const { productAll, productById, create, update, remove } = require('../controllers/product')
 const { requireSignIn, isAuth, isAdmin } = require('../controllers/auth')
 const { userById } = require('../controllers/user')
 

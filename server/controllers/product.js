@@ -159,9 +159,8 @@ exports.productAll = (req, res) =>{
         if (error || !product) {
             return res.status(400).json({ error: 'Unable to load products' })
         }
-        // set value of new request object 
-        req = product
-        next()
+        // Return the Result as json 
+        return res.json(Product)
     })
 
     //Below this is testing code, Commented out as the above should work
@@ -192,6 +191,7 @@ exports.productAll = (req, res) =>{
         //})
         //Return the object
         //TODO
+}
 
 exports.remove = (req, res) => {
     // get the product from frontend
