@@ -160,7 +160,7 @@ exports.productAll = (req, res) =>{
             return res.status(400).json({ error: 'Unable to load products' })
         }
         // Return the Result as json 
-        return res.json(Products)
+        return res.json(products)
     })
 
 }
