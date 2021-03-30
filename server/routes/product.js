@@ -12,4 +12,6 @@ router.delete('/remove/:productId/:userId', requireSignIn, isAuth, isAdmin, remo
 router.param('userId', userById)
 router.param('productId', productById)
 
+router.get("/products",productAll)
+
 module.exports = router
