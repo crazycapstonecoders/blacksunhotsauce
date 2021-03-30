@@ -36,7 +36,7 @@ export default function Checkout({ products }) {
             {data.clientToken !== null ? (
             <div>
                 <DropIn 
-                options={{ authorization: data.clientToken }} 
+                options={{ authorization: data.clientToken, paypal: { vault: 'flow' } }} 
                 onInstance={instance => data.instance = instance} 
                 />
                 <Button round color="success">
