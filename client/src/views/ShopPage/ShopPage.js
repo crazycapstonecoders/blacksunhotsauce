@@ -7,6 +7,7 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
 import './ShopPage.css'
 import Placeholder from '../../assets/img/temp.png'
+import { render } from 'node-sass';
 
 // import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
@@ -14,12 +15,85 @@ import Placeholder from '../../assets/img/temp.png'
 
 // const useStyles = makeStyles(styles);
 
+
+class product_Card extends React.Component{
+    //The below method is called when the component is rendered
+    render(){
+        //Init Variables
+        imgProduct = "";
+        nameProduct = "";
+        descProduct = "";
+        costProduct = "";
+        //Check if the input is null
+        if (!thisProduct){
+            //No product input, Return a placeholder card
+            return (
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card-Shop">
+                        <p>Error: No product input for this card!</p>
+                    </div>
+                </div>
+            )
+        } else{
+            imgProduct = thisProduct.image
+            nameProduct = thisProduct.name
+            descProduct = thisProduct.description
+            costProduct = thisProduct.price
+        }
+        return (
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <div class="card-Shop">
+                    <div class="card-shop-image">
+                        <img src={imgProduct} alt="placeholder"></img>
+                    </div>
+                    <h1>{nameProduct}</h1>
+                    <p>{costProduct}</p>
+                    <p>{descProduct}</p>
+                    <div class="flex grid-container">
+                        <form action="">
+                            <button type="submit" action="" class="col-md-8 col-xs-12">Add to cart</button>
+                            <input type="number" class="col-md-4 col-xs-12"></input>
+                            <input type="text" class="hidden" value="#ProductID" disabled></input>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+    
+}
+
+function product_grid(products){
+
+    //TODO this will need a good input setup
+    return (
+        <div id="divShop" class="flex grid-container">
+            <product_Card thisProduct={product}/>
+        </div>
+    )
+}
+
+
+
+
+function test(){
+    return (<p>Meep</p>)
+}
+
 export default function ShopPage(props) {
     // const classes = useStyles()
     const { ...rest } = props
 
     //Request Products from the DB
     const products = ""
+    products = [
+        {name: 'Testing',description: 'Description', price: '$10.99', images: 'NYI'},
+        {name: 'Testing',description: 'Description', price: '$9.99', images: 'NYI'},
+        {name: 'Testing',description: 'Description', price: '$8.99', images: 'NYI'},
+        {name: 'Testing',description: 'Description', price: '$7.99', images: 'NYI'},
+        {name: 'Testing',description: 'Description', price: '$6.99', images: 'NYI'},
+        {name: 'Testing',description: 'Description', price: '$5.99', images: 'NYI'},
+    ]
     
     //Setup the HTTP request
 
@@ -45,7 +119,7 @@ export default function ShopPage(props) {
             />
             <a name="Top"></a>
             <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
-            products.forEach(element)
+            <product_grid />
             
 
             <div id="divShop" class="flex grid-container">
