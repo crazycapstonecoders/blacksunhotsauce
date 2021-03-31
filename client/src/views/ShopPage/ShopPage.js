@@ -18,7 +18,10 @@ export default function ShopPage(props) {
     // const classes = useStyles()
     const { ...rest } = props
 
-
+    //Request Products from the DB
+    const products = ""
+    
+    //Setup the HTTP request
 
 
     //Below is the returned page structure
@@ -42,7 +45,7 @@ export default function ShopPage(props) {
             />
             <a name="Top"></a>
             <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
-
+            products.forEach(element)
             
 
             <div id="divShop" class="flex grid-container">
