@@ -17,9 +17,8 @@ import styles from "assets/jss/material-kit-react/views/userDashboardPage.js";
 
 const useStyles = makeStyles(styles);
 
-export default function UserDashboardPage(props) {
+export default function UserDashboardPage() {
     const classes = useStyles()
-    const { ...rest } = props
     const { user: { name } } = isAuthenticated()
 
     return (
@@ -33,7 +32,6 @@ export default function UserDashboardPage(props) {
                 height: 400,
                 color: "white"
                 }}
-                {...rest}
             />
             <Parallax small filter image={require("assets/img/profile-bg.jpg")}>
                 <div className={classes.headerContainer}>
