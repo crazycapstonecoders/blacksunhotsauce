@@ -15,7 +15,8 @@ import { render } from 'node-sass';
 
 // const useStyles = makeStyles(styles);
 
-
+//Class: product_Card
+//---This is the rendering class for a singular product
 class product_Card extends React.Component{
     //The below method is called when the component is rendered
     render(){
@@ -35,11 +36,13 @@ class product_Card extends React.Component{
                 </div>
             )
         } else{
+            //Load the values fo generating the HTML
             imgProduct = thisProduct.image
             nameProduct = thisProduct.name
             descProduct = thisProduct.description
             costProduct = thisProduct.price
         }
+        //Return HTML with the rendering per
         return (
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                 <div class="card-Shop">
@@ -63,21 +66,29 @@ class product_Card extends React.Component{
     
 }
 
-function product_grid(products){
+//Class: product_Grid
+//---This class is the rendering class for the product grid
+//---Requires a products object to be defined in is calling
+class product_grid extends React.component{
+    //The below method is called when the component is rendered
+    render(){
+        //Check if the input is defined
+        if (!thisProducts){
+            return(
+                <div id="divShop" class="flex grid-container">
+                    <h1>Error: Unable to load products!</h1>
+                </div>
+            )
+        }
 
-    //TODO this will need a good input setup
-    return (
-        <div id="divShop" class="flex grid-container">
-            <product_Card thisProduct={product}/>
-        </div>
-    )
-}
 
-
-
-
-function test(){
-    return (<p>Meep</p>)
+        //Return HTML rendering of the product grid
+        return (
+            <div id="divShop" class="flex grid-container">
+                <product_Card thisProduct={product}/>
+            </div>
+        )
+    }
 }
 
 export default function ShopPage(props) {
@@ -86,6 +97,9 @@ export default function ShopPage(props) {
 
     //Request Products from the DB
     const products = ""
+
+    //TODO
+    //This is testing code
     products = [
         {name: 'Testing',description: 'Description', price: '$10.99', images: 'NYI'},
         {name: 'Testing',description: 'Description', price: '$9.99', images: 'NYI'},
@@ -119,7 +133,7 @@ export default function ShopPage(props) {
             />
             <a name="Top"></a>
             <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
-            <product_grid />
+            <product_grid thisProducts = {products}/>
             
 
             <div id="divShop" class="flex grid-container">
