@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { itemTotal } from '../../helpers/cartHelpers'
 import { isAuthenticated, signout } from '../../api/authApi'
 // react components for routing our app without refresh
 import { Link, withRouter } from "react-router-dom";
@@ -29,7 +30,7 @@ function HeaderLinks({ history }) {
         <Link className={classes.navLink} style={isActive(history, '/shop')} to="/shop">Shop</Link>
       </ListItem>
       <ListItem className={classes.listItem}>
-        <Link className={classes.navLink} style={isActive(history, '/cart')} to="/cart">Cart</Link>
+        <Link className={classes.navLink} style={isActive(history, '/cart')} to="/cart">Cart (<sup>{itemTotal()}</sup>)</Link>
       </ListItem>
       {isAuthenticated() && isAuthenticated().user.role === 0 && (
         <ListItem className={classes.listItem}>

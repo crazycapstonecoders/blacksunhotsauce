@@ -1,36 +1,62 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import ReusableCard from '../../helpers/ReusableCard'
+import { getProducts } from '../../api/productApi' 
+// nodejs library that concatenates classes
+import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
 
-// import styles from "assets/jss/material-kit-react/views/loginPage.js";
+import styles from "assets/jss/material-kit-react/views/shopPage.js";
 
-// import image from "assets/img/bg7.jpg";
+const useStyles = makeStyles(styles)
 
-// const useStyles = makeStyles(styles);
+export default function ShopPage() {
+    const classes = useStyles()
+    const [products, setProducts] = useState([])
+    const [error, setError] = useState(false)
 
-export default function ShopPage(props) {
-    // const classes = useStyles()
-    const { ...rest } = props
+    const listProducts = () => {
+        getProducts().then(res => {
+            setProducts(res.data)
+        }).catch(error => {
+            setError(error)
+        })
+    }
 
+    useEffect(() => {
+        listProducts()
+    }, [])
+    
     return (
         <div>
             <Header
                 color="transparent"
-                brand="Material Kit React"
+                brand="#testing"
                 rightLinks={<HeaderLinks />}
                 fixed
                 changeColorOnScroll={{
                 height: 400,
                 color: "white"
                 }}
-                {...rest}
             />
             <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
-            <h1>This is shop page</h1>
+            <div className={classNames(classes.main, classes.mainRaised)}>
+                <div className={classes.container}>
+                    <GridContainer spacing={4}>
+                        {products.map((product, i) => (
+                            <GridItem key={i} xs={12} sm={6} md={4}>
+                                <ReusableCard product={product} showAddToCartButton={ product.quantity > 0 ? true : false } />
+                            </GridItem> 
+                        ))}
+                    </GridContainer>
+                </div>
+            </div>
         </div>
     )
 }

@@ -5,6 +5,7 @@ import { isAuthenticated } from '../../../api/authApi'
 import DropIn from 'braintree-web-drop-in-react' 
 // core components
 import Button from "components/CustomButtons/Button.js"
+import { getConstantValue } from 'typescript'
 
 export default function Checkout({ products }) {
     const [data, setData] = useState({
@@ -17,6 +18,12 @@ export default function Checkout({ products }) {
     // get authenticated user id and auth token while making sure user is indeed authenticated first
     const userId = isAuthenticated() && isAuthenticated().user._id
     const token = isAuthenticated() && isAuthenticated().token
+
+    const getTotal = () => {
+        return products.reduce((currentValue, nextValue) => {
+            return currentValue + nextValue.count * nextValue.price
+        }, 0)
+    }
 
     const getToken = (userId, token) => {
         getBraintreeToken(userId, token).then(res => {
@@ -33,6 +40,9 @@ export default function Checkout({ products }) {
 
     const showDropIn = () => (
         <div>
+            <h2>Your cart summary</h2>
+            <hr />
+            <h2>Total: ${getTotal()}</h2>
             {data.clientToken !== null ? (
             <div>
                 <DropIn 

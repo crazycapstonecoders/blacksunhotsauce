@@ -30,13 +30,12 @@ import image from "assets/img/bg7.jpg";
 
 const useStyles = makeStyles(styles);
 
-export default function SigninPage(props) {
+export default function SigninPage() {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
   setTimeout(function () {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
-  const { ...rest } = props;
   // initialize state values
   const [values, setValues] = useState({
     email: '',
@@ -112,7 +111,6 @@ export default function SigninPage(props) {
         absolute
         color="transparent"
         rightLinks={<HeaderLinks />}
-        {...rest}
       />
       <div
         className={classes.pageHeader}

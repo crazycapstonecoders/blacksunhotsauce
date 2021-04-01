@@ -26,13 +26,12 @@ import image from "assets/img/bg7.jpg";
 
 const useStyles = makeStyles(styles);
 
-export default function ResetPasswordPage(props) {
+export default function ResetPasswordPage() {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
   setTimeout(function () {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
-  const { ...rest } = props;
   // initialize state values 
   const [values, setValues] = useState({
     newPassword: '',
@@ -92,7 +91,6 @@ export default function ResetPasswordPage(props) {
         absolute
         color="transparent"
         rightLinks={<HeaderLinks />}
-        {...rest}
       />
       <div
         className={classes.pageHeader}
