@@ -21,12 +21,12 @@ class product_Card extends React.Component{
     //The below method is called when the component is rendered
     render(){
         //Init Variables
-        imgProduct = "";
-        nameProduct = "";
-        descProduct = "";
-        costProduct = "";
+        let imgProduct = "../../assets/img/temp.png";
+        let nameProduct = "Name";
+        let descProduct = "Description";
+        let costProduct = "$0.00";
         //Check if the input is null
-        if (!thisProduct){
+        if (!this.thisProduct){
             //No product input, Return a placeholder card
             return (
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
@@ -37,10 +37,10 @@ class product_Card extends React.Component{
             )
         } else{
             //Load the values fo generating the HTML
-            imgProduct = thisProduct.image
-            nameProduct = thisProduct.name
-            descProduct = thisProduct.description
-            costProduct = thisProduct.price
+            imgProduct = this.thisProduct.image
+            nameProduct = this.thisProduct.name
+            descProduct = this.thisProduct.description
+            costProduct = this.thisProduct.price
         }
         //Return HTML with the rendering per
         return (
@@ -73,19 +73,21 @@ class product_grid extends React.component{
     //The below method is called when the component is rendered
     render(){
         //Check if the input is defined
-        if (!thisProducts){
+        if (!this.thisProducts){
             return(
                 <div id="divShop" class="flex grid-container">
                     <h1>Error: Unable to load products!</h1>
                 </div>
             )
         }
-
-
+        //Map the products (Doesnt seem to be what i need as it maps it to expanded HTML, but thats not viable from my perspective?)
+        let output = this.thisProducts.map((currentProduct)=>
+            <product_card thisProduct={currentProduct}/>
+        );
         //Return HTML rendering of the product grid
         return (
             <div id="divShop" class="flex grid-container">
-                <product_Card thisProduct={product}/>
+                {output}
             </div>
         )
     }
@@ -133,9 +135,12 @@ export default function ShopPage(props) {
             />
             <a name="Top"></a>
             <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
-            <product_grid thisProducts = {products}/>
+            <product_grid thisProducts ={this.products}/>
             
-
+            <p class="hidden">
+                Below this point is the template that the generated code is based on
+                Keeping it here until I can get the above working
+            </p>
             <div id="divShop" class="flex grid-container">
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="card-Shop">
@@ -155,121 +160,6 @@ export default function ShopPage(props) {
                 </div>
 
                 <p class="hidden">Below this is duplicates of the above code, when the page is generated it would loop and generate this per item</p>
-
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                    <div class="card-Shop">
-                        <div class="card-shop-image">
-                            <img src={Placeholder} alt="placeholder"></img>
-                        </div>
-                        <h1>Product Name</h1>
-                        <p alt="product-Image">Description</p>
-                        <div class="flex grid-container">
-                            <form action="">
-                                <button type="submit" action="" class="col-md-8 col-xs-12">Add to cart</button>
-                                <input type="number" class="col-md-4 col-xs-12"></input>
-                                <input type="text" class="hidden" value="#ProductID" disabled></input>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                    <div class="card-Shop">
-                        <div class="card-shop-image">
-                            <img src={Placeholder} alt="placeholder"></img>
-                        </div>
-                        <h1>Product Name</h1>
-                        <p alt="product-Image">Description</p>
-                        <div class="flex grid-container">
-                            <form action="">
-                                <button type="submit" action="" class="col-md-8 col-xs-12">Add to cart</button>
-                                <input type="number" class="col-md-4 col-xs-12"></input>
-                                <input type="text" class="hidden" value="#ProductID" disabled></input>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                    <div class="card-Shop">
-                        <div class="card-shop-image">
-                            <img src={Placeholder} alt="placeholder"></img>
-                        </div>
-                        <h1>Product Name</h1>
-                        <p alt="product-Image">Description</p>
-                        <div class="flex grid-container">
-                            <form action="">
-                                <button type="submit" action="" class="col-md-8 col-xs-12">Add to cart</button>
-                                <input type="number" class="col-md-4 col-xs-12"></input>
-                                <input type="text" class="hidden" value="#ProductID" disabled></input>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                    <div class="card-Shop">
-                        <div class="card-shop-image">
-                            <img src={Placeholder} alt="placeholder"></img>
-                        </div>
-                        <h1>Product Name</h1>
-                        <p alt="product-Image">Description</p>
-                        <div class="flex grid-container">
-                            <form action="">
-                                <button type="submit" action="" class="col-md-8 col-xs-12">Add to cart</button>
-                                <input type="number" class="col-md-4 col-xs-12"></input>
-                                <input type="text" class="hidden" value="#ProductID" disabled></input>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                    <div class="card-Shop">
-                        <div class="card-shop-image">
-                            <img src={Placeholder} alt="placeholder"></img>
-                        </div>
-                        <h1>Product Name</h1>
-                        <p alt="product-Image">Description</p>
-                        <div class="flex grid-container">
-                            <form action="">
-                                <button type="submit" action="" class="col-md-8 col-xs-12">Add to cart</button>
-                                <input type="number" class="col-md-4 col-xs-12"></input>
-                                <input type="text" class="hidden" value="#ProductID" disabled></input>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                    <div class="card-Shop">
-                        <div class="card-shop-image">
-                            <img src={Placeholder} alt="placeholder"></img>
-                        </div>
-                        <h1>Product Name</h1>
-                        <p alt="product-Image">Description</p>
-                        <div class="flex grid-container">
-                            <form action="">
-                                <button type="submit" action="" class="col-md-8 col-xs-12">Add to cart</button>
-                                <input type="number" class="col-md-4 col-xs-12"></input>
-                                <input type="text" class="hidden" value="#ProductID" disabled></input>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                    <div class="card-Shop">
-                        <div class="card-shop-image">
-                            <img src={Placeholder} alt="placeholder"></img>
-                        </div>
-                        <h1>Product Name</h1>
-                        <p alt="product-Image">Description</p>
-                        <div class="flex grid-container">
-                            <form action="">
-                                <button type="submit" action="" class="col-md-8 col-xs-12">Add to cart</button>
-                                <input type="number" class="col-md-4 col-xs-12"></input>
-                                <input type="text" class="hidden" value="#ProductID" disabled></input>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                
-                
 
                 <p class="hidden">Below this point is non-generated code</p>
 
