@@ -43,7 +43,7 @@ export default function UserDashboardPage() {
                 </div>
             </Parallax>
             <div className={classes.container}>
-                <GridContainer>
+                <GridContainer justify="center">
                     <GridItem xs={12} sm={12} md={4} className={classes.infoItem}>
                         {UserUpdate()}
                     </GridItem>

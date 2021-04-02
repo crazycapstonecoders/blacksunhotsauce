@@ -66,15 +66,15 @@ export default function CartPage() {
                 color: "white"
                 }}
             />
-            <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
+            <Parallax small filter image={require("assets/img/bg3.jpg")} />
                 <div className={classNames(classes.main, classes.mainRaised)}>
                     <div className={classes.container}>
-                        <GridContainer>
+                        <GridContainer justify='center'>
                             <GridItem xs={12} sm={12} md={4} className={classes.cartItem}>
                                 {items.length > 0 ? showItems(items) : noItemsMessage()}
                             </GridItem>
                             <GridItem xs={12} sm={12} md={4} className={classes.checkout}>
-                                <Checkout products={items} />
+                                <Checkout products={items} setRun={setRun} run={run} />
                             </GridItem>
                         </GridContainer>  
                     </div>

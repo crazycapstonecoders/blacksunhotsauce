@@ -3,18 +3,20 @@
  * It is customizable based on incoming props and conditional rendering
  */
 import React, { useState } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { addItem, updateItem, removeItem } from './cartHelpers'
 // react component for creating beautiful carousel
 import Carousel from "react-slick"
-// @material-ui/core components
-import { TextField } from '@material-ui/core'
+// @material-ui/icons
+import Check from "@material-ui/icons/Check";
 // core componenets
 import { makeStyles } from "@material-ui/core/styles";
 import Badge from 'components/Badge/Badge.js';
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
+import CustomInput from "components/CustomInput/CustomInput.js"
+import SnackbarContent from "components/Snackbar/SnackbarContent.js"
 
 import imagesStyles from "assets/jss/material-kit-react/imagesStyles.js";
 
@@ -54,19 +56,28 @@ export default function ReusableCard({
         slidesToScroll: 1,
         autoplay: false
     }
-    const [redirect, setRedirect] = useState(false)
+    const [success, setSuccess] = useState(false)
     const [count, setCount] = useState(product.count)
 
     const addToCart = () => {
         addItem(product, () => {
-            setRedirect(true)
+            setSuccess(true)
         })
     }
 
-    const shouldRedirect = redirect => {
-        if(redirect) {
-            return <Redirect to='/cart' />
-        }
+    const showSuccess = () => {
+        return success && (
+            <SnackbarContent
+            message={
+            <span>
+                Item added to cart! <Link to="/cart">View Cart</Link>
+            </span>
+            }
+            close
+            color="success"
+            icon={Check}
+            />
+        )
     }
 
     const showAddToCartBtn = showAddToCartButton => {
@@ -87,13 +98,18 @@ export default function ReusableCard({
 
     const showCartUpdateOptions = cartUpdate => {
         return cartUpdate && (
-            <TextField
-            label="Cart Items"
-            type="number"
-            style={{ marginLeft: '5%' }}
-            value={count}
-            onChange={handleChange(product._id)}
-          />
+            <CustomInput
+            labelText="Cart Items"
+            id="items"
+            formControlProps={{
+                fullWidth: false
+            }}
+            inputProps={{
+                onChange: handleChange(product._id),
+                value: count,
+                type: "number"
+              }}
+            />
         )
     }
 
@@ -113,7 +129,7 @@ export default function ReusableCard({
 
     return (
         <Card className={classes.card}>
-            {shouldRedirect(redirect)}
+            {showSuccess()}
             <Carousel { ...settings }>
                     {product.images.map((image, i) => (
                         <div key={i}>

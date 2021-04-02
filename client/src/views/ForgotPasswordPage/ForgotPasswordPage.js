@@ -5,8 +5,8 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
-// @material-ui/lab components
-import { Alert } from '@material-ui/lab'
+// @material-ui/icons
+import Check from "@material-ui/icons/Check";
 // core components
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
@@ -18,6 +18,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
+import SnackbarContent from "components/Snackbar/SnackbarContent.js"
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
@@ -70,17 +71,35 @@ export default function ForgotPasswordPage() {
     }
   }
 
-  const showError = () => (
-    <Alert severity="error" style={{ display: error ? '' : 'none' }}>
-      {error}
-    </Alert>
-  )
+  const showError = () => {
+    return error && (
+        <SnackbarContent
+        message={
+          <span>
+            {error}
+          </span>
+        }
+        close
+        color="danger"
+        icon="info_outline"
+      />
+    )
+    }
 
-  const showMessage = () => (
-    <Alert severity="success" style={{ display: message ? '' : 'none' }}>
-      {message}
-    </Alert>
-  )
+  const showMessage = () => {
+    return message && (
+        <SnackbarContent
+        message={
+        <span>
+            {message}
+        </span>
+        }
+        close
+        color="success"
+        icon={Check}
+        />
+    )
+  }
 
   return (
     <div>
