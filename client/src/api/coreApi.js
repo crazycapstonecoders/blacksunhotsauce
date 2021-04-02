@@ -18,3 +18,29 @@ export const getBraintreeToken = (userId, token) => {
         }
     })
 }
+
+export const processPayment = (userId, token, paymentData) => {
+    return axios({
+        method: 'POST',
+        url: `${server}/api/braintree/payment/${userId}`,
+        headers: {
+            Accept: "*/*",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        data: JSON.stringify(paymentData)
+    })
+}
+
+export const createOrder = (userId, token, orderData) => {
+    return axios({
+        method: 'POST',
+        url: `${server}/api/order/create/${userId}`,
+        headers: {
+            Accept: "*/*",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        data: JSON.stringify({ order: orderData })
+    })
+}

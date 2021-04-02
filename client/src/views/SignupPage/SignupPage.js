@@ -6,8 +6,8 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
-// @material-ui/lab components
-import { Alert } from '@material-ui/lab'
+// @material-ui/icons
+import Check from "@material-ui/icons/Check";
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
@@ -22,6 +22,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
+import SnackbarContent from "components/Snackbar/SnackbarContent.js"
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
@@ -78,25 +79,35 @@ export default function SigninPage() {
     }
   }
 
-  const closeError = () => {
-    setValues({ ...values, error: '' })
-  }
+  const showError = () => {
+    return error && (
+        <SnackbarContent
+        message={
+          <span>
+            {error}
+          </span>
+        }
+        close
+        color="danger"
+        icon="info_outline"
+      />
+    )
+}
 
-  const closeSuccess = () => {
-      setValues({ ...values, success: false })
-  }
-
-  const showError = () => (
-    <Alert onClose={closeError} severity="error" style={{ display: error ? '' : 'none' }}>
-        {error}
-    </Alert>
-  )
-
-  const showSuccess = () => (
-    <Alert onClose={closeSuccess} severity="success" style={{ display: success ? '' : 'none' }}>
-        Success! User created. Please <Link to="/signin" variant="body2" >Sign In</Link>
-    </Alert>
-  )
+const showSuccess = () => {
+    return success && (
+        <SnackbarContent
+        message={
+        <span>
+            Success! User created. Please <Link to="/signin">Sign In</Link>
+        </span>
+        }
+        close
+        color="success"
+        icon={Check}
+        />
+    )
+}
 
   return (
     <div>

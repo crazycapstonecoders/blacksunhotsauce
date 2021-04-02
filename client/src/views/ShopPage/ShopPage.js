@@ -45,7 +45,7 @@ export default function ShopPage() {
                 color: "white"
                 }}
             />
-            <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
+            <Parallax small filter image={require("assets/img/bg2.jpg")} />
             <div className={classNames(classes.main, classes.mainRaised)}>
                 <div className={classes.container}>
                     <GridContainer spacing={4}>

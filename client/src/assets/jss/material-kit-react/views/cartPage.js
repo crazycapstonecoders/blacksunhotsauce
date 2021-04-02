@@ -10,13 +10,13 @@ const cartPageStyle = {
           maxWidth: "540px"
         },
         "@media (min-width: 768px)": {
-          maxWidth: "100%"
+          maxWidth: "90%"
         },
         "@media (min-width: 992px)": {
           maxWidth: "960px"
         },
         "@media (min-width: 1200px)": {
-          maxWidth: "80%",
+          maxWidth: "75%"
         }
       },
       checkout: {
@@ -24,13 +24,13 @@ const cartPageStyle = {
           maxWidth: "540px"
         },
         "@media (min-width: 768px)": {
-          maxWidth: "100%"
+          maxWidth: "60%"
         },
         "@media (min-width: 992px)": {
-          maxWidth: "40%",
+          maxWidth: "40%"
         },
         "@media (min-width: 1200px)": {
-          maxWidth: "35%",
+          maxWidth: "35%"
         },
       }, 
       cartItem: {
@@ -38,16 +38,14 @@ const cartPageStyle = {
           maxWidth: "540px"
         },
         "@media (min-width: 768px)": {
-          maxWidth: "100%",
-          paddingLeft: '2%',
-          marginRight: '5%'
+          maxWidth: "60%"
         },
         "@media (min-width: 992px)": {
-          maxWidth: "55%"
+          maxWidth: "55%",
+          marginRight: '5%'
         },
         "@media (min-width: 1200px)": {
-          maxWidth: "50%",
-          paddingLeft: '2%',
+          maxWidth: "40%",
           marginRight: '5%'
         },
       },
