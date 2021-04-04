@@ -50,7 +50,7 @@ exports.signIn = async (req, res, next) => {
                 // create a signed jwt token to authenticate user
                 const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
                 // persists the token as t with expiration date
-                res.cookie('t', token, { expire: new Date() + 9999 })
+                res.cookie('t', token, { expire: new Date() + 9999, httpOnly: true })
                 // define user object and return both user object and token to front end
                 const { _id, name, email, role } = user
                 return res.json({ token, user: { _id, name, email, role } })
@@ -180,7 +180,7 @@ exports.socialLogin = (req, res) => {
             // create a signed jwt token to authenticate user
             const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
             // persists the token as t with expiration date
-            res.cookie('t', token, { expire: new Date() + 9999 })
+            res.cookie('t', token, { expire: new Date() + 9999, httpOnly: true })
             // define user object and return both user object and token to front end
             const { _id, name, email, role } = user
             return res.json({ token, user: { _id, name, email, role } })
@@ -188,7 +188,7 @@ exports.socialLogin = (req, res) => {
             // create a signed jwt token to authenticate user
             const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
             // persists the token as t with expiration date
-            res.cookie('t', token, { expire: new Date() + 9999 })
+            res.cookie('t', token, { expire: new Date() + 9999, httpOnly: true })
             // define user object and return both user object and token to front end
             const { _id, name, email, role } = user
             return res.json({ token, user: { _id, name, email, role } })

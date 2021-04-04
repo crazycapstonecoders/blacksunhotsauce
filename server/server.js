@@ -10,7 +10,7 @@ const app = express()
 require('dotenv').config()
 
 // express middlewares to handle cors, parse cookies and parse json as well as log http request
-app.use(cors())
+app.use(cors({ origin: "http://localhost:3000", credentials: true }))
 app.use(cookieParser())
 app.use(express.json())
 app.use(morgan('dev'))
