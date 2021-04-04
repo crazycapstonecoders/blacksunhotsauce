@@ -106,7 +106,7 @@ export default function Checkout({ products, setRun = f => f, run = undefined })
             <SnackbarContent
             message={
               <span>
-                {data.error}
+                {data.error} <Link to="/signup">Please sign up</Link>
               </span>
             }
             close
