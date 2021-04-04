@@ -11,6 +11,9 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
+import './ShopPage.css'
+import Placeholder from '../../assets/img/temp.png'
+//import { render } from 'node-sass';
 
 import styles from "assets/jss/material-kit-react/views/shopPage.js";
 
