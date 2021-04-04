@@ -154,7 +154,7 @@ exports.update = (req, res) => {
 
 exports.productAll = (req, res) => {
     // get all products 
-    // eg https://example.com/product/<productId>
+    // eg https://example.com/product/<products>
     Product.find({}, function (error, products) {
         if (error || !products) {
             return res.status(400).json({ error: 'Unable to load products' })
@@ -189,5 +189,28 @@ exports.remove = (req, res) => {
         })
     }).catch(error => {
         return res.status(400).json({ error: 'Error deleting images in storage' })
+    })
+}
+
+exports.decreaseQuantity = (req, res, next) => {
+    // map through all products
+    let bulkOps = req.body.order.products.map(product => {
+        return {
+            updateOne: {
+                // filter the products based on their respective id
+                filter: { _id: product._id },
+                // update should include quantity and then decrement said quantity
+                // and increment sold quantity as user places an order
+                update: { $inc: { quantity: -product.count, sold: +product.count } }
+            }
+        }
+    })
+
+    Product.bulkWrite(bulkOps, {}, (error, products) => {
+        if(error) {
+            return res.status(400).json({ error: 'Could not update product' })
+        }
+        // execute next middleware
+        next()
     })
 }

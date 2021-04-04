@@ -1,3 +1,4 @@
+const { Order } = require('../models/order')
 const User = require('../models/user')
 
 exports.userById = (req, res, next, id) => {
@@ -51,3 +52,33 @@ exports.update = (req, res) => {
         })
     })
 } 
+
+exports.addOrderToHistory = (req, res, next) => {
+    let history = []
+    // push necessary order info to user purchase history
+    req.body.order.products.forEach((product) => {
+        history.push({ 
+            _id: product._id, 
+            name: product.name, 
+            quantity: product.count, 
+            price: product.price,
+            transaction_id: req.body.order.transaction_id, 
+            amount: req.body.order.amount
+        })
+    })
+
+    // locate user who made that order and push the above history array 
+    // to the history property as defined in the user model
+    // retrieve the updated info with new: true 
+    User.findOneAndUpdate(
+        { _id: req.profile._id }, 
+        { $push: { history: history } }, 
+        { new: true }, 
+        (error, data) => {
+            if(error) {
+                return res.status(400).json({ error: 'Could not update user purchase history' })
+            }
+            // execute next middleware function 
+            next()
+    })
+}
