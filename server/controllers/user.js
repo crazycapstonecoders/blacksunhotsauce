@@ -60,7 +60,7 @@ exports.addOrderToHistory = (req, res, next) => {
         history.push({ 
             _id: product._id, 
             name: product.name, 
-            descriptiom: product.descriptiom,
+            description: product.description,
             quantity: product.count, 
             price: product.price,
             transaction_id: req.body.order.transaction_id, 
