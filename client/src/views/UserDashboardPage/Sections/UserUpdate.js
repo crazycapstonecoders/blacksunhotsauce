@@ -41,7 +41,7 @@ export default function UserUpdate() {
     const userId = isAuthenticated() && isAuthenticated().user._id
     const token = isAuthenticated() && isAuthenticated().token
 
-    const init = userId => {
+    const init = (userId, token) => {
         read(userId, token).then(res => {
             setValues({ ...values, name: res.data.name, email: res.data.email, role: res.data.role })
         }).catch(error => {
@@ -50,7 +50,7 @@ export default function UserUpdate() {
     }
 
     useEffect(() => {
-        init(userId)
+        init(userId, token)
     }, [])
 
     // higher order function to target name and event of form

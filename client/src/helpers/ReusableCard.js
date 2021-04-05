@@ -151,7 +151,9 @@ export default function ReusableCard({
                 <p>${product.price}</p>
                 <Button color="primary">View Product</Button>
                 {showAddToCartBtn(showAddToCartButton)}
+                <br />
                 {showCartUpdateOptions(cartUpdate)}
+                <br />
                 {showRemoveCartBtn(showRemoveCartButton)}
             </CardBody>
         </Card>
