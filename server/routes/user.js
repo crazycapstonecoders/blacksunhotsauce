@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { userById, read, update } = require('../controllers/user')
+const { userById, read, update, orderHistory } = require('../controllers/user')
 const { requireSignIn, isAuth, isAdmin } = require('../controllers/auth')
 
 router.get('/secret/:userId', requireSignIn, isAuth, (req, res) => {
@@ -7,6 +7,8 @@ router.get('/secret/:userId', requireSignIn, isAuth, (req, res) => {
 })
 
 router.get('/:userId', requireSignIn, isAuth, read)
+
+router.get('/orders/by/:userId', requireSignIn, isAuth, orderHistory)
 
 router.put('/update/:userId', requireSignIn, isAuth, update)
 

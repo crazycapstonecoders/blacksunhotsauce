@@ -11,6 +11,7 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
+import SnackbarContent from "components/Snackbar/SnackbarContent.js"
 
 import styles from "assets/jss/material-kit-react/views/shopPage.js";
 
@@ -32,6 +33,21 @@ export default function ShopPage() {
     useEffect(() => {
         listProducts()
     }, [])
+
+    const showError = () => {
+        return error && (
+            <SnackbarContent
+            message={
+                <span>
+                {error}
+                </span>
+            }
+            close
+            color="danger"
+            icon="info_outline"
+            />
+        )
+    }
     
     return (
         <div>
@@ -47,6 +63,7 @@ export default function ShopPage() {
             />
             <Parallax small filter image={require("assets/img/bg2.jpg")} />
             <div className={classNames(classes.main, classes.mainRaised)}>
+                {showError()}
                 <div className={classes.container}>
                     <GridContainer spacing={4}>
                         {products.map((product, i) => (

@@ -60,6 +60,7 @@ exports.addOrderToHistory = (req, res, next) => {
         history.push({ 
             _id: product._id, 
             name: product.name, 
+            descriptiom: product.descriptiom,
             quantity: product.count, 
             price: product.price,
             transaction_id: req.body.order.transaction_id, 
@@ -80,5 +81,20 @@ exports.addOrderToHistory = (req, res, next) => {
             }
             // execute next middleware function 
             next()
+    })
+}
+
+exports.orderHistory = (req, res) => {
+    // find order based on user id
+    Order.find({ user: req.profile._id })
+    // only grab user id and name
+        .populate('user', '_id name')
+    // sort order by when they were created
+        .sort('-created')
+        .exec((error, orders) => {
+            if(error) {
+                return res.status(400).json({ error: 'Error getting order history' })
+            }
+            res.json(orders)
     })
 }
