@@ -92,9 +92,9 @@ export default function SigninPage() {
         icon="info_outline"
       />
     )
-}
+  }
 
-const showSuccess = () => {
+  const showSuccess = () => {
     return success && (
         <SnackbarContent
         message={
@@ -107,7 +107,7 @@ const showSuccess = () => {
         icon={Check}
         />
     )
-}
+  }
 
   return (
     <div>
