@@ -31,12 +31,12 @@ export default function ShopPage() {
     }
     
     const testing = [
-        {name: 'Testing',description: 'Description', price: '$10.99', images: 'NYI'},
-        {name: 'Testing',description: 'Description', price: '$9.99', images: 'NYI'},
-        {name: 'Testing',description: 'Description', price: '$8.99', images: 'NYI'},
-        {name: 'Testing',description: 'Description', price: '$7.99', images: 'NYI'},
-        {name: 'Testing',description: 'Description', price: '$6.99', images: 'NYI'},
-        {name: 'Testing',description: 'Description', price: '$5.99', images: 'NYI'},
+        {name: 'Testing',description: 'Description', price: '$10.99', images: [] },
+        {name: 'Testing',description: 'Description', price: '$9.99', images: [] },
+        {name: 'Testing',description: 'Description', price: '$8.99', images: [] },
+        {name: 'Testing',description: 'Description', price: '$7.99', images: [] },
+        {name: 'Testing',description: 'Description', price: '$6.99', images: [] },
+        {name: 'Testing',description: 'Description', price: '$5.99', images: [] },
     ]
     
 
