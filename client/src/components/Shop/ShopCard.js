@@ -13,7 +13,7 @@ import CustomInput from "components/CustomInput/CustomInput.js"
 import SnackbarContent from "components/Snackbar/SnackbarContent.js"
 import { Link } from 'react-router-dom'
 
-import { addItem, updateItem, removeItem } from './cartHelpers'
+import { addItem, updateItem, removeItem } from '../../helpers/cartHelpers'
 
 //Globals for settings
 
