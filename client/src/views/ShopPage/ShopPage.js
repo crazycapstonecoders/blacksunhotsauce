@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ReusableCard from '../../helpers/ReusableCard'
+import IdleWarning from '../../helpers/IdleWarning' 
 import { getProducts } from '../../api/productApi' 
 // nodejs library that concatenates classes
 import classNames from "classnames";
@@ -62,6 +63,7 @@ export default function ShopPage() {
                 }}
             />
             <Parallax small filter image={require("assets/img/bg2.jpg")} />
+            <IdleWarning />
             <div className={classNames(classes.main, classes.mainRaised)}>
                 {showError()}
                 <div className={classes.container}>

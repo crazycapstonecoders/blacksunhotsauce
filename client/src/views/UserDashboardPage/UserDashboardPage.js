@@ -2,6 +2,7 @@ import React from 'react'
 import { isAuthenticated } from '../../api/authApi'
 import UserUpdate from "./Sections/UserUpdate" 
 import UserOrderHistory from "./Sections/UserOrderHistory" 
+import IdleWarning from '../../helpers/IdleWarning'
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -40,6 +41,7 @@ export default function UserDashboardPage() {
                     </GridContainer>
                 </div>
             </Parallax>
+            <IdleWarning />
             <div className={classes.container}>
                 <GridContainer justify="center">
                     <GridItem xs={12} sm={12} md={4} className={classes.infoItem}>

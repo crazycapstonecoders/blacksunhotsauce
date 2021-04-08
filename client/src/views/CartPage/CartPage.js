@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getCart } from '../../helpers/cartHelpers'
 import ReusableCard from '../../helpers/ReusableCard'
+import IdleWarning from '../../helpers/IdleWarning'
 import Checkout from './Sections/Checkout'
 // nodejs library that concatenates classes
 import classNames from "classnames";
@@ -67,6 +68,7 @@ export default function CartPage() {
                 }}
             />
             <Parallax small filter image={require("assets/img/bg3.jpg")} />
+            <IdleWarning />
                 <div className={classNames(classes.main, classes.mainRaised)}>
                     <div className={classes.container}>
                         <GridContainer justify='center'>
