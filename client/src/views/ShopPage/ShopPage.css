@@ -26,6 +26,11 @@
     margin-top: .2em;
     margin-right: auto;
     margin-left: auto;
+    text-align: center;
+}
+
+.cardshop .title{
+    font-size: larger;
 }
 
 /* Ensure container contents have full visibility if opacity is used in background*/
@@ -33,26 +38,19 @@
     opacity: 100%;
 }
 
-/*This modifies the rendering of images on the store page*/
-
-.card-shop-image img{
-    width: 80%;
-    min-height: 20%;
-    text-align: center;
-    margin-left: 10%;
-    margin-right: auto;
-}
-
 /* This modifies the Text elements natively in the card-shop*/
-.card-Shop h1{
-    text-align: center;
-}
-.card-Shop p {
-    text-align: center;
-    width: 80%;
+.card-Shop h1,p{
     margin-left: auto;
     margin-right: auto;
+    width: 80%;
 }
+
+/* This modifies the rendering of the current stock*/
+.card-Shop span{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
 
 /* This modifies the div containing the form elements*/
 .card-Shop div {
@@ -73,6 +71,21 @@
 .card-shop:hover{
     transition: 500ms;
     opacity: 100%;
+}
+
+/* The below classes are used for debugging spacing*/
+.test1{
+    background-color: teal;
+}
+.test2{
+    background-color: tomato;
+}
+
+.price-avail{
+    background-color: violet;
+    width:100%;
+    margin-left: 0px;
+    margin-left: 0px;
 }
 
 /*This can be used to hide any elements that should not be visible to the user*/

@@ -175,13 +175,25 @@ export default function Shop_Card(props,{
                     ))}
                 </Carousel>
                 <h1>{nameProduct}</h1>
-                <p>{costProduct}</p>
+                <br/>
+                <div class="price-avail flex">
+                    <div class="test1 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <p>{costProduct}</p>
+                    </div>
+                    <div class="test2 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        {showAvailability(props.product.quantity)}
+                    </div>
+                    
+                    
+                </div>
+                
                 <p>{descProduct}</p>
+                
                 <div class="flex grid-container">
                     <form action="">
-                        <button type="submit" action="" class="col-md-8 col-xs-12">Add to cart</button>
-                        <input type="number" class="col-md-4 col-xs-12"></input>
-                        <input type="text" class="hidden" value={IDProduct} disabled></input>
+                        {showAddToCartBtn(showAddToCartButton)}
+                        {showCartUpdateOptions(cartUpdate)}
+                        {showRemoveCartBtn(showRemoveCartButton)}
                     </form>
                 </div>
             </div>
