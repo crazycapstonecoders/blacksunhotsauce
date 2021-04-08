@@ -51,10 +51,13 @@
     margin-right: 0px;
 }
 
+/*This modifies the space used for the content of the card */
+.card-content{
+    width: 85%;
+}
 
 /* This modifies the div containing the form elements*/
 .card-Shop div {
-    width: 80%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -65,6 +68,8 @@
 }
 .card-shop > button{
     height: 1.3em;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* This makes the catds get a higher opacity on hover*/
@@ -81,11 +86,17 @@
     background-color: tomato;
 }
 
-.price-avail{
-    background-color: violet;
-    width:100%;
-    margin-left: 0px;
-    margin-left: 0px;
+/* This modifies the cost text*/
+.cost{
+    font-weight: bold;
+    font-size: 1.4em;
+    color: black;
+    text-align: right;
+}
+
+/* This modifies the description of the product*/
+.description{
+    color: black;
 }
 
 /*This can be used to hide any elements that should not be visible to the user*/

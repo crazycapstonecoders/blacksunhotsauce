@@ -32,6 +32,10 @@ export default function ShopPage() {
         })
     }
     
+
+    //The below lines are for testing without the server operating for styling purposes
+    //Please leave in until we are done with the styling pass
+    /*
     const testing = [
         {name: 'Testing',description: 'Description', price: '$10.99', images: [] },
         {name: 'Testing',description: 'Description', price: '$9.99', images: [] },
@@ -40,7 +44,7 @@ export default function ShopPage() {
         {name: 'Testing',description: 'Description', price: '$6.99', images: [] },
         {name: 'Testing',description: 'Description', price: '$5.99', images: [] },
     ]
-    
+    */
 
     
 
@@ -80,7 +84,7 @@ export default function ShopPage() {
             />
             <Parallax small filter image={require("assets/img/bg2.jpg")} />
             <IdleWarning />
-            <ShopGrid Products={testing}/>
+            <ShopGrid Products={products}/>
         </div>
     )
 }
