@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // nodejs library to set properties for components
 import PropTypes, { array } from "prop-types";
 // @material-ui/core components
@@ -11,6 +11,9 @@ import Badge from 'components/Badge/Badge.js';
 import Button from "components/CustomButtons/Button.js";
 import CustomInput from "components/CustomInput/CustomInput.js"
 import SnackbarContent from "components/Snackbar/SnackbarContent.js"
+import { Link } from 'react-router-dom'
+
+import { addItem, updateItem, removeItem } from './cartHelpers'
 
 //Globals for settings
 
@@ -43,8 +46,20 @@ const useStyles = makeStyles(styles);
 
 
 
-
-export default function Shop_Card(props){
+/**
+ * Component: Shop_Card
+ * ---This component generates teh shopcard object as spawned from the shopGrid object
+ * @param {*} props  //This is the input product as defined in props
+ * @param {*} param1 //These are the toggles used in Ians code
+ * @returns 
+ */
+export default function Shop_Card(props,{
+        showAddToCartButton = true, 
+        cartUpdate = false, 
+        showRemoveCartButton = false, 
+        setRun = f => f, // default value of function 
+        run = undefined})
+    {
     console.log("Triggering function:");
     //Init Variables
     var nameProduct = "Name";
@@ -52,29 +67,13 @@ export default function Shop_Card(props){
     var costProduct = "$0.00";
     var IDProduct = IDProduct = "######";
     const classes = useStyles();
-    //Check if the input is null
-    if (props.product === null || props.product === undefined){
-        //No product input, Return a placeholder card
-        return (
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                <div class="card-Shop">
-                    <p>Error: No product input for this card!</p>
-                </div>
-            </div>
-        )
-    } else{
-        //Load the values for generating the HTML
-        nameProduct = props.product.name
-        descProduct = props.product.description
-        costProduct = props.product.price
-        IDProduct = "######"
-    }
+    
     //Ians code is imported Below
     const [success, setSuccess] = useState(false)
-    const [count, setCount] = useState(product.count)
+    const [count, setCount] = useState(props.product.count)
 
     const addToCart = () => {
-        addItem(product, () => {
+        addItem(props.product, () => {
             setSuccess(true)
         })
     }
@@ -119,7 +118,7 @@ export default function Shop_Card(props){
                 fullWidth: false
             }}
             inputProps={{
-                onChange: handleChange(product._id),
+                onChange: handleChange(props.product._id),
                 value: count,
                 type: "number"
               }}
@@ -129,7 +128,7 @@ export default function Shop_Card(props){
 
     const showRemoveCartBtn = showRemoveCartButton => {
         return showRemoveCartButton && (
-            <Button onClick={() => { removeItem(product._id); setRun(!run) }} color="danger">Remove From Cart</Button>
+            <Button onClick={() => { removeItem(props.product._id); setRun(!run) }} color="danger">Remove From Cart</Button>
         )
     }
 
@@ -142,22 +141,39 @@ export default function Shop_Card(props){
     }
     //End of Ians Code
 
+    //Check if the input is null
+    if (props.product === null || props.product === undefined){
+        //No product input, Return a placeholder card
+        return (
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <div class="card-Shop">
+                    <p>Error: No product input for this card!</p>
+                </div>
+            </div>
+        )
+    } else{
+        //Load the values for generating the HTML
+        nameProduct = props.product.name
+        descProduct = props.product.description
+        costProduct = props.product.price
+        IDProduct = "######"
+    }
     //Return HTML with the rendering
     return (
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
             <div class="card-Shop">
-            <Carousel { ...settings }>
-                {props.product.images.map((image, i) => (
-                    <div key={i}>
-                        <img
-                        style={{height: "180px", width: "100%", display: "block"}}
-                        className={classes.imgCardTop}
-                        src={image.url}
-                        alt="Card-img-cap"
-                        />
-                    </div>
-                ))}
-            </Carousel>
+                <Carousel { ...settings }>
+                    {props.product.images.map((image, i) => (
+                        <div key={i}>
+                            <img
+                            style={{height: "180px", width: "100%", display: "block"}}
+                            className={classes.imgCardTop}
+                            src={image.url}
+                            alt="Card-img-cap"
+                            />
+                        </div>
+                    ))}
+                </Carousel>
                 <h1>{nameProduct}</h1>
                 <p>{costProduct}</p>
                 <p>{descProduct}</p>
@@ -176,3 +192,6 @@ export default function Shop_Card(props){
 Shop_Card.propTypes = {
     product: PropTypes.object
   };
+
+
+  
