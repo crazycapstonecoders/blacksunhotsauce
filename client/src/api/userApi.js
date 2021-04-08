@@ -44,3 +44,27 @@ export const updatedUser = (user, next) => {
         }
     }
 }
+
+export const getOrderHistory = (userId, token) => {
+    return axios({
+        method: 'GET',
+        url: `${server}/api/user/orders/by/${userId}`,
+        headers: {
+            Accept: "*/*",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
+
+export const getOrderDetails = (userId, orderId, token) => {
+    return axios({
+        method: 'GET',
+        url: `${server}/api/order/${userId}/${orderId}`,
+        headers: {
+            Accept: "*/*",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        }
+    })
+}

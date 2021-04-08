@@ -98,6 +98,9 @@ const userDashboardPageStyle = {
   },
   form: {
     margin: "0"
+  },
+  table: {
+    minWidth: 650,
   }
 }
 

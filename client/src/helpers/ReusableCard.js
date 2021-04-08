@@ -33,7 +33,8 @@ const styles = {
   },
   card: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    height: '500px'
   }
 };
 
@@ -149,9 +150,10 @@ export default function ReusableCard({
                 {showAvailability(product.quantity)}
                 <p>Quantity: {product.quantity}</p>
                 <p>${product.price}</p>
-                <Button color="primary">View Product</Button>
                 {showAddToCartBtn(showAddToCartButton)}
+                <br />
                 {showCartUpdateOptions(cartUpdate)}
+                <br />
                 {showRemoveCartBtn(showRemoveCartButton)}
             </CardBody>
         </Card>

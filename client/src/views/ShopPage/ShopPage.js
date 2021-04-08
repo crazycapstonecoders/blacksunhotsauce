@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import IdleWarning from '../../helpers/IdleWarning' 
 import { getProducts } from '../../api/productApi' 
 // nodejs library that concatenates classes
 //import classNames from "classnames";
@@ -10,6 +11,7 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
 import ShopGrid from "components/Shop/ShopGrid.js"
 import './ShopPage.css'
+import SnackbarContent from "components/Snackbar/SnackbarContent.js"
 
 import styles from "assets/jss/material-kit-react/views/shopPage.js";
 
@@ -49,25 +51,21 @@ export default function ShopPage() {
         listProducts()
     }, [])
 
-
-    //Read from DB?
-    let output = products.getProducts
-    let Temp = typeof(listProducts)
-
-    if (listProducts === null){
-        return (
-            <p>Null: {listProducts}</p>
+    const showError = () => {
+        return error && (
+            <SnackbarContent
+            message={
+                <span>
+                {error}
+                </span>
+            }
+            close
+            color="danger"
+            icon="info_outline"
+            />
         )
     }
-
-    if (listProducts === undefined){
-        return (
-            <p>Undefined: {listProducts}</p>
-        )
-    }
-
-
-    //return the HTML with react generation tag
+    
     return (
         <div>
             <Header
@@ -81,10 +79,8 @@ export default function ShopPage() {
                 }}
             />
             <Parallax small filter image={require("assets/img/bg2.jpg")} />
+            <IdleWarning />
             <ShopGrid Products={testing}/>
-
-
-        
         </div>
     )
 }

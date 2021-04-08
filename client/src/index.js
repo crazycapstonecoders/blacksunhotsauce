@@ -9,6 +9,7 @@ import "assets/scss/material-kit-react.scss?v=1.9.0";
 import LandingPage from "views/LandingPage/LandingPage.js";
 import AdminDashboardPage from "views/AdminDashboardPage/AdminDashboardPage.js";
 import UserDashboardPage from "views/UserDashboardPage/UserDashboardPage.js";
+import UserPurchaseHistory from "views/UserDashboardPage/Sections/UserPurchaseHistory.js";
 import SigninPage from "views/SigninPage/SigninPage.js";
 import SignupPage from "views/SignupPage/SignupPage.js";
 import ShopPage from "views/ShopPage/ShopPage.js";
@@ -31,6 +32,7 @@ ReactDOM.render(
       <Route path="/shop" component={ShopPage} />
       <Route path="/cart" component={CartPage} />
       <AdminRoute path="/admin/dashboard" component={AdminDashboardPage} />
+      <PrivateRoute path="/user/:userId/:orderId" component={UserPurchaseHistory} />
       <PrivateRoute path="/user/dashboard" component={UserDashboardPage} />
       <Route path="/" component={LandingPage} />
     </Switch>
