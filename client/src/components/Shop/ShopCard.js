@@ -48,15 +48,12 @@ const useStyles = makeStyles(styles);
 
 /**
  * Component: Shop_Card
- * ---This component generates teh shopcard object as spawned from the shopGrid object
+ * ---This component generates the shopcard object as spawned from the shopGrid object
  * @param {*} props  //This is the input product as defined in props
  * @param {*} param1 //These are the toggles used in Ians code
  * @returns 
  */
-export default function Shop_Card(props,{
-        showAddToCartButton = true, 
-        cartUpdate = false, 
-        showRemoveCartButton = false, 
+export default function Shop_Card({product,showAddToCartButton = true},{
         setRun = f => f, // default value of function 
         run = undefined})
     {
@@ -65,15 +62,14 @@ export default function Shop_Card(props,{
     var nameProduct = "Name";
     var descProduct = "Description";
     var costProduct = "$0.00";
-    var IDProduct = IDProduct = "######";
-    const classes = useStyles();
-    
+
     //Ians code is imported Below
     const [success, setSuccess] = useState(false)
-    const [count, setCount] = useState(props.product.count)
+    const [count, setCount] = useState(product.count)
+    const classes = useStyles();
 
     const addToCart = () => {
-        addItem(props.product, () => {
+        addItem(product, () => {
             setSuccess(true)
         })
     }
@@ -109,29 +105,6 @@ export default function Shop_Card(props,{
         }
     }
 
-    const showCartUpdateOptions = cartUpdate => {
-        return cartUpdate && (
-            <CustomInput
-            labelText="Cart Items"
-            id="items"
-            formControlProps={{
-                fullWidth: false
-            }}
-            inputProps={{
-                onChange: handleChange(props.product._id),
-                value: count,
-                type: "number"
-              }}
-            />
-        )
-    }
-
-    const showRemoveCartBtn = showRemoveCartButton => {
-        return showRemoveCartButton && (
-            <Button onClick={() => { removeItem(props.product._id); setRun(!run) }} color="danger">Remove From Cart</Button>
-        )
-    }
-
     const showAvailability = quantity => {
         return quantity > 0 ? (
             <Badge color="info">In Stock</Badge>
@@ -142,7 +115,7 @@ export default function Shop_Card(props,{
     //End of Ians Code
 
     //Check if the input is null
-    if (props.product === null || props.product === undefined){
+    if (product === null || product === undefined){
         //No product input, Return a placeholder card
         return (
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
@@ -153,18 +126,23 @@ export default function Shop_Card(props,{
         )
     } else{
         //Load the values for generating the HTML
-        nameProduct = props.product.name
-        descProduct = props.product.description
-        costProduct = props.product.price
-        IDProduct = "######"
+        nameProduct = product.name
+        descProduct = product.description
+        costProduct = product.price
     }
+
+    //Check if we are rendering the product
+    if (product.quantity <= 0){
+        showAddToCartButton = false;
+    }
+
     //Return HTML with the rendering
     return (
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
             <div class="card-Shop">
                 <div class="card-content">
                     <Carousel { ...settings }>
-                        {props.product.images.map((image, i) => (
+                        {product.images.map((image, i) => (
                             <div key={i}>
                                 <img
                                 style={{height: "180px", width: "100%", display: "block"}}
@@ -185,20 +163,17 @@ export default function Shop_Card(props,{
                             <p class="cost">{costProduct}</p>
                         </div>
                         <div class="col-xl-5 col-lg-5 col-md-5 col-sm-6 col-xs-6">
-                            {showAvailability(props.product.quantity)}
+                            {showAvailability(product.quantity)}
                         </div>
                         <div class="spacer col-xl-1 col-lg-1 col-md-2 col-sm-1 col-xs-1">
                             <br/>
                         </div>
                     </div>
-                
                     <p class="description">{descProduct}</p>
                 
                     <div class="shop-controls">
                         <form action="">
                             {showAddToCartBtn(showAddToCartButton)}
-                            {showCartUpdateOptions(cartUpdate)}
-                            {showRemoveCartBtn(showRemoveCartButton)}
                         </form>
                     </div>
                 </div>

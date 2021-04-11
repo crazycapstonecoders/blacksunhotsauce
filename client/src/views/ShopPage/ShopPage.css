@@ -17,7 +17,7 @@
 .card-Shop{
     width: 98%;
     background-color: lightgray;
-    opacity: 50%;
+    opacity: 95%;
     border-radius: 10px;
     border: gray 1px solid;
     padding-left: .2em;
@@ -54,6 +54,16 @@
 /*This modifies the space used for the content of the card */
 .card-content{
     width: 85%;
+    min-height: 300px;
+}
+
+/* This modifies the spacing of the description */
+.card-content .description{
+    max-height: 5em;
+    min-height: 5em;
+    overflow-y: auto;
+    overflow-x: hidden;
+    word-wrap: break-word;
 }
 
 /* This modifies the div containing the form elements*/

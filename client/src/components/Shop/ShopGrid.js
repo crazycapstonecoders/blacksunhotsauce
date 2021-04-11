@@ -6,9 +6,9 @@ import PropTypes, { array } from "prop-types";
 
 import ShopCard from "./ShopCard.js";
 
-export default function Shop_Grid(props) {
+export default function Shop_Grid({Products}) {
     //Check if the input is defined
-    if (props.Products === undefined || props.Products.length <= 0){
+    if (Products === undefined || Products.length <= 0){
         return(
             <div id="divShop" class="flex grid-container">
                 <h1 class="error">Error: Unable to load products!</h1>
@@ -17,7 +17,7 @@ export default function Shop_Grid(props) {
     } else{
         //Map the input to the output form
         var output = ""
-        output = props.Products.map((product)=> <ShopCard product={product}/>)
+        output = Products.map((product)=> <ShopCard product={product} showAddToCartButton={ product.quantity > 0 ? true : false }/>)
     }
     //Return HTML rendering of the product grid
     return (
