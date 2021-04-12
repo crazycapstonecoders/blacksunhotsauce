@@ -39,8 +39,8 @@ exports.signIn = async (req, res, next) => {
         try {
             // log in the user
             req.logIn(user, { session: false }, async (error) => {
-                if (error) {
-                    return res.status(400).json(error)
+                if (error || !user) {
+                    return res.status(400).json({ error: 'User does not exist. Please sign up' })
                 }
                 // check if password match user
                 const compare = await user.authenticate(password)
@@ -173,7 +173,7 @@ exports.socialLogin = (req, res) => {
      * Else, we create a new user using the social login info
      */
     User.findOne({ email }, (error, user) => {
-        if(error || !user) {
+        if (error || !user) {
             user = new User(req.body)
             req.profile = user
             user.save()
