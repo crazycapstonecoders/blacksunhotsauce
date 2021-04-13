@@ -96,7 +96,6 @@ export default function Products() {
                                     <TableCell>{product.sold}</TableCell>
                                     <TableCell>
                                             <Button color="rose" to={`/admin/product/update/${product._id}`} component={Link}>Update</Button>
-                                            <hr />
                                             <Button color="danger" onClick={() => deleteProduct(product._id)}>Delete</Button>
                                     </TableCell>
                                 </TableRow>
