@@ -44,3 +44,14 @@ export const createOrder = (userId, token, orderData) => {
         data: JSON.stringify({ order: orderData })
     })
 }
+
+export const getProducts = () => {
+    return axios({
+        method: 'GET',
+        url: `${server}/api/product/products`,
+        headers: {
+            Accept: "*/*",
+            "Content-Type": "application/json"
+        }
+    })
+}

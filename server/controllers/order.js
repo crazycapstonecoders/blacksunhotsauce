@@ -1,4 +1,4 @@
-const { Order, CartItem } = require('../models/order')
+const { Order } = require('../models/order')
 
 exports.orderById = (req, res, next, id) => {
     Order.findById(id).exec((error, order) => {
@@ -25,6 +25,11 @@ exports.readAll = (req, res) => {
         })
 }
 
+exports.getStatusValues = (req, res) => {
+    // get order status 
+    res.json(Order.schema.path('status').enumValues)
+}
+
 // get order by id
 exports.read = (req, res) => {
     return res.json(req.order)
@@ -41,3 +46,12 @@ exports.create = (req, res) => {
         return res.status(400).json({ error: "Error creating order" })
     })
 }   
+
+exports.updateOrderStatus = (req, res) => {
+    Order.updateOne({ _id: req.body.orderId }, { $set: { status: req.body.status } }, (error, order) => {
+        if(error) {
+            return res.status(400).json({ error: 'Unable to update order status' })
+        }
+        res.json(order)
+    })
+}
