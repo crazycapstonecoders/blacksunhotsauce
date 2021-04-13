@@ -3,9 +3,9 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 // @material-ui/icons
-import Chat from "@material-ui/icons/Chat";
+import Chat from "@material-ui/icons/TrendingUp";
 import VerifiedUser from "@material-ui/icons/VerifiedUser";
-import Fingerprint from "@material-ui/icons/Fingerprint";
+import Fingerprint from "@material-ui/icons/StoreOutlined";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -21,13 +21,16 @@ export default function ProductSection() {
     <div className={classes.section}>
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={8}>
-          <h2 className={classes.title}>Let{"'"}s talk product</h2>
+          <h2 className={classes.title}>Let{"'"}s talk hot sauce</h2>
           <h5 className={classes.description}>
-            This is the paragraph where you can write more details about your
-            product. Keep you user engaged by providing meaningful information.
-            Remember that by this time, the user is curious, otherwise he wouldn
-            {"'"}t scroll to get here. Add a button if you want the user to see
-            more.
+            All Blacksun Hot Sauces are made in a small batch, one gallon at a time process.
+            Using ingredients grown locally and others purchased from around the world, our
+            hot sauces come in a variety of unique flavors. Ranging in hotness, we offer the
+            exact flavor you need to spice up your meals.
+
+             <p className={classes.description}>
+                 <a href="shop">Browse The Shop</a>.
+                </p>        
           </h5>
         </GridItem>
       </GridContainer>
@@ -35,8 +38,8 @@ export default function ProductSection() {
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
             <InfoArea
-              title="Free Chat"
-              description="Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough."
+              title="We are growing!"
+              description="Currently we sell individual bottles of our amazing hot sauce, but will be adding bulk purchase of larger quantities. Resteraunt owners stay tuned!"
               icon={Chat}
               iconColor="info"
               vertical
@@ -44,8 +47,8 @@ export default function ProductSection() {
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
             <InfoArea
-              title="Verified Users"
-              description="Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough."
+              title="Secure Sign up"
+              description="Please create an account with our secure sign in and easily access our current selction of sauces."
               icon={VerifiedUser}
               iconColor="success"
               vertical
@@ -53,8 +56,8 @@ export default function ProductSection() {
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
             <InfoArea
-              title="Fingerprint"
-              description="Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough."
+              title="Online Ordering"
+              description="Welcome to our store! With no storefront location, we have relied on word of mouth and in person sales. With this online store, our firey sauces are just a click away!"
               icon={Fingerprint}
               iconColor="danger"
               vertical
