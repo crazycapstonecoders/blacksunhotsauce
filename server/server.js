@@ -37,8 +37,8 @@ app.use('/api/product', productRouter)
 app.use('/api/order', orderRouter)
 app.use('/api/braintree', braintreeRouter)
 
-// localhost port
-const port = 5000 || process.env.PORT
+// deployment and localhost port
+const port = process.env.PORT || 5000
 
 // prepare to deploy
 if(process.env.NODE_ENV === 'production') {
