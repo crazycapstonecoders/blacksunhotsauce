@@ -47,7 +47,6 @@ export default function UpdateProduct() {
 
     const init = () => {
         getSingleProduct(productId).then(res => {
-            console.log(res.data)
             setValues({ ...values, name: res.data.name, description: res.data.description, price: res.data.price, quantity: res.data.quantity, formData: new FormData() })
         }).catch(error => {
             setValues({ ...values, error: error.response.data.error })
