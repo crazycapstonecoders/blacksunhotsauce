@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-const server = 'http://localhost:5000'
-
 /**
 This file exports different functions that make requests/calls to the API/Backend.
 API calls/requests are made via axios.
@@ -10,7 +8,7 @@ API calls/requests are made via axios.
 export const read = (userId, token) => {
     return axios({
         method: 'GET',
-        url: `${server}/api/user/${userId}`,
+        url: `/api/user/${userId}`,
         headers: {
             Accept: "*/*",
             "Content-Type": "application/json",
@@ -22,7 +20,7 @@ export const read = (userId, token) => {
 export const update = (userId, token, user) => {
     return axios({
         method: 'PUT',
-        url: `${server}/api/user/update/${userId}`,
+        url: `/api/user/update/${userId}`,
         headers: {
             Accept: "*/*",
             "Content-Type": "application/json",
@@ -48,7 +46,7 @@ export const updatedUser = (user, next) => {
 export const getOrderHistory = (userId, token) => {
     return axios({
         method: 'GET',
-        url: `${server}/api/user/orders/by/${userId}`,
+        url: `/api/user/orders/by/${userId}`,
         headers: {
             Accept: "*/*",
             "Content-Type": "application/json",
@@ -60,7 +58,7 @@ export const getOrderHistory = (userId, token) => {
 export const getOrderDetails = (userId, orderId, token) => {
     return axios({
         method: 'GET',
-        url: `${server}/api/order/${userId}/${orderId}`,
+        url: `/api/order/${userId}/${orderId}`,
         headers: {
             Accept: "*/*",
             "Content-Type": "application/json",
