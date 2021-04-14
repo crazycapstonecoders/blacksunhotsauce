@@ -101,7 +101,7 @@ export default function UserUpdate() {
     }
 
     return (
-        <Card>
+        <Card className={classes.infoItem}>
             <form className={classes.form} onSubmit={handleSubmit}>
                 <CardHeader color="info" className={classes.cardHeader}>
                     <h4>User Information</h4>
@@ -168,11 +168,11 @@ export default function UserUpdate() {
                 <CardFooter className={classes.cardFooter}>
                     <Button round color="rose" onClick={handleSubmit}>
                         Update Info
-                </Button>
+                    </Button>
                     <hr />
                     <Button color="info" to='/cart' component={Link}>
                         View Cart
-                </Button>
+                    </Button>
                 </CardFooter>
             </form>
         </Card>
