@@ -1,5 +1,4 @@
 const User = require('../models/user')
-require('dotenv').config()
 
 module.exports = (passport, localStrategy, jwtStrategy, extractJwt) => {
     // passport strategy to authenticate user
@@ -20,7 +19,7 @@ module.exports = (passport, localStrategy, jwtStrategy, extractJwt) => {
 
     // verify user token
     passport.use(new jwtStrategy({
-        secretOrKey: "bcdfdhcbvhe",
+        secretOrKey: process.env.JWT_SECRET,
         jwtFromRequest: extractJwt.fromAuthHeaderAsBearerToken(),
     }, (token, done) => {
         try {
