@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import IdleWarning from '../../../helpers/IdleWarning' 
 import { isAuthenticated } from '../../../api/authApi'
-import { createProduct } from '../../../api/adminApi' 
+import { getSingleProduct, updateProduct } from '../../../api/adminApi' 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import { CircularProgress } from '@material-ui/core'
@@ -15,12 +17,17 @@ import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import SnackbarContent from "components/Snackbar/SnackbarContent.js"
 import InputLabel from '@material-ui/core/InputLabel';
+import Header from "components/Header/Header.js";
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
+import HeaderLinks from "components/Header/HeaderLinks.js";
+import Parallax from "components/Parallax/Parallax.js";
 
 import styles from "assets/jss/material-kit-react/views/adminDashboardPage.js";
 
 const useStyles = makeStyles(styles)
 
-export default function AddProduct() {
+export default function UpdateProduct() {
     const classes = useStyles()
     const { user, token } = isAuthenticated()
     const [values, setValues] = useState({
@@ -35,10 +42,20 @@ export default function AddProduct() {
         formData: ''
     })
     const { name, description, price, quantity, error, loading, createdProduct, formData } = values
+    // get order id from parameters of route
+    const { productId } = useParams()
+
+    const init = () => {
+        getSingleProduct(productId).then(res => {
+            console.log(res.data)
+            setValues({ ...values, name: res.data.name, description: res.data.description, price: res.data.price, quantity: res.data.quantity, formData: new FormData() })
+        }).catch(error => {
+            setValues({ ...values, error: error.response.data.error })
+        })
+    }
 
     useEffect(() => {
-        // get new form data using form data api by browser
-        setValues({ ...values, formData: new FormData() })
+        init()
     }, [])
 
     // higher order function to target name and event of form
@@ -52,12 +69,8 @@ export default function AddProduct() {
     const handleSubmit = e => {
         e.preventDefault()
         setValues({ ...values, error: '', loading: true })
-        createProduct(formData, user._id, token).then(res => {
+        updateProduct(productId, formData, user._id, token).then(res => {
             setValues({ ...values, name: '', description: '', price: '', quantity: '', image: '', loading: false, success: true, createdProduct: res.data.name, error: '' })
-            setTimeout(() => {
-                // refresh page in 1.5s to show updated info
-                window.location.reload()
-            }, 1500)
         }).catch(error => {
             setValues({ ...values, error: error.response.data.error })
         })
@@ -83,7 +96,7 @@ export default function AddProduct() {
             <SnackbarContent
             message={
             <span>
-                Success! {createdProduct} has been added!
+                Success! {createdProduct} has been updated!
             </span>
             }
             close
@@ -97,13 +110,13 @@ export default function AddProduct() {
         <CircularProgress style={{ display: loading ? '' : 'none' }} />
     )
 
-    const newProductForm = () => (
+    const updateProductForm = () => (
         <Card>
             {showSuccess()}
             {showError()}
             <form className={classes.form} onSubmit={handleSubmit}>
                 <CardHeader color="info" className={classes.cardHeader}>
-                    <h4>New Product Information</h4>
+                    <h4>Product Information</h4>
                 </CardHeader>
                 <CardBody>
                     <input onChange={handleChange('image')} type='file' name='image' accept='image/*' />
@@ -159,7 +172,7 @@ export default function AddProduct() {
                 </CardBody>
                 <CardFooter className={classes.cardFooter}>
                     <Button round color="rose" onClick={handleSubmit}>
-                        Add Product
+                        Update Product
                     </Button>
                 </CardFooter>
             </form>
@@ -168,8 +181,32 @@ export default function AddProduct() {
 
     return (
         <div>
-            {showLoading()}
-            {newProductForm()}
+            <Header
+            color="transparent"
+            brand="Material Kit React"
+            rightLinks={<HeaderLinks />}
+            fixed
+            changeColorOnScroll={{
+            height: 400,
+            color: "white"
+            }}
+            />
+            <Parallax small filter image={require("assets/img/profile-bg.jpg")}>
+                <div className={classes.headerContainer}>
+                    <GridContainer>
+                        <GridItem xs={12} sm={12} md={6}>
+                            <h1 className={classes.header}>Hello and welcome {user.name}</h1>
+                        </GridItem>
+                    </GridContainer>
+                </div>
+            </Parallax>
+            <IdleWarning />
+            <GridContainer justify="center">
+                <GridItem xs={12} sm={12} md={8}>
+                    {showLoading()}
+                    {updateProductForm()}
+                </GridItem>
+            </GridContainer>
         </div>
     )
 }

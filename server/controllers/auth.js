@@ -6,8 +6,8 @@ const extractJwt = require('passport-jwt').ExtractJwt
 const jwt = require('jsonwebtoken')
 require('../auth/passport')(passport, localStrategy, jwtStrategy, extractJwt)
 const _ = require("lodash")
-const nodeMailer = require('nodemailer')
 const axios = require('axios')
+const { sendEmail } = require('../helper/helpers')
 
 exports.signUp = async (req, res) => {
     // get email from client side via user sign up
@@ -108,9 +108,8 @@ exports.forgotPassword = (req, res) => {
             },
             to: email,
             subject: 'Password Reset Instructions',
-            text: `Please click on the link to reset your password: ${process.env.CLIENT_URL}/reset-password/${resetToken}`,
-            html: `<p>Please click on the link to reset your password:</p> 
-                <p><a href=${process.env.CLIENT_URL}/reset-password/${resetToken}>${process.env.CLIENT_URL}/reset-password/${resetToken}</a></p>`
+            html: `<h3>Hello, Please click on the link to reset your password:</h3> 
+                <h4><a href=${process.env.CLIENT_URL}/reset-password/${resetToken}>${process.env.CLIENT_URL}/reset-password/${resetToken}</a></h4>`
         }
         // save resetToken to user object
         return user.updateOne({ resetPasswordLink: resetToken }, (error, success) => {
@@ -194,22 +193,5 @@ exports.socialLogin = (req, res) => {
             return res.json({ token, user: { _id, name, email, role } })
         }
     })
-}
-
-// helper functions
-const sendEmail = emailData => {
-    const transporter = nodeMailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 587,
-        secure: false,
-        requireTLS: true,
-        auth: {
-            user: process.env.EMAIL_USERNAME,
-            pass: process.env.EMAIL_PASSWORD
-        }
-    })
-    return transporter.sendMail(emailData)
-        .then(info => console.log(`Message send: ${info.response}`))
-        .catch(error => console.log(`Problem sending email: ${error}`))
 }
 

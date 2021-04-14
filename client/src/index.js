@@ -8,6 +8,7 @@ import "assets/scss/material-kit-react.scss?v=1.9.0";
 // pages for this product
 import LandingPage from "views/LandingPage/LandingPage.js";
 import AdminDashboardPage from "views/AdminDashboardPage/AdminDashboardPage.js";
+import UpdateProduct from "views/AdminDashboardPage/Sections/UpdateProduct";
 import UserDashboardPage from "views/UserDashboardPage/UserDashboardPage.js";
 import UserPurchaseHistory from "views/UserDashboardPage/Sections/UserPurchaseHistory.js";
 import SigninPage from "views/SigninPage/SigninPage.js";
@@ -20,7 +21,7 @@ import PrivateRoute from "auth/PrivateRoute.js"
 import AdminRoute from "auth/AdminRoute.js"
 
 
-var hist = createBrowserHistory();
+const hist = createBrowserHistory();
 
 ReactDOM.render(
   <Router history={hist}>
@@ -31,6 +32,7 @@ ReactDOM.render(
       <Route path="/reset-password/:resetPasswordToken" component={ResetPasswordPage} />
       <Route path="/shop" component={ShopPage} />
       <Route path="/cart" component={CartPage} />
+      <AdminRoute path="/admin/product/update/:productId" component={UpdateProduct} />
       <AdminRoute path="/admin/dashboard" component={AdminDashboardPage} />
       <PrivateRoute path="/user/:userId/:orderId" component={UserPurchaseHistory} />
       <PrivateRoute path="/user/dashboard" component={UserDashboardPage} />

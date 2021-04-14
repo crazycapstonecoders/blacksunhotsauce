@@ -106,9 +106,6 @@ exports.update = (req, res) => {
         if (error) {
             return res.status(400).json({ error: 'Image could not be uploaded' })
         }
-        if (!name || !description || !quantity || !price) {
-            return res.status(400).json({ error: 'All fields are required' })
-        }
         // get the product user is updating
         let product = req.product
         // use lodash to simplify code 
