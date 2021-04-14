@@ -20,7 +20,7 @@ module.exports = (passport, localStrategy, jwtStrategy, extractJwt) => {
 
     // verify user token
     passport.use(new jwtStrategy({
-        secretOrKey: process.env.JWT_SECRET,
+        secretOrKey: "bcdfdhcbvhe",
         jwtFromRequest: extractJwt.fromAuthHeaderAsBearerToken(),
     }, (token, done) => {
         try {
