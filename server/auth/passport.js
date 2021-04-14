@@ -1,4 +1,5 @@
 const User = require('../models/user')
+require('dotenv').config()
 
 module.exports = (passport, localStrategy, jwtStrategy, extractJwt) => {
     // passport strategy to authenticate user
