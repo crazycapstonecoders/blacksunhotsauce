@@ -21,34 +21,20 @@ const userDashboardPageStyle = {
   },
   infoItem: {
     "@media (min-width: 576px)": {
-      maxWidth: "540px"
+      maxWidth: "58%",
+      marginLeft: '25%'
     },
     "@media (min-width: 768px)": {
-      maxWidth: "45%",
-      paddingLeft: '2%',
-      marginRight: '5%'
+      maxWidth: "50%",
+      marginLeft: '25%'
     },
     "@media (min-width: 992px)": {
-      maxWidth: "40%"
+      maxWidth: "50%",
+      marginLeft: '25%'
     },
     "@media (min-width: 1200px)": {
-      maxWidth: "25%",
-      paddingLeft: '2%',
-      marginRight: '5%'
-    },
-  }, 
-  purchaseItem: {
-    "@media (min-width: 576px)": {
-      maxWidth: "540px"
-    },
-    "@media (min-width: 768px)": {
-      maxWidth: "50%"
-    },
-    "@media (min-width: 992px)": {
-      maxWidth: "55%"
-    },
-    "@media (min-width: 1200px)": {
-      maxWidth: "50%"
+      marginLeft: '25%',
+      width: '50%'
     },
   },
   header: {
