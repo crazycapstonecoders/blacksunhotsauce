@@ -3,7 +3,7 @@ const formidable = require('formidable')
 const _ = require('lodash')
 const { v4: uuidv4 } = require('uuid')
 const admin = require('firebase-admin')
-const serviceAccount = require('../../../black-sun-sauces-firebase-adminsdk-q0eh3-f4c75592fd.json')
+const serviceAccount = require('../../black-sun-sauces-firebase-adminsdk-q0eh3-f4c75592fd.json')
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     storageBucket: process.env.FIREBASE_STORAGEBUCKET
