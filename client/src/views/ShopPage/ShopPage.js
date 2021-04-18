@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import IdleWarning from '../../helpers/IdleWarning' 
-import { getProducts } from '../../api/productApi' 
+import { getProducts } from '../../api/coreApi' 
 // nodejs library that concatenates classes
 //import classNames from "classnames";
 // @material-ui/core components
@@ -21,7 +21,7 @@ export default function ShopPage() {
     //Define components in the module to take on materia styling
     const classes = useStyles()
     const [products, setProducts] = useState([])
-    const [error, setError] = useState(false)
+    const [error, setError] = useState('')
 
     //TEMP: Expand products or read from DB?
     const listProducts = () => {
@@ -59,7 +59,7 @@ export default function ShopPage() {
             <SnackbarContent
             message={
                 <span>
-                {error}
+                    {error}
                 </span>
             }
             close

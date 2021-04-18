@@ -3,7 +3,10 @@ const formidable = require('formidable')
 const _ = require('lodash')
 const { v4: uuidv4 } = require('uuid')
 const admin = require('firebase-admin')
-const serviceAccount = require('../../../black-sun-sauces-firebase-adminsdk-q0eh3-f4c75592fd.json')
+require("dotenv").config()
+
+// save as env var to facilitate deployment to heroku
+const serviceAccount = JSON.parse(process.env.GOOGLE_CREDS)
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     storageBucket: process.env.FIREBASE_STORAGEBUCKET
@@ -22,6 +25,12 @@ exports.productById = (req, res, next, id) => {
     })
 }
 
+// get product by id
+exports.read = (req, res) => {
+    req.product.image = undefined
+    return res.json(req.product)
+}
+
 exports.create = (req, res) => {
     // get form data using formidable library
     let form = new formidable.IncomingForm()
@@ -36,11 +45,15 @@ exports.create = (req, res) => {
         if (!name || !description || !quantity || !price) {
             return res.status(400).json({ error: 'All fields are required' })
         }
-        if (files.image.type === null) {
-            return res.status(400).json({ error: 'Image is required' })
-        }
-        if (files.image.type.includes('image') !== true) {
-            return res.status(400).json({ message: 'Please upload a valid image' })
+        if(files.image === undefined) {
+            return res.status(400).json({ error: 'Image valid image' })
+        } else {
+            if(files.image.type === null) {
+                return res.status(400).json({ message: 'Please upload a valid image' })
+            }
+            if (files.image.type.includes('image') !== true) {
+                return res.status(400).json({ message: 'Please upload a valid image' })
+            }
         }
         // create new product document with fields for db
         let product = new Product(fields)
@@ -96,15 +109,12 @@ exports.update = (req, res) => {
         if (error) {
             return res.status(400).json({ error: 'Image could not be uploaded' })
         }
-        if (!name || !description || !quantity || !price) {
-            return res.status(400).json({ error: 'All fields are required' })
-        }
         // get the product user is updating
         let product = req.product
         // use lodash to simplify code 
         product = _.extend(product, fields)
         // image is not required, so just save it even if image is null
-        if (files.image.type == null) {
+        if (files.image === undefined) {
             product.save().then(product => {
                 res.json(product)
             }).catch(error => {
@@ -155,13 +165,13 @@ exports.update = (req, res) => {
 exports.productAll = (req, res) => {
     // get all products 
     // eg https://example.com/product/<products>
-    Product.find({}, function (error, products) {
+    Product.find().exec((error, products) => {
         if (error || !products) {
             return res.status(400).json({ error: 'Unable to load products' })
         }
         // Return the Result as json 
         return res.json(products)
-    })
+    }) 
 }
 
 exports.remove = (req, res) => {

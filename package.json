@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js",
-    "server": "nodemon server/server.js"
+    "server": "nodemon server/server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "Crazy Capstone Coders",
   "license": "ISC",

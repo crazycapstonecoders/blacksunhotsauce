@@ -160,7 +160,7 @@ export default function Checkout({ products, setRun = f => f, run = undefined })
                 }}
                 />
                 <DropIn 
-                options={{ authorization: data.clientToken, paypal: { vault: 'flow' } }} 
+                options={{ authorization: data.clientToken }} 
                 onInstance={instance => data.instance = instance} 
                 />
                 <Button onClick={buy} round color="success">

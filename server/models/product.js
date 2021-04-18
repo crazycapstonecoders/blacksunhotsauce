@@ -26,11 +26,7 @@ const productSchema = new Schema({
         type: Number,
         default: 0
     },
-    images: [{}],
-    shipping: {
-        required: false,
-        type: Boolean
-    }
+    images: [{}]
 }, { timestamps: true }
 )
 
