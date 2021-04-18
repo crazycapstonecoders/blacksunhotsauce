@@ -4,8 +4,6 @@
     margin-right: auto;
     text-align: center;
 }
-
-
 /* This is the container of the grid used in the shop*/
 .divShop{
     width: 90%;
@@ -27,10 +25,6 @@
     margin-right: auto;
     margin-left: auto;
     text-align: center;
-}
-
-.cardshop .title{
-    font-size: larger;
 }
 
 /* Ensure container contents have full visibility if opacity is used in background*/
@@ -72,44 +66,23 @@
     margin-right: auto;
 }
 
-/* This resizes the form controls*/
-.card-shop > input{
-    height: .6em;
-}
-.card-shop > button{
-    height: 1.3em;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 /* This makes the cards get a higher opacity on hover*/
 .card-shop:hover{
     transition: 500ms;
     opacity: 100%;
 }
 
-.card-shop-control{
-    min-height: 55px;
-}
-
 /* This modifies the placeholder image that loads in before any images*/
 .card-image{
-    min-height: 325px;
     background-image: url("../../assets/img/Placeholder.png");
     background-size: cover;
+    background-position: center;
 }
 
+/*This modifies the product title/Name presentation*/
 .card-content h1{
     margin-bottom: .1em;
     margin-top: .1em;
-}
-
-/* The below classes are used for debugging spacing*/
-.test1{
-    background-color: teal;
-}
-.test2{
-    background-color: tomato;
 }
 
 /* This modifies the cost text*/
@@ -118,6 +91,13 @@
     font-size: 1.4em;
     color: black;
     text-align: right;
+}
+
+.card-shop-control{
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 12px;
+    min-height: 5.2em;
 }
 
 /* This modifies the description of the product*/
@@ -138,29 +118,6 @@
     flex-wrap: wrap;
 }
 
-/* This class enables a link object to visibly become a button */
-.button{
-    max-width: 60%;
-    margin-left: auto;
-    margin-right: auto;
-    border: 1px solid black;
-    background-color: gray;
-    border-radius: 5px;
-}
-
-.button a{
-    text-decoration: none;
-    color: black;
-}
-
-.button:hover{
-    transition: 500ms;
-    background-color: lightgray;
-}
-
-.button:visited{
-    color: black;
-}
 
 /*Extra small devices */
 @media (max-width: 600px){
