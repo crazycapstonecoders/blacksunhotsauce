@@ -141,20 +141,22 @@ export default function Shop_Card({product,showAddToCartButton = true},{
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
             <div class="card-Shop">
                 <div class="card-content">
-                    <Carousel { ...settings }>
-                        {product.images.map((image, i) => (
-                            <div key={i}>
-                                <img
-                                style={{height: "180px", width: "100%", display: "block"}}
-                                className={classes.imgCardTop}
-                                src={image.url}
-                                alt="Card-img-cap"
-                                />
-                            </div>
-                        ))}
-                    </Carousel>
+                    <div class="card-image">
+                        <Carousel { ...settings }>
+                            {product.images.map((image, i) => (
+                                <div key={i}>
+                                    <img
+                                    style={{height: "180px", width: "100%", display: "block"}}
+                                    className={classes.imgCardTop}
+                                    src={image.url}
+                                    alt="Card-img-cap"
+                                    />
+                                </div>
+                            ))}
+                        </Carousel>
+                    </div>
+                    
                     <h1>{nameProduct}</h1>
-                    <br/>
                     <div class="price-avail flex">
                         <div class="spacer col-xl-1 col-lg-1 col-md-2 col-sm-1 col-xs-1">
                             <br/>
@@ -171,7 +173,7 @@ export default function Shop_Card({product,showAddToCartButton = true},{
                     </div>
                     <p class="description">{descProduct}</p>
                 
-                    <div class="shop-controls">
+                    <div class="card-shop-control">
                         <form action="">
                             {showAddToCartBtn(showAddToCartButton)}
                         </form>

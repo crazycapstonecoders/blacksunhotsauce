@@ -82,10 +82,26 @@
     margin-right: auto;
 }
 
-/* This makes the catds get a higher opacity on hover*/
+/* This makes the cards get a higher opacity on hover*/
 .card-shop:hover{
     transition: 500ms;
     opacity: 100%;
+}
+
+.card-shop-control{
+    min-height: 55px;
+}
+
+/* This modifies the placeholder image that loads in before any images*/
+.card-image{
+    min-height: 325px;
+    background-image: url("../../assets/img/Placeholder.png");
+    background-size: cover;
+}
+
+.card-content h1{
+    margin-bottom: .1em;
+    margin-top: .1em;
 }
 
 /* The below classes are used for debugging spacing*/
@@ -188,6 +204,9 @@
     .col-xs-0{
         width: 0%;
     }
+    .card-image{
+        min-height: 200px;
+    }
 }
 
 /*small devices */
@@ -230,6 +249,9 @@
     }
     .col-sm-0{
         width: 0%;
+    }
+    .card-image{
+        min-height: 200px;
     }
 }
 
@@ -274,6 +296,9 @@
     .col-md-0{
         width: 0%;
     }
+    .card-image{
+        min-height: 250px;
+    }
 }
 
 /*large devices */
@@ -317,6 +342,9 @@
     .col-lg-0{
         width: 0%;
     }
+    .card-image{
+        min-height: 300px;
+    }
 }
 
 /*Extra large devices */
@@ -359,5 +387,8 @@
     }  
     .col-xl-0{
         width: 0%;
+    }
+    .card-image{
+        min-height: 350px;
     }
 }
