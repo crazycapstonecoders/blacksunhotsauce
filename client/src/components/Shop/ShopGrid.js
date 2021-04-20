@@ -10,20 +10,16 @@ export default function Shop_Grid({Products}) {
     //Check if the input is defined
     if (Products === undefined || Products.length <= 0){
         return(
-            <div id="divShop" class="flex grid-container">
-                <h1 class="error">Error: Unable to load products!</h1>
+            <div id="divShop" className="flex grid-container">
+                <h1 className="error">Error: Unable to load products!</h1>
             </div>
         )
-    } else{
-        //Map the input to the output form
-        var output = ""
-        output = Products.map((product)=> <ShopCard product={product} showAddToCartButton={ product.quantity > 0 ? true : false }/>)
     }
     //Return HTML rendering of the product grid
     return (
-        <div id="divShop" class="flex grid-container">
-            <p class="hidden">The below code should inset the resulting HTML inside the page</p>
-            {output}
+        <div id="divShop" className="flex grid-container">
+            <p className="hidden">The below code should insert the resulting HTML inside the page</p>
+            {Products.map((product,i)=> <ShopCard key={i} product={product} showAddToCartButton={ product.quantity > 0 ? true : false }/>)}
         </div>
     )
 }

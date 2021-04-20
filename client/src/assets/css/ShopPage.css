@@ -3,6 +3,14 @@
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    width: 50%;
+    background-color:tomato;
+    margin-top: .5em;
+    margin-bottom: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    border-radius: 10px;
+    opacity: 99%;
 }
 /* This is the container of the grid used in the shop*/
 .divShop{
@@ -15,7 +23,7 @@
 .card-Shop{
     width: 98%;
     background-color: lightgray;
-    opacity: 95%;
+    opacity: 99%;
     border-radius: 10px;
     border: gray 1px solid;
     padding-left: .2em;
@@ -77,14 +85,18 @@
     background-image: url("../../assets/img/Placeholder.png");
     background-size: cover;
     background-position: center;
+    margin-top: .4em;
 }
 
-/*This modifies the product title/Name presentation*/
-.card-content h1{
-    margin-bottom: .1em;
-    margin-top: .1em;
+.product-name{
+    position: relative;
+    bottom: +1.7em;
+    margin-bottom: -1.2em;
+    background-color: whitesmoke;
+    opacity: 70%;
+    border-radius: 10px;
+    max-width: 80%;
 }
-
 /* This modifies the cost text*/
 .cost{
     font-weight: bold;
@@ -116,6 +128,12 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+
+/*This class modifies the width used in the shop page for products*/
+.grid-container{
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
@@ -162,7 +180,11 @@
         width: 0%;
     }
     .card-image{
-        min-height: 200px;
+        height: 350px;
+        max-width: 100%;
+    }
+    .grid-container{
+        width: 95%;
     }
 }
 
@@ -208,7 +230,11 @@
         width: 0%;
     }
     .card-image{
-        min-height: 200px;
+        height: 350px;
+        max-width: 100%;
+    }
+    .grid-container{
+        width: 93%;
     }
 }
 
@@ -254,7 +280,11 @@
         width: 0%;
     }
     .card-image{
-        min-height: 250px;
+        height: 325px;
+        max-width: 100%;
+    }
+    .grid-container{
+        width: 90%;
     }
 }
 
@@ -300,7 +330,8 @@
         width: 0%;
     }
     .card-image{
-        min-height: 300px;
+        height: 300px;
+        max-width: 100%;
     }
 }
 
@@ -346,6 +377,7 @@
         width: 0%;
     }
     .card-image{
-        min-height: 350px;
+        height: 275px;
+        max-width: 100%;
     }
 }

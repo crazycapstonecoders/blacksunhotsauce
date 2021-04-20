@@ -9,7 +9,6 @@ import imagesStyles from "assets/jss/material-kit-react/imagesStyles.js";
 import Check from "@material-ui/icons/Check";
 import Badge from 'components/Badge/Badge.js';
 import Button from "components/CustomButtons/Button.js";
-import CustomInput from "components/CustomInput/CustomInput.js"
 import SnackbarContent from "components/Snackbar/SnackbarContent.js"
 import { Link } from 'react-router-dom'
 
@@ -118,8 +117,8 @@ export default function Shop_Card({product,showAddToCartButton = true},{
     if (product === null || product === undefined){
         //No product input, Return a placeholder card
         return (
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                <div class="card-Shop">
+            <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <div className="card-Shop">
                     <p>Error: No product input for this card!</p>
                 </div>
             </div>
@@ -131,17 +130,12 @@ export default function Shop_Card({product,showAddToCartButton = true},{
         costProduct = product.price
     }
 
-    //Check if we are rendering the product
-    if (product.quantity <= 0){
-        showAddToCartButton = false;
-    }
-
     //Return HTML with the rendering
     return (
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
-            <div class="card-Shop">
-                <div class="card-content">
-                    <div class="card-image">
+        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+            <div className="card-Shop">
+                <div className="card-content">
+                    <div className="card-image">
                         <Carousel { ...settings }>
                             {product.images.map((image, i) => (
                                 <div key={i}>
@@ -156,24 +150,24 @@ export default function Shop_Card({product,showAddToCartButton = true},{
                         </Carousel>
                     </div>
                     
-                    <h1>{nameProduct}</h1>
-                    <div class="price-avail flex">
-                        <div class="spacer col-xl-1 col-lg-1 col-md-2 col-sm-1 col-xs-1">
+                    <h1 className="product-name">{nameProduct}</h1>
+                    <div className="price-avail flex">
+                        <div className="spacer col-xl-1 col-lg-1 col-md-2 col-sm-1 col-xs-1">
                             <br/>
                         </div>
                         <div class="col-xl-5 col-lg-5 col-md-3 col-sm-4 col-xs-4">
-                            <p class="cost">{costProduct}</p>
+                            <p className="cost">{costProduct}</p>
                         </div>
-                        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-6 col-xs-6">
+                        <div className="col-xl-5 col-lg-5 col-md-5 col-sm-6 col-xs-6">
                             {showAvailability(product.quantity)}
                         </div>
-                        <div class="spacer col-xl-1 col-lg-1 col-md-2 col-sm-1 col-xs-1">
+                        <div className="spacer col-xl-1 col-lg-1 col-md-2 col-sm-1 col-xs-1">
                             <br/>
                         </div>
                     </div>
-                    <p class="description">{descProduct}</p>
+                    <p className="description">{descProduct}</p>
                 
-                    <div class="card-shop-control">
+                    <div className="card-shop-control">
                         <form action="">
                             {showAddToCartBtn(showAddToCartButton)}
                         </form>

@@ -2,30 +2,27 @@ import React, { useState, useEffect } from 'react'
 import IdleWarning from '../../helpers/IdleWarning' 
 import { getProducts } from '../../api/coreApi' 
 // nodejs library that concatenates classes
-//import classNames from "classnames";
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
 // core components
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
 import ShopGrid from "components/Shop/ShopGrid.js"
-import './ShopPage.css'
-import SnackbarContent from "components/Snackbar/SnackbarContent.js"
+import '../../assets/css/ShopPage.css'
 
-import styles from "assets/jss/material-kit-react/views/shopPage.js";
 
-const useStyles = makeStyles(styles)
+
 
 export default function ShopPage() {
     //Define components in the module to take on materia styling
-    const classes = useStyles()
+
     const [products, setProducts] = useState([])
     const [error, setError] = useState('')
 
     //TEMP: Expand products or read from DB?
     const listProducts = () => {
         getProducts().then(res => {
+            console.log(res.data)
             setProducts(res.data)
         }).catch(error => {
             setError(error)
@@ -33,7 +30,7 @@ export default function ShopPage() {
     }
     
 
-    //The below lines are for testing without the server operating for styling purposes
+    //The below lines are for testing without the server operating for styling purposes (faster loading between changes)
     //Please leave in until we are done with the styling pass
     const testing = [
         {name: 'Testing',description: 'hasdfjkjasdjkfashjkfgjashjdfhjkasdfhjkhasjkdhfhasjkfhjkhaskdhfjkhasfhjkhasdkhfjkahjksdhjkfhjkashfkhasjkhfhaskhdfhashdfjkasjkfjkhsadhfjkhasdhfjkasdhjfasdhfhksdhakfhasjkhfsdhafjhjkshfjkhsadjkfhjkasfhsjdhfhjhsdfhjsdhjkhfghdjkfghjkdhfghdjg', price: '$10.99', images: [], quantity: 10 },
@@ -45,29 +42,10 @@ export default function ShopPage() {
     ]
     
 
-    
-
-    
-
     //Something about applying an effect to the list?
     useEffect(() => {
         listProducts()
     }, [])
-
-    const showError = () => {
-        return error && (
-            <SnackbarContent
-            message={
-                <span>
-                    {error}
-                </span>
-            }
-            close
-            color="danger"
-            icon="info_outline"
-            />
-        )
-    }
     
     return (
         <div>
@@ -77,13 +55,13 @@ export default function ShopPage() {
                 rightLinks={<HeaderLinks />}
                 fixed
                 changeColorOnScroll={{
-                height: 400,
+                height: 250,
                 color: "white"
                 }}
             />
             <Parallax small filter image={require("assets/img/bg2.jpg")} />
             <IdleWarning />
-            <ShopGrid Products={products}/>
+            <ShopGrid Products={testing}/>
         </div>
     )
 }
