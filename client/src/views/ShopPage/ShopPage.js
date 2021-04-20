@@ -61,7 +61,7 @@ export default function ShopPage() {
             />
             <Parallax small filter image={require("assets/img/bg2.jpg")} />
             <IdleWarning />
-            <ShopGrid Products={testing}/>
+            <ShopGrid Products={products}/>
         </div>
     )
 }
