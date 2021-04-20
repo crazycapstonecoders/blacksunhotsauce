@@ -32,6 +32,7 @@
     margin-top: .2em;
     margin-right: auto;
     margin-left: auto;
+    margin-bottom: .4em;;
     text-align: center;
 }
 
@@ -90,12 +91,14 @@
 
 .product-name{
     position: relative;
-    bottom: +1.7em;
+    bottom: +2.1em;
     margin-bottom: -1.2em;
     background-color: whitesmoke;
     opacity: 70%;
     border-radius: 10px;
     max-width: 80%;
+    font-size:x-large;
+    font-weight: bold;
 }
 /* This modifies the cost text*/
 .cost{
@@ -135,7 +138,15 @@
     margin-left: auto;
     margin-right: auto;
 }
+.quantity{
+    font-size: x-large;
+    text-align: center;
+    margin-right: auto;
+}
 
+body{
+    background-color: dimgray;
+}
 
 /*Extra small devices */
 @media (max-width: 600px){
@@ -185,6 +196,12 @@
     }
     .grid-container{
         width: 95%;
+    }
+    .quantity{
+        font-size: x-large;
+        text-align: center;
+        position: relative;
+        top: .5em;
     }
 }
 
@@ -332,6 +349,9 @@
     .card-image{
         height: 300px;
         max-width: 100%;
+    }
+    .quantity{
+        font-size: large;
     }
 }
 

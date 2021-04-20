@@ -61,10 +61,10 @@ export default function Shop_Card({product,showAddToCartButton = true},{
     var nameProduct = "Name";
     var descProduct = "Description";
     var costProduct = "$0.00";
+    var quantityProduct = 0;
 
     //Ians code is imported Below
     const [success, setSuccess] = useState(false)
-    const [count, setCount] = useState(product.count)
     const classes = useStyles();
 
     const addToCart = () => {
@@ -94,16 +94,6 @@ export default function Shop_Card({product,showAddToCartButton = true},{
         )
     }
 
-    const handleChange = productId => e => {
-        // run use effect in parent component
-        setRun(!run)
-        // make sure we don't have negative value
-        setCount(e.target.value < 1 ? 1 : e.target.value)
-        if(e.target.value >= 1) {
-            updateItem(productId, e.target.value)  
-        }
-    }
-
     const showAvailability = quantity => {
         return quantity > 0 ? (
             <Badge color="info">In Stock</Badge>
@@ -130,9 +120,18 @@ export default function Shop_Card({product,showAddToCartButton = true},{
         costProduct = product.price
     }
 
+    //Process the quantitiy Product
+    if (product.quantity > 0 && product.quantity != undefined && product.quantity != null){
+        quantityProduct = product.quantity + " Available"
+    } else{
+        //Product is zero
+        quantityProduct = "";
+    }
+
     //Return HTML with the rendering
     return (
         <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+            {showSuccess()}
             <div className="card-Shop">
                 <div className="card-content">
                     <div className="card-image">
@@ -156,7 +155,7 @@ export default function Shop_Card({product,showAddToCartButton = true},{
                             <br/>
                         </div>
                         <div class="col-xl-5 col-lg-5 col-md-3 col-sm-4 col-xs-4">
-                            <p className="cost">{costProduct}</p>
+                            <p className="cost">${costProduct}</p>
                         </div>
                         <div className="col-xl-5 col-lg-5 col-md-5 col-sm-6 col-xs-6">
                             {showAvailability(product.quantity)}
@@ -168,9 +167,15 @@ export default function Shop_Card({product,showAddToCartButton = true},{
                     <p className="description">{descProduct}</p>
                 
                     <div className="card-shop-control">
-                        <form action="">
-                            {showAddToCartBtn(showAddToCartButton)}
-                        </form>
+                        <div className="flex">
+                            <div className="col-xs-6">
+                                {showAddToCartBtn(showAddToCartButton)}
+                            </div>
+                            <div className="col-xs-6">
+                                <p className="quantity">{quantityProduct}</p>
+                            </div>
+                            
+                        </div>
                     </div>
                 </div>
                 
