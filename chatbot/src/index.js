@@ -1,7 +1,8 @@
 'use strict';
 
-const { ExpressJS, Lambda, Webhook } = require('jovo-framework');
+const { ExpressJS, Lambda, WebhookVerified: Webhook } = require('jovo-framework');
 const { app } = require('./app.js');
+const cors = require('cors')
 
 // ------------------------------------------------------------------
 // HOST CONFIGURATION
@@ -9,8 +10,10 @@ const { app } = require('./app.js');
 
 // ExpressJS (Jovo Webhook)
 if (process.argv.indexOf('--webhook') > -1) {
-  const port = process.env.JOVO_PORT || 3000;
+  const port = process.env.PORT || 3000;
   Webhook.jovoApp = app;
+
+  Webhook.use(cors())
 
   Webhook.listen(port, () => {
     console.info(`Local server listening on port ${port}.`);

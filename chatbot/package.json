@@ -2,8 +2,12 @@
   "name": "jovo-sample-voice-app-nodejs",
   "version": "3.0.0",
   "description": "A sample voice app that works with the Jovo Framework",
+  "engines": {
+    "node": "13.8.0"
+  },
   "main": "src/index.js",
   "dependencies": {
+    "alexa-verifier-middleware": "^1.0.3",
     "axios": "^0.21.1",
     "cors": "^2.8.5",
     "jovo-db-filedb": "^3.0.14",

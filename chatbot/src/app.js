@@ -51,7 +51,7 @@ app.setHandler({
 
   async SingleProductIntent() {
     await listProductByName(this.$nlu.NlpjsNlu.utterance).then(res => {
-      this.tell(`The ${res.data.name} can be described as ${res.data.description}. It is priced at $${res.data.price}. There are ${res.data.quantity} remaining.`)
+      this.tell(`The ${res.data.name} can be described as "${res.data.description}". It is priced at $${res.data.price}. There are ${res.data.quantity} remaining.`)
     }).catch(error => {
       console.log(error)
     })

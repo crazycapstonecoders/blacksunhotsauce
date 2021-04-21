@@ -16,7 +16,7 @@ exports.getProducts = () => {
 exports.listProductByName = name => {
     return axios({
         method: 'GET',
-        url: `http://localhost:5000/api/product/by/productName`,
+        url: `${server}/api/product/by/productName`,
         headers: {
             Accept: "*/*",
             "Content-Type": "application/json"

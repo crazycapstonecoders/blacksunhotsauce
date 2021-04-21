@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react'
-import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import { Widget, addResponseMessage, setQuickButtons } from 'react-chat-widget';
 import 'react-chat-widget/lib/styles.css';
 
 export default function Chatbot() {
     const makeRequestToJovo = () => {
-        axios.post('https://webhook.jovo.cloud/3a9b43a5-3fb1-49a0-a0e3-975eb0b3f303', {
+        axios.post('https://blacksunchatbot.herokuapp.com/webhook', {
             version: "3.2.4",
             type: "jovo-platform-web",
             request: {
@@ -43,7 +42,7 @@ export default function Chatbot() {
     }, [])
 
     const handleNewUserMessage = newMessage => {
-        axios.post("https://webhook.jovo.cloud/3a9b43a5-3fb1-49a0-a0e3-975eb0b3f303", {
+        axios.post("https://blacksunchatbot.herokuapp.com/webhook", {
             version: "3.2.4",
             type: "jovo-platform-web",
             request: {
