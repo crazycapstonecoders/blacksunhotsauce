@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser')
 const morgan = require('morgan')
 const cors = require('cors')
 const mongoose = require('mongoose')
+const path = require('path')
 
 const app = express()
 
@@ -36,8 +37,19 @@ app.use('/api/product', productRouter)
 app.use('/api/order', orderRouter)
 app.use('/api/braintree', braintreeRouter)
 
-// localhost port
-const port = 5000 || process.env.PORT
+// deployment and localhost port
+const port = process.env.PORT || 5000
+
+// prepare to deploy
+if(process.env.NODE_ENV === 'production') {
+    // serve static assets if in production
+    app.use(express.static('client/build'))
+
+    app.get('*', (req, res) => {
+        // go to client's build folder and load index.html
+        res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'))
+    })
+}
 
 app.listen(port, () => {
     console.log('Server running on ' + port)

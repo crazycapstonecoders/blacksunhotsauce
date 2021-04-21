@@ -1,4 +1,5 @@
 import React from "react";
+import Chatbot from './Sections/Chatbot'
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -40,7 +41,7 @@ export default function LandingPage(props) {
         }}
         {...rest}
       />
-      <Parallax filter image={require("assets/img/landing-bg.jpg")}>
+      <Parallax filter image={require("assets/img/parallax.png")}>
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
@@ -71,7 +72,7 @@ export default function LandingPage(props) {
           <WorkSection />
         </div>
       </div>
-     
+      <Chatbot />
     </div>
   );
 }

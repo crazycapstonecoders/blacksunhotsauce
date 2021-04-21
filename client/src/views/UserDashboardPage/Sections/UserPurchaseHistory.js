@@ -106,11 +106,11 @@ export default function UserPurchaseHistory() {
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
-                                                {products.map((products, i) => (
+                                                {products.map((product, i) => (
                                                     <TableRow key={i}>
-                                                        <TableCell>{products.name}</TableCell>
-                                                        <TableCell>{products.count}</TableCell>
-                                                        <TableCell>${products.price}</TableCell>
+                                                        <TableCell>{product.name}</TableCell>
+                                                        <TableCell>{product.count}</TableCell>
+                                                        <TableCell>${product.price}</TableCell>
                                                         <TableCell>{new Date(orderCreated).toLocaleDateString()}</TableCell>
                                                     </TableRow>
                                                 ))}

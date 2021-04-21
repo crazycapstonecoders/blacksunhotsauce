@@ -18,12 +18,9 @@ import CardBody from "components/Card/CardBody.js";
 import CustomInput from "components/CustomInput/CustomInput.js"
 import SnackbarContent from "components/Snackbar/SnackbarContent.js"
 
-import imagesStyles from "assets/jss/material-kit-react/imagesStyles.js";
-
 import { cardTitle } from "assets/jss/material-kit-react.js";
 
 const styles = {
-  ...imagesStyles,
   cardTitle,
   textMuted: {
     color: "#6c757d"
@@ -34,7 +31,8 @@ const styles = {
   card: {
     display: 'flex',
     flexDirection: 'column',
-    height: '500px'
+    height: '500px',
+    width: '400px'
   }
 };
 
@@ -116,7 +114,7 @@ export default function ReusableCard({
 
     const showRemoveCartBtn = showRemoveCartButton => {
         return showRemoveCartButton && (
-            <Button onClick={() => { removeItem(product._id); setRun(!run) }} color="danger">Remove From Cart</Button>
+            <Button style={{ marginTop: '5%' }} onClick={() => { removeItem(product._id); setRun(!run) }} color="danger">Remove From Cart</Button>
         )
     }
 
@@ -151,9 +149,7 @@ export default function ReusableCard({
                 <p>Quantity: {product.quantity}</p>
                 <p>${product.price}</p>
                 {showAddToCartBtn(showAddToCartButton)}
-                <br />
                 {showCartUpdateOptions(cartUpdate)}
-                <br />
                 {showRemoveCartBtn(showRemoveCartButton)}
             </CardBody>
         </Card>

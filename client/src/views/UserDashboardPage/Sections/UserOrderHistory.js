@@ -37,7 +37,6 @@ export default function UserOrderHistory() {
         const init = (userId, token) => {
             getOrderHistory(userId, token).then(res => {
                 setValues({ ...values, purchaseHistory: res.data, error: '' })
-                // setValues({ ...values, purchaseHistory: res.data.history })
             }).catch(error => {
                 setValues({ ...values, error: error.response.data.error })
             })
@@ -76,6 +75,7 @@ export default function UserOrderHistory() {
                                 <TableCell>Order #</TableCell>
                                 <TableCell>Date</TableCell>
                                 <TableCell>Status</TableCell>
+                                <TableCell>Total Products</TableCell>
                                 <TableCell>Total</TableCell>
                             </TableRow>
                         </TableHead>
@@ -87,6 +87,7 @@ export default function UserOrderHistory() {
                                     </TableCell>
                                     <TableCell>{new Date(ph.createdAt).toLocaleDateString()}</TableCell>
                                     <TableCell>{ph.status}</TableCell>
+                                    <TableCell>{ph.products.length}</TableCell>
                                     <TableCell>${ph.amount}</TableCell>
                                 </TableRow>
                             ))}

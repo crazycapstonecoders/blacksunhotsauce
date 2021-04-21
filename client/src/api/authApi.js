@@ -1,7 +1,4 @@
 import axios from 'axios'
-axios.defaults.withCredentials = true
-
-const server = 'http://localhost:5000'
 
 /**
 This file exports different functions that make requests/calls to the API/Backend.
@@ -11,7 +8,7 @@ API calls/requests are made via axios.
 export const signup = user => {
     return axios({
         method: 'POST',
-        url: `${server}/api/auth/signup`,
+        url: `/api/auth/signup`,
         headers: {
             Accept: "*/*",
             "Content-Type": "application/json",
@@ -23,7 +20,7 @@ export const signup = user => {
 export const signin = user => {
     return axios({
         method: 'POST',
-        url: `${server}/api/auth/signin`,
+        url: `/api/auth/signin`,
         headers: {
             Accept: "*/*",
             "Content-Type": "application/json",
@@ -38,7 +35,7 @@ export const signout = next => {
         localStorage.removeItem('jwt')
         localStorage.removeItem('user')
         next()
-        return axios.get(`${server}/api/auth/signout`)
+        return axios.get(`/api/auth/signout`)
         .then(res => console.log(res))
         .catch(error => console.log(error))
     }
@@ -67,7 +64,7 @@ export const isAuthenticated = () => {
 export const forgotPassword = email => {
     return axios({
         method: 'PUT',
-        url: `${server}/api/auth/forgot-password`,
+        url: `/api/auth/forgot-password`,
         headers: {
             Accept: "*/*",
             "Content-Type": "application/json",
@@ -79,7 +76,7 @@ export const forgotPassword = email => {
 export const resetPassword = resetInfo => {
     return axios({
         method: 'PUT',
-        url: `${server}/api/auth/reset-password`,
+        url: `/api/auth/reset-password`,
         headers: {
             Accept: "*/*",
             "Content-Type": "application/json",
@@ -91,7 +88,7 @@ export const resetPassword = resetInfo => {
 export const validateRecaptcha = token => {
     return axios({
         method: 'POST',
-        url:`${server}/api/auth/validateRecaptcha`,
+        url:`/api/auth/validateRecaptcha`,
         headers: {
             Accept: "*/*",
             "Content-Type": "application/json"
@@ -103,7 +100,7 @@ export const validateRecaptcha = token => {
 export const socialLogin = user => {
     return axios({
         method: 'POST',
-        url:`${server}/api/auth/social-login`,
+        url:`/api/auth/social-login`,
         headers: {
             Accept: "*/*",
             "Content-Type": "application/json"
