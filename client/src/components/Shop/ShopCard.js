@@ -75,16 +75,19 @@ export default function Shop_Card({product,showAddToCartButton = true},{
 
     const showSuccess = () => {
         return success && (
-            <SnackbarContent
-            message={
-            <span>
-                Item added to cart! <Link to="/cart">View Cart</Link>
-            </span>
-            }
-            close
-            color="success"
-            icon={Check}
-            />
+            <div className="cart-addition">
+                <SnackbarContent
+                message={
+                <span>
+                    Item added to cart! <Link to="/cart">View Cart</Link>
+                </span>
+                }
+                close
+                color="success"
+                icon={Check}
+                />
+            </div>
+            
         )
     }
 

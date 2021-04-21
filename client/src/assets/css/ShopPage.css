@@ -148,6 +148,15 @@ body{
     background-color: dimgray;
 }
 
+.cart-addition{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    position: fixed;
+    top: 4em;
+    z-index: 1;
+    font-size: large;
+}
+
 /*Extra small devices */
 @media (max-width: 600px){
     .col-xs-12{
@@ -203,6 +212,9 @@ body{
         position: relative;
         top: .5em;
     }
+    .cart-addition{
+        right: 25%;
+    }
 }
 
 /*small devices */
@@ -252,6 +264,9 @@ body{
     }
     .grid-container{
         width: 93%;
+    }
+    .cart-addition{
+        right: 30%;
     }
 }
 
@@ -303,6 +318,9 @@ body{
     .grid-container{
         width: 90%;
     }
+    .cart-addition{
+        right: 35%;
+    }
 }
 
 /*large devices */
@@ -353,6 +371,9 @@ body{
     .quantity{
         font-size: large;
     }
+    .cart-addition{
+        right: 38%;
+    }
 }
 
 /*Extra large devices */
@@ -399,5 +420,8 @@ body{
     .card-image{
         height: 275px;
         max-width: 100%;
+    }
+    .cart-addition{
+        right: 40%;
     }
 }
