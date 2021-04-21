@@ -9,7 +9,6 @@
     "jovo-db-filedb": "^3.0.14",
     "jovo-framework": "^3.5.1",
     "jovo-nlu-nlpjs": "^3.5.1",
-    "jovo-platform-alexa": "^3.5.2",
     "jovo-platform-web": "^3.5.2",
     "jovo-plugin-debugger": "^3.0.14"
   },
