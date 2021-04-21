@@ -1,28 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import ReusableCard from '../../helpers/ReusableCard'
 import IdleWarning from '../../helpers/IdleWarning' 
 import { getProducts } from '../../api/coreApi' 
-// nodejs library that concatenates classes
-import classNames from "classnames";
-// @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
 // core components
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import SnackbarContent from "components/Snackbar/SnackbarContent.js"
-
-import styles from "assets/jss/material-kit-react/views/shopPage.js";
-
-const useStyles = makeStyles(styles)
+import ShopGrid from "components/Shop/ShopGrid.js"
+import '../../assets/css/ShopPage.css'
 
 export default function ShopPage() {
-    const classes = useStyles()
     const [products, setProducts] = useState([])
     const [error, setError] = useState('')
-
+    
+    //Get the products from the Database
     const listProducts = () => {
         getProducts().then(res => {
             setProducts(res.data)
@@ -30,26 +20,11 @@ export default function ShopPage() {
             setError(error)
         })
     }
-
+    
     useEffect(() => {
         listProducts()
     }, [])
 
-    const showError = () => {
-        return error && (
-            <SnackbarContent
-            message={
-                <span>
-                    {error}
-                </span>
-            }
-            close
-            color="danger"
-            icon="info_outline"
-            />
-        )
-    }
-    
     return (
         <div>
             <Header
@@ -58,24 +33,13 @@ export default function ShopPage() {
                 rightLinks={<HeaderLinks />}
                 fixed
                 changeColorOnScroll={{
-                height: 400,
+                height: 250,
                 color: "white"
                 }}
             />
-            <Parallax small filter image={require("assets/img/bg2.jpg")} />
+            <Parallax small image={require("assets/img/parallax.png")} />
             <IdleWarning />
-            <div className={classNames(classes.main, classes.mainRaised)}>
-                {showError()}
-                <div className={classes.container}>
-                    <GridContainer spacing={4}>
-                        {products.map((product, i) => (
-                            <GridItem key={i} xs={12} sm={6} md={4}>
-                                <ReusableCard product={product} showAddToCartButton={ product.quantity > 0 ? true : false } />
-                            </GridItem> 
-                        ))}
-                    </GridContainer>
-                </div>
-            </div>
+            <ShopGrid Products={products}/>
         </div>
     )
 }
