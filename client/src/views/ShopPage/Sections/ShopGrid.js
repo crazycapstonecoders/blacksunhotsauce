@@ -1,6 +1,4 @@
 import React from "react";
-// nodejs library to set properties for components
-import PropTypes from "prop-types";
 import ShopCard from "./ShopCard.js";
 
 export default function Shop_Grid({products}) {
@@ -19,7 +17,3 @@ export default function Shop_Grid({products}) {
         </div>
     )
 }
-
-Shop_Grid.propTypes = {
-    Products: PropTypes.array
-}; 

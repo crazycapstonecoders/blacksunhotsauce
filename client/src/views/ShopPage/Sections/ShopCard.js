@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-// nodejs library to set properties for components
-import PropTypes from "prop-types";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Carousel from "react-slick"
@@ -10,7 +8,7 @@ import Badge from 'components/Badge/Badge.js';
 import Button from "components/CustomButtons/Button.js";
 import SnackbarContent from "components/Snackbar/SnackbarContent.js"
 import { Link } from 'react-router-dom'
-import { addItem } from '../../helpers/cartHelpers'
+import { addItem } from '../../../helpers/cartHelpers'
 
 //---Carousel
 const settings = {
@@ -155,10 +153,6 @@ export default function Shop_Card({product, showAddToCartButton = true}) {
         </div>
     )
 }
-
-Shop_Card.propTypes = {
-    product: PropTypes.object
-};
 
 
   

@@ -5,7 +5,7 @@ import { getProducts } from '../../api/coreApi'
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
-import ShopGrid from "components/Shop/ShopGrid.js"
+import ShopGrid from "./Sections/ShopGrid.js"
 import '../../assets/css/ShopPage.css'
 
 export default function ShopPage() {
