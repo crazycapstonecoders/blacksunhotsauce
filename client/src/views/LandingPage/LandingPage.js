@@ -1,4 +1,5 @@
 import React from "react";
+import Chatbot from './Sections/Chatbot'
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -74,6 +75,7 @@ export default function LandingPage(props) {
         </div>
       </div>
       <Footer />
+      <Chatbot />
     </div>
   );
 }
