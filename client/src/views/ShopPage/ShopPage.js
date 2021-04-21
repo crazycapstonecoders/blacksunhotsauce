@@ -9,9 +9,9 @@ import ShopGrid from "components/Shop/ShopGrid.js"
 import '../../assets/css/ShopPage.css'
 
 export default function ShopPage() {
-    //Define components in the module to take on materia styling
     const [products, setProducts] = useState([])
     const [error, setError] = useState('')
+    
     //Get the products from the Database
     const listProducts = () => {
         getProducts().then(res => {

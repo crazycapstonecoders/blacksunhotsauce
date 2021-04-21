@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-//Imports for Ians Code
 import Carousel from "react-slick"
 import imagesStyles from "assets/jss/material-kit-react/imagesStyles.js";
 import Check from "@material-ui/icons/Check";
@@ -106,7 +105,6 @@ export default function Shop_Card({product, showAddToCartButton = true}) {
 
     return (
         <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
-            
             <div className="card-Shop">
                 <div className="card-content">
                     <div className="card-image">

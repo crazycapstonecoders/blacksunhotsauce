@@ -1,13 +1,7 @@
 import React from "react";
-// nodejs library to set properties for components
-import PropTypes, { array } from "prop-types";
-// @material-ui/core components
-//import { makeStyles } from "@material-ui/core/styles";
-
 import ShopCard from "./ShopCard.js";
 
 export default function Shop_Grid({Products}) {
-    //Check if the input is defined
     if (Products === undefined || Products.length <= 0){
         return(
             <div id="divShop" className="flex grid-container">
@@ -15,7 +9,7 @@ export default function Shop_Grid({Products}) {
             </div>
         )
     }
-    //Return HTML rendering of the product grid
+
     return (
         <div id="divShop" className="flex grid-container">
             <p className="hidden">The below code should insert the resulting HTML inside the page</p>
@@ -23,7 +17,3 @@ export default function Shop_Grid({Products}) {
         </div>
     )
 }
-
-Shop_Grid.propTypes = {
-    Products: PropTypes.array
-  };
