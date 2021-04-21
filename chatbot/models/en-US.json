@@ -1,0 +1,60 @@
+{
+  "invocation": "my test app",
+  "intents": [
+    {
+      "name": "HelloWorldIntent",
+      "phrases": ["hi", "hello", "say hello", "say hello world"]
+    },
+    {
+      "name": "YesIntent",
+      "phrases": ["yes", "yeah", "yup", "sure"]
+    },
+    {
+      "name": "ProductsIntent",
+      "phrases": [
+        "see products", 
+        "list products",
+        "show me all the products",
+        "products",
+        "hot sauce",
+        "sauces",
+        "show me the products",
+        "show products",
+        "show all products",
+        "display products",
+        "display all products",
+        "show all hot sauces",
+        "list all hot sauce",
+        "what products do you guys have",
+        "show me what you got"
+      ]
+    },
+    {
+      "name": "LearnMoreIntent",
+      "phrases": [
+        "Learn more"
+      ]
+    },
+    {
+      "name": "SingleProductIntent",
+      "phrases": [
+        "Troll",
+        "Carolina Peach",
+        "Cayenne Mango",
+        "Cilantro Lime",
+        "Smoked Black Bean",
+        "Tobasco Pepper"
+      ]
+    },
+    {
+      "name": "SignUpIntent",
+      "phrases": [
+        "Sign Up",
+        "I want to sign up",
+        "register",
+        "sign up",
+        "Register"
+      ]
+    }
+  ]
+}
