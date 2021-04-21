@@ -5,8 +5,7 @@ import { getProducts } from '../../api/coreApi'
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
-import ShopGrid from "./Sections/ShopGrid.js"
-import './ShopPage.css'
+import ShopCard from "./Sections/ShopCard.js"
 
 export default function ShopPage() {
     const [products, setProducts] = useState([])
@@ -25,6 +24,14 @@ export default function ShopPage() {
         listProducts()
     }, [])
 
+    if (products === undefined || products.length <= 0){
+        return(
+            <div id="divShop" className="flex grid-container">
+                <h1 className="error">Error: Unable to load products!</h1>
+            </div>
+        )
+    }
+
     return (
         <div>
             <Header
@@ -39,7 +46,10 @@ export default function ShopPage() {
             />
             <Parallax small image={require("assets/img/parallax.png")} />
             <IdleWarning />
-            <ShopGrid products={products}/>
+            <div id="divShop" className="flex grid-container">
+                <p className="hidden">The below code should insert the resulting HTML inside the page</p>
+                {products.map((product,i)=> <ShopCard key={i} product={product} showAddToCartButton={ product.quantity > 0 ? true : false }/>)}
+            </div>
         </div>
     )
 }
