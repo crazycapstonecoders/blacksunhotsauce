@@ -12,6 +12,17 @@ admin.initializeApp({
     storageBucket: process.env.FIREBASE_STORAGEBUCKET
 })
 
+exports.productByName = (req, res) => {
+    const { name } = req.body
+    Product.findOne({ name }, (error, product) => {
+        if (error || !product) {
+            return res.status(400).json({ error: 'Product not found' })
+        }
+        req.product = product
+        return res.json(req.product)
+    })
+}
+
 exports.productById = (req, res, next, id) => {
     // get product associated with id that comes from request parameters
     // eg https://example.com/product/<productId>

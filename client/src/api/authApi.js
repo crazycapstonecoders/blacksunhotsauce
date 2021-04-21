@@ -1,5 +1,4 @@
 import axios from 'axios'
-axios.defaults.withCredentials = true
 
 /**
 This file exports different functions that make requests/calls to the API/Backend.
