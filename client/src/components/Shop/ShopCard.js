@@ -133,7 +133,7 @@ export default function Shop_Card({product,showAddToCartButton = true},{
     //Return HTML with the rendering
     return (
         <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
-            {showSuccess()}
+            
             <div className="card-Shop">
                 <div className="card-content">
                     <div className="card-image">
@@ -167,18 +167,18 @@ export default function Shop_Card({product,showAddToCartButton = true},{
                         </div>
                     </div>
                     <p className="description">{descProduct}</p>
-                
                     <div className="card-shop-control">
                         <div className="flex">
-                            <div className="col-xs-6">
+                            <div className="col-xs-5">
                                 {showAddToCartBtn(showAddToCartButton)}
                             </div>
-                            <div className="col-xs-6">
+                            <div className="col-xs-7">
                                 <p className="quantity">{quantityProduct}</p>
                             </div>
                             
                         </div>
                     </div>
+                    {showSuccess()}
                 </div>
                 
             </div>

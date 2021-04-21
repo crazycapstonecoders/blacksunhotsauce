@@ -14,7 +14,7 @@
 }
 /* This is the container of the grid used in the shop*/
 .divShop{
-    width: 90%;
+    width: 100%;
     margin-right: auto;
     margin-left: auto;
     box-sizing: border-box;
@@ -34,6 +34,8 @@
     margin-left: auto;
     margin-bottom: .4em;;
     text-align: center;
+    min-height: 500px;
+    max-height: 490px;
 }
 
 /* Ensure container contents have full visibility if opacity is used in background*/
@@ -56,7 +58,7 @@
 
 /*This modifies the space used for the content of the card */
 .card-content{
-    width: 85%;
+    width: 90%;
     min-height: 300px;
 }
 
@@ -139,7 +141,6 @@
     margin-right: auto;
 }
 .quantity{
-    font-size: x-large;
     text-align: center;
     margin-right: auto;
 }
@@ -150,12 +151,14 @@ body{
 
 .cart-addition{
     margin-top: 0px;
-    margin-bottom: 0px;
-    position: fixed;
-    top: 4em;
+    margin-bottom: -6em;
+    position: relative;
+    bottom: 4.2em;
     z-index: 1;
     font-size: large;
 }
+
+
 
 /*Extra small devices */
 @media (max-width: 600px){
@@ -212,8 +215,11 @@ body{
         position: relative;
         top: .5em;
     }
+    .card-Shop{
+        max-height: 550px;
+    }
     .cart-addition{
-        right: 25%;
+        margin-bottom: -2.8em;
     }
 }
 
@@ -265,8 +271,11 @@ body{
     .grid-container{
         width: 93%;
     }
+    .card-Shop{
+        max-height: 550px;
+    }
     .cart-addition{
-        right: 30%;
+        margin-bottom: -3.8em;
     }
 }
 
@@ -318,8 +327,11 @@ body{
     .grid-container{
         width: 90%;
     }
+    .card-Shop{
+        max-height: 540px;
+    }
     .cart-addition{
-        right: 35%;
+        margin-bottom: -4.8em;
     }
 }
 
@@ -371,9 +383,6 @@ body{
     .quantity{
         font-size: large;
     }
-    .cart-addition{
-        right: 38%;
-    }
 }
 
 /*Extra large devices */
@@ -421,7 +430,7 @@ body{
         height: 275px;
         max-width: 100%;
     }
-    .cart-addition{
-        right: 40%;
+    .quantity{
+        font-size: medium;
     }
 }
