@@ -16,9 +16,9 @@ import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
 
-import team1 from "assets/img/faces/logo.jpg";
-import team2 from "assets/img/faces/louie.png";
-import team3 from "assets/img/faces/pepper.jpg";
+import team1 from "assets/img/faces/logosquare.jpg";
+import team2 from "assets/img/faces/louiesquare.png";
+import team3 from "assets/img/faces/peppersquare.jpg";
 
 import ShopPage from "views/ShopPage/ShopPage.js";
 
@@ -38,7 +38,7 @@ export default function TeamSection() {
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
             <Card plain>
-              <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
+              <GridItem xs={12} sm={10} md={6} className={classes.itemGrid}>
                 <img src={team1} alt="..." className={imageClasses} />
               </GridItem>
               <h4 className={classes.cardTitle}>
@@ -59,6 +59,8 @@ export default function TeamSection() {
                   justIcon
                   color="transparent"
                   className={classes.margin5}
+                  href="https://www.facebook.com/"
+                  target="_blank"
                 >
                   <i className={classes.socials + " fab fa-facebook"} />
                 </Button>
@@ -87,6 +89,8 @@ export default function TeamSection() {
                   justIcon
                   color="transparent"
                   className={classes.margin5}
+                  href="https://www.instagram.com/"
+                  target="_blank"
                 >
                   <i className={classes.socials + " fab fa-instagram"} />
                 </Button>

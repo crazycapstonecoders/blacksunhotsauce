@@ -22,10 +22,16 @@ export default function WorkSection() {
         <GridItem cs={12} sm={12} md={8}>
           <h2 className={classes.title}>Get in touch</h2>
           <h4 className={classes.description}>
-            Please contact us with any questions or comments.
+            Please contact us with any questions or comments.<br></br>
+            Phone: (513)-281-4749<br></br>
+            Email: crazycapstonecoders@gmail.com<br></br>
             Thank you!
           </h4>
-          <form>
+
+          {/* I will get this section working hopefully, just want to save txt input from user and send to our email.
+          I think I know what to do, just getting it to work correctly. Just added contact info for now */}
+
+          {/* <form action="mailto:crazycapstonecoders@gmail.com" method="post" enctype="text/plain">
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
                 <CustomInput
@@ -58,10 +64,10 @@ export default function WorkSection() {
                 }}
               />
               <GridItem xs={12} sm={12} md={4}>
-                <Button type="clear" color="primary">Send Message</Button>
+                <Button type="submit" color="primary">Send Message</Button>
               </GridItem>
             </GridContainer>
-          </form>
+          </form> */}
         </GridItem>
       </GridContainer>
     </div>
