@@ -58,7 +58,6 @@ export default function LandingPage(props) {
                 href="SignUp"
                 rel="noopener noreferrer"
               >
-                
                 Create Account
               </Button>
             </GridItem>
