@@ -106,7 +106,7 @@ export default function ShopPage() {
                 color: "white"
                 }}
             />
-            <Parallax small filter image={require("assets/img/bg2.jpg")} />
+            <Parallax small filter image={require("assets/img/parallax.png")} />
             <IdleWarning />
             <div className={classNames(classes.main, classes.mainRaised)}>
                 {showError()}
