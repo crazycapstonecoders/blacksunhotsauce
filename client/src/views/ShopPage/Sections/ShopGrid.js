@@ -1,5 +1,6 @@
 import React from "react";
 import ShopCard from "./ShopCard.js";
+import '../ShopPage.css'
 
 export default function Shop_Grid({products}) {
     if (products === undefined || products.length <= 0){
