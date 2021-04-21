@@ -30,9 +30,7 @@ const styles = {
   },
   card: {
     display: 'flex',
-    flexDirection: 'column',
-    height: '500px',
-    width: '400px'
+    flexDirection: 'column'
   }
 };
 
