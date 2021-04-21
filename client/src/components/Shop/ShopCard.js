@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+// nodejs library to set properties for components
+import PropTypes from "prop-types";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Carousel from "react-slick"
@@ -153,6 +155,10 @@ export default function Shop_Card({product, showAddToCartButton = true}) {
         </div>
     )
 }
+
+Shop_Card.propTypes = {
+    product: PropTypes.object
+};
 
 
   
