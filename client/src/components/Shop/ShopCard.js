@@ -56,7 +56,6 @@ export default function Shop_Card({product,showAddToCartButton = true},{
         setRun = f => f, // default value of function 
         run = undefined})
     {
-    console.log("Triggering function:");
     //Init Variables
     var nameProduct = "Name";
     var descProduct = "Description";
