@@ -60,6 +60,8 @@ import SnackbarContent from "components/Snackbar/SnackbarContent.js"
 
 import styles from "assets/jss/material-kit-react/views/shopPage.js";
 
+import '../ShopPage.scss'
+
 const useStyles = makeStyles(styles)
 
 export default function ShopPage() {
