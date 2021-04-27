@@ -13,6 +13,7 @@ export default function Shop_Grid({products}) {
 
     return (
         <div id="divShop" className="flex grid-container">
+            <p className="hidden">The below code should insert the resulting HTML inside the page</p>
             {products.map((product,i)=> <ShopCard key={i} product={product} showAddToCartButton={ product.quantity > 0 ? true : false }/>)}
         </div>
     )
