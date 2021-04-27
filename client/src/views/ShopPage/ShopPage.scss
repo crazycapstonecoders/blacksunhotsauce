@@ -10,7 +10,6 @@
     padding-top: .5em;
     padding-bottom: .5em;
     border-radius: 10px;
-    opacity: 99%;
 }
 /* This is the container of the grid used in the shop*/
 .divShop{
@@ -23,7 +22,6 @@
 .card-Shop{
     width: 98%;
     background-color: lightgray;
-    opacity: 99%;
     border-radius: 10px;
     border: gray 1px solid;
     padding-left: .2em;
@@ -38,10 +36,6 @@
     max-height: 490px;
 }
 
-/* Ensure container contents have full visibility if opacity is used in background*/
-.card-Shop *{
-    opacity: 100%;
-}
 
 /* This modifies the Text elements natively in the card-shop*/
 .card-Shop h1,p{
@@ -80,7 +74,6 @@
 /* This makes the cards get a higher opacity on hover*/
 .card-shop:hover{
     transition: 500ms;
-    opacity: 100%;
 }
 
 /* This modifies the placeholder image that loads in before any images*/
@@ -96,7 +89,6 @@
     bottom: +2.1em;
     margin-bottom: -1.2em;
     background-color: whitesmoke;
-    opacity: 70%;
     border-radius: 10px;
     max-width: 80%;
     font-size:x-large;
