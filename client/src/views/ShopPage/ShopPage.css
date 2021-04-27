@@ -85,9 +85,7 @@
 
 /* This modifies the placeholder image that loads in before any images*/
 .card-image{
-    background-image: url("../../assets/img/Placeholder.png");
-    background-size: cover;
-    background-position: center;
+    
     margin-top: .4em;
 }
 

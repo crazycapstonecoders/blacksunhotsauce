@@ -122,7 +122,33 @@ export default function Shop_Card({product, showAddToCartButton = true}) {
                             ))}
                         </Carousel>
                     </div>
-                    
+                    <h1 className="product-name">{nameProduct}</h1>
+                    <div className="price-avail flex">
+                        <div className="spacer col-xl-1 col-lg-1 col-md-2 col-sm-1 col-xs-1">
+                            <br/>
+                        </div>
+                        <div className="col-xl-5 col-lg-5 col-md-3 col-sm-4 col-xs-4">
+                            <p className="cost">${costProduct}</p>
+                        </div>
+                        <div className="col-xl-5 col-lg-5 col-md-5 col-sm-6 col-xs-6">
+                            {showAvailability(product.quantity)}
+                        </div>
+                        <div className="spacer col-xl-1 col-lg-1 col-md-2 col-sm-1 col-xs-1">
+                            <br/>
+                        </div>
+                    </div>
+                    <p className="description">{descProduct}</p>
+                    <div className="card-shop-control">
+                        <div className="flex">
+                            <div className="col-xs-5">
+                                {showAddToCartBtn(showAddToCartButton)}
+                            </div>
+                            <div className="col-xs-7">
+                                <p className="quantity">{quantityProduct}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {showSuccess()}
                 </div>
             </div>
         </div>
