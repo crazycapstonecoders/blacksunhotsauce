@@ -9,7 +9,6 @@ import Button from "components/CustomButtons/Button.js";
 import SnackbarContent from "components/Snackbar/SnackbarContent.js"
 import { Link } from 'react-router-dom'
 import { addItem } from '../../../helpers/cartHelpers'
-import '../ShopPage.css'
 
 //---Carousel
 const settings = {

@@ -5,7 +5,7 @@ import { getProducts } from '../../api/coreApi'
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
-import ShopGrid from "./Sections/ShopGrid.js"
+import ShopCard from "./ShopCard.js";
 
 export default function ShopPage() {
     const [products, setProducts] = useState([])
@@ -38,7 +38,9 @@ export default function ShopPage() {
             />
             <Parallax small image={require("assets/img/parallax.png")} />
             <IdleWarning />
-            
+            <div id="divShop" className="flex grid-container">
+                {products.map((product,i)=> <ShopCard key={i} product={product} showAddToCartButton={ product.quantity > 0 ? true : false }/>)}
+            </div>
             
 
             
