@@ -5,7 +5,7 @@ import { getProducts } from '../../api/coreApi'
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
-import ShopCard from "./ShopCard.js";
+import ShopCard from "./Sections/ShopCard.js";
 
 export default function ShopPage() {
     const [products, setProducts] = useState([])
