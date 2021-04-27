@@ -39,6 +39,7 @@ export default function ShopPage() {
             <Parallax small image={require("assets/img/parallax.png")} />
             <IdleWarning />
             <ShopGrid products={products}/>
+            <p>test</p>
         </div>
     )
 }
