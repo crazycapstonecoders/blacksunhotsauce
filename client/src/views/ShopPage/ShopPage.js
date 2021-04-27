@@ -38,11 +38,26 @@ export default function ShopPage() {
             />
             <Parallax small image={require("assets/img/parallax.png")} />
             <IdleWarning />
-            <ShopGrid products={products}/>
+            
             <p>test</p>
+
+            
+
+
+
+
         </div>
     )
 }
+
+
+
+
+
+
+
+
+
 // import React, { useState, useEffect } from 'react'
 // import ReusableCard from '../../helpers/ReusableCard'
 // import IdleWarning from '../../helpers/IdleWarning' 
