@@ -108,20 +108,7 @@ export default function Shop_Card({product, showAddToCartButton = true}) {
         <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
             <div className="card-Shop">
                 <div className="card-content">
-                    <div className="card-image">
-                        <Carousel { ...settings }>
-                            {product.images.map((image, i) => (
-                                <div key={i}>
-                                    <img
-                                    style={{height: "180px", width: "100%", display: "block"}}
-                                    className={classes.imgCardTop}
-                                    src={image.url}
-                                    alt="Card-img-cap"
-                                    />
-                                </div>
-                            ))}
-                        </Carousel>
-                    </div>
+                    
                     <h1 className="product-name">{nameProduct}</h1>
                     <div className="price-avail flex">
                         <div className="spacer col-xl-1 col-lg-1 col-md-2 col-sm-1 col-xs-1">
