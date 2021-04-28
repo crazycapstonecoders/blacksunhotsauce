@@ -67,7 +67,7 @@ export default function CartPage() {
                 color: "white"
                 }}
             />
-            <Parallax small filter image={require("assets/img/bg3.jpg")} />
+            <Parallax small filter image={require("assets/img/parallax.png")} />
             <IdleWarning />
                 <div className={classNames(classes.main, classes.mainRaised)}>
                     <div className={classes.container}>

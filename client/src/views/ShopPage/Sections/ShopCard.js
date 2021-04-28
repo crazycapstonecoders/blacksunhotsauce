@@ -9,7 +9,6 @@ import Button from "components/CustomButtons/Button.js";
 import SnackbarContent from "components/Snackbar/SnackbarContent.js"
 import { Link } from 'react-router-dom'
 import { addItem } from '../../../helpers/cartHelpers'
-import '../ShopPage.css'
 
 //---Carousel
 const settings = {
@@ -113,7 +112,7 @@ export default function Shop_Card({product, showAddToCartButton = true}) {
                             {product.images.map((image, i) => (
                                 <div key={i}>
                                     <img
-                                    style={{height: "180px", width: "100%", display: "block"}}
+                                    style={{height: "100%", width: "100%", display: "block"}}
                                     className={classes.imgCardTop}
                                     src={image.url}
                                     alt="Card-img-cap"
