@@ -112,7 +112,7 @@ export default function Shop_Card({product, showAddToCartButton = true}) {
                             {product.images.map((image, i) => (
                                 <div key={i}>
                                     <img
-                                    style={{height: "100%", width: "100%", display: "block"}}
+                                    style={{max-height: "350px", width: "100%", display: "block"}}
                                     className={classes.imgCardTop}
                                     src={image.url}
                                     alt="Card-img-cap"
