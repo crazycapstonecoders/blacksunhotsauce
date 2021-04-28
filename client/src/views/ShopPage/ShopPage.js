@@ -17,7 +17,7 @@ export default function ShopPage() {
         getProducts().then(res => {
             setProducts(res.data)
         }).catch(error => {
-            setError(error)
+            setError(error.response.data.error)
         })
     }
     
@@ -35,7 +35,6 @@ export default function ShopPage() {
 
     return (
         <div>
-            {showError()}
             <Header
                 color="transparent"
                 brand="#testing"
@@ -48,6 +47,7 @@ export default function ShopPage() {
             />
             <Parallax small image={require("assets/img/parallax.png")} />
             <IdleWarning />
+            {showError()}
             <ShopGrid products={products} />
         </div>
     )
