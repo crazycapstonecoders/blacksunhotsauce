@@ -35,6 +35,7 @@ export default function ShopPage() {
 
     return (
         <div>
+            {showError()}
             <Header
                 color="transparent"
                 brand="#testing"
