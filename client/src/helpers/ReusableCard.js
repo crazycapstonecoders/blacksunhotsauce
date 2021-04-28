@@ -131,7 +131,7 @@ export default function ReusableCard({
                     {product.images.map((image, i) => (
                         <div key={i}>
                             <img
-                            style={{height: "180px", width: "100%", display: "block"}}
+                            style={{height: "350px", width: "100%", display: "block"}}
                             className={classes.imgCardTop}
                             src={image.url}
                             alt="Card-img-cap"
