@@ -53,3 +53,15 @@ export const getProducts = () => {
         }
     })
 }
+
+export const mailToAdmin = message => {
+    return axios({
+        method: 'POST',
+        url: `http://localhost:5000/api/user/mail-to-admin`,
+        headers: {
+            Accept: "*/*",
+            "Content-Type": "application/json",
+        },
+        data: JSON.stringify(message)
+    })
+}

@@ -166,7 +166,7 @@ export default function SigninPage() {
                           <InputAdornment position="end">
                             <Icon className={classes.inputIconsColor}>
                               lock_outline
-                              </Icon>
+                            </Icon>
                           </InputAdornment>
                         ),
                         autoComplete: "off"
