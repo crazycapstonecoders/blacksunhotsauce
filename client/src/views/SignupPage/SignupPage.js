@@ -143,6 +143,7 @@ export default function SigninPage() {
                       }}
                       inputProps={{
                         onChange: handleChange('name'),
+                        value: name,
                         type: "text",
                         endAdornment: (
                           <InputAdornment position="end">
@@ -159,6 +160,7 @@ export default function SigninPage() {
                       }}
                       inputProps={{
                         onChange: handleChange('email'),
+                        value: email,
                         type: "email",
                         endAdornment: (
                           <InputAdornment position="end">
@@ -175,6 +177,7 @@ export default function SigninPage() {
                       }}
                       inputProps={{
                         onChange: handleChange('password'),
+                        value: password,
                         type: "password",
                         endAdornment: (
                           <InputAdornment position="end">

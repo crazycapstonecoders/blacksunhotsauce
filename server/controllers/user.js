@@ -1,5 +1,6 @@
 const { Order } = require('../models/order')
 const User = require('../models/user')
+const { sendEmail } = require('../helper/helpers')
 
 exports.userById = (req, res, next, id) => {
     User.findById(id).exec((error, user) => {
@@ -96,5 +97,29 @@ exports.orderHistory = (req, res) => {
                 return res.status(400).json({ error: 'Error getting order history' })
             }
             res.json(orders)
+    })
+}
+
+// Send message to admin by landing page visitors if they have any
+exports.mailToAdmin = async (req, res) => {
+    const { name, email, message } = req.body.values
+    if(name === '' || email === '' || message === '') {
+        return res.status(400).json({ error: 'All fields are required' })
+    }
+    // send an email to the admin
+    const emailData = {
+        from: {
+            name: `${name}`
+        },
+        to: `crazycapstonecoders@gmail.com`,
+        subject: 'Questions from potential client',
+        html: `
+        <h3>A potential client with the following email <em>${email}</em> and name <em>${name}</em>, has reached out with the following message:</h3>
+        <h3>${message}</h3>
+        <h3>End of message.</h3>`        
+    }
+    sendEmail(emailData)
+    return res.status(200).json({
+        message: 'Your message has been received, please give us a few days to process it. Thank you'
     })
 }
